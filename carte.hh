@@ -14,9 +14,7 @@ private:
 
 protected:
 
-  static int _cpt;        // compteur static
-  int _id;                // id propre à chaque carte
-
+  int _id;                // id propre à chaque carte (déterminé par nous à la main)
 
   map<int, bool> _cartes_anterieures;  // dictionnaire des cartes permettant d’afficher cette carte : bool pour préciser si la carte est disponible ou pas dans le jeu
   map<int, bool> _cartes_posterieures; // dictionnaire des cartes suivantes à afficher : bool pour dire si on peut les afficher ou non (spécifique aux cartes énigmes -> si on peut mettre dans la classe énigme comment faire ??)
@@ -27,11 +25,26 @@ protected:
 public:
 
   // Constructeur
-  Carte(std::string nom_carte): _nom_carte(nom_carte){};
+  Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){};
 
   // Destructeur
   ~Carte();
 
+  // Méthodes
+
+  // getter de _nom_carte
+  // ajout élément dictionnaire (obligé de faire 3 fonctions pour les 3 dictionnaires ??)
+  // mettre toutes les clés d'un dictionnaire à 0 ou 1 -> à voir peut-être pas nécessaire
+
+
+  bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non du jeu
+  bool retrait_carte_autorise();   // indique si la carte peut-être retirée ou non du jeu
+
+
+  // En lien avec l'interface graphique :
+  // méthode pour afficher la carte
+  // méthode pour zoomer sur la carte
+  // méthode pour retirer la carte
 
 
 
