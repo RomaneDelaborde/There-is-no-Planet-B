@@ -15,11 +15,10 @@ protected:
 
   int _id;                // id propre à chaque carte (déterminé par nous à la main)
 
-  std::map<int, bool> _cartes_anterieures;  // dictionnaire des cartes permettant d’afficher cette carte : bool pour préciser si la carte est disponible ou pas dans le jeu
-  std::map<int, bool> _cartes_posterieures; // dictionnaire des cartes suivantes à afficher : bool pour dire si on peut les afficher ou non (spécifique aux cartes énigmes -> si on peut mettre dans la classe énigme comment faire ??)
-  std::map<int, bool> _cartes_kick;         // dictionnaire des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin) : bool pour dire si la carte est affichée à l'écran ou non
 
-  std::set<int> _codes_objets; // ensemble des codes des objets présents sur la carte (en rouge et blanc)
+  std::set<int, bool> _cartes_anterieures;  // ensemble des cartes permettant d’afficher cette carte
+  std::set<int, bool> _cartes_posterieures; // ensemble des cartes suivantes à afficher
+  std::set<int, bool> _cartes_kick;         // ensemble des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
 
 
 public:
