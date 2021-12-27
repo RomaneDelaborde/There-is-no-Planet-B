@@ -4,7 +4,7 @@
 #include <set>
 
 
-class PlateauJeu{
+class Jeu{
 
 private:
 
@@ -13,10 +13,10 @@ private:
 public:
 
   // Constructeur
-  PlateauJeu(Carte carte_regles); // ou alors ne rien mettre dedans comme la carte des règles est connue et tjrs la 1ère
+  Jeu(Carte carte_regles); // ou alors ne rien mettre dedans comme la carte des règles est connue et tjrs la 1ère
 
   // Destructeur
-  ~PlateauJeu(){};
+  ~Jeu(){};
 
   // Méthodes
   // ajout carte dans les cartes affichées
