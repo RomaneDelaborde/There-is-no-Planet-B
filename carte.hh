@@ -36,11 +36,6 @@ public:
   // modifier clé d'un élément
   // mettre toutes les clés d'un dictionnaire à 0 ou 1 -> à voir peut-être pas nécessaire
 
-  // les 2 méthodes qui suivent ne sont peut-être pas nécessaires (à mettre dans la classe Jeu pour laisser contrôler les cartes que le joueur souhaite afficher ?)
-  bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non
-  bool retrait_carte_autorise();   // indique si la carte peut-être retirée ou non
-
-
 
   // En lien avec l'interface graphique :
   // méthode pour afficher la carte

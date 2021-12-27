@@ -25,6 +25,8 @@ public:
   // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
   // affichage des cartes ? -> voir tous les bails graphiques à faire
 
+  //bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non
+
   // charger les dicos de chaque carte à partir du ou des fichiers csv -> peut-être il va falloir faire un switch si on a plusieurs csv
   // méthode pour taper les codes : s'ils sont valides alors on débloque des cartes
 
