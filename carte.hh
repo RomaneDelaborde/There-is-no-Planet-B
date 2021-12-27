@@ -8,7 +8,6 @@
 class Carte{
 
 private:
-
   // peut-être à mettre en privé idk
   std::string _nom_carte;  // nom de l'image associée à la carte (au format XX)
 
@@ -22,13 +21,14 @@ protected:
 
   set<int> _codes_objets; // ensemble des codes des objets présents sur la carte (en rouge et blanc)
 
+
 public:
 
   // Constructeur
   Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){};
 
   // Destructeur
-  ~Carte();
+  ~Carte(){}; // vide car pas de mémoire associée à un pointeur à libérer pour le moment
 
   // Méthodes
 
@@ -37,9 +37,10 @@ public:
   // modifier clé d'un élément
   // mettre toutes les clés d'un dictionnaire à 0 ou 1 -> à voir peut-être pas nécessaire
 
-
+  // les 2 méthodes qui suivent ne sont peut-être pas nécessaires
   bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non
   bool retrait_carte_autorise();   // indique si la carte peut-être retirée ou non
+
 
 
   // En lien avec l'interface graphique :
