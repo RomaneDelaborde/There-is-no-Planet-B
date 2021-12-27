@@ -34,11 +34,12 @@ public:
 
   // getter de _nom_carte
   // ajout élément dictionnaire (obligé de faire 3 fonctions pour les 3 dictionnaires ??)
+  // modifier clé d'un élément
   // mettre toutes les clés d'un dictionnaire à 0 ou 1 -> à voir peut-être pas nécessaire
 
 
-  bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non du jeu
-  bool retrait_carte_autorise();   // indique si la carte peut-être retirée ou non du jeu
+  bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non
+  bool retrait_carte_autorise();   // indique si la carte peut-être retirée ou non
 
 
   // En lien avec l'interface graphique :
