@@ -42,5 +42,6 @@ public:
   // méthode pour zoomer sur la carte
   // méthode pour retirer la carte
 
+  // Ajout getter et setter
 
 };
