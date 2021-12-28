@@ -10,6 +10,7 @@ class Jeu{
 private:
 
   std::map<Carte> _cartes_jeu; // ensemble des cartes du jeu : bool pour dire si elles sont affichées à l'écran ou non
+  // ou alors faire un ensemble/liste(*) avec les cartes et le dico _carte_jeu contient des id en clés pour faciliter les choses et après on regarde les attributs dont on a besoin en parcourant chaque élément de (*)
 
 public:
 
@@ -20,6 +21,7 @@ public:
   ~Jeu(){};
 
   // Méthodes
+  void changement_valeur_carte_dico(int id_carte, bool dispo); // ou faire 2 fonctions explicites : dispo et pas_dispo (dispo pour disponible)
   // ajout carte dans les cartes affichées
   // retrait carte
   // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
