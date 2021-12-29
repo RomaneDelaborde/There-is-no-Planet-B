@@ -12,12 +12,10 @@ private:
 
 protected:
 
-  int _id;                // id=identifiant propre à chaque carte (déterminé par nous à la main)
+  int _id;    // id=identifiant propre à chaque carte (déterminé par nous à la main)
 
-
-  //std::vector<int> _id_cartes_anterieures;  // liste des id des cartes permettant d’afficher cette carte --> vraiment utile ?
-  std::vector<int> _id_cartes_posterieures; // liste des id des cartes suivantes à afficher
-  //std::vector<int> _id_cartes_posterieures_secretes; // liste des id des cartes suivantes à afficher qui sont déblocables seulement par combinaison/énigme
+  std::vector<int> _id_cartes_posterieures; // liste des id des cartes suivantes à afficher (ne contient pas les cartes secrètes déblocables par une énigme ou une combinaison d'objets)
+  //std::vector<int> _id_cartes_posterieures_secretes; // liste des id des cartes suivantes à afficher qui sont déblocables seulement par combinaison/énigme -> on devrait pas en avoir besoin car déblocables grâce aux énigmes et aux combinaisons (voir futures classes Enigme et Objet)
   std::vector<int> _id_cartes_kick;         // liste des id des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
 
 
@@ -31,17 +29,17 @@ public:
 
   // Méthodes
 
-  // getter de _nom_carte
-  // ajout élément dictionnaire (obligé de faire 3 fonctions pour les 3 dictionnaires ??)
-  // modifier clé d'un élément
-  // mettre toutes les clés d'un dictionnaire à 0 ou 1 -> à voir peut-être pas nécessaire
-
-
-  // En lien avec l'interface graphique :
-  // méthode pour afficher la carte
-  // méthode pour zoomer sur la carte
-  // méthode pour retirer la carte
-
   // Ajout getter et setter
+  // Getter de _nom_carte
+  std::string get_nom_carte() const {return _nom_carte};
+
+
+
+  // En lien avec l'interface graphique (à mettre ici ou dans une autre classe ?):
+  // méthode pour afficher la carte
+  // méthode pour retirer la carte
+  
+  // méthode pour zoomer sur la carte (faire peut-être appel à une imgae de meilleure qualité : dans ce cas rajouter un attribut std::string _nom_carte_zoomee qui correpond au nom de l'image ayant une qualité supérieure)
+
 
 };
