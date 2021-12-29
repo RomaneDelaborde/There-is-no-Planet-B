@@ -55,7 +55,25 @@ void Jeu::carte_map_desaffichage(const int id_carte)
 }
 
 
-void Jeu::demande_affichage_carte(int id_carte)
+bool Jeu::affichage_carte_autorise(const int id_carte) const
+{
+  for(int i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
+  {
+    if(_map_id[_cartes_jeu[i]._id]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
+    {
+      for(int j=0; j< _cartes_jeu._id_cartes_posterieures.size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      {
+        if(_cartes_jeu._id_cartes_posterieures[j]==id_carte)
+        {
+          return 1;
+        }
+      }
+    }
+  }
+  return 0;
+}
+
+void Jeu::demande_affichage_carte(const int id_carte) // fonction bool ou pas en mode 0 : affichage carte effectuée et 1 : carte pas affichée et après on opère tous les changements (*)
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas
   {
@@ -75,7 +93,9 @@ void Jeu::demande_affichage_carte(int id_carte)
 
       break;
 
-    case 0:
+    case 0: // checker dans tous les cartes postérieures
+
+      // faire passer carte à la valeur 1 et tout le blabla -> à faire ici ou là (*) ?
       break;
 
     //default:

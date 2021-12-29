@@ -33,16 +33,14 @@ public:
   void carte_map_affichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur 1
   void carte_map_desaffichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur -1
 
-  void demande_affichage_carte(int id_carte); // demande de l'affichage d'une carte par le joueur
-  //bool affichage_carte_autorise(); // indique si la carte peut-être affichée ou non --> méthode utile ou pas ?
+  bool affichage_carte_autorise(const int id_carte) const; // indique si la carte peut-être affichée ou non
+  void demande_affichage_carte(const int id_carte) const; // demande de l'affichage d'une carte par le joueur
+
 
 
   // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
   // affichage des cartes ? -> voir tous les bails graphiques à faire : ça serait bien affichage carte en fonction de l'id
 
-
-
-  // charger les dicos de chaque carte à partir du ou des fichiers csv -> peut-être il va falloir faire un switch si on a plusieurs csv
   // méthodes pour taper les codes : s'ils sont valides alors on débloque des cartes
 
 };
