@@ -14,7 +14,7 @@ class Jeu{
 private:
 
   std::vector<Carte> _cartes_jeu; // liste des cartes du jeu
-  std::map<int, int> _map_id; //map des id des cartes du jeu : int pour donner une indication sur leur affichage : 1 = carte affichée, 0 = carte pas encore affichée et -1 = carte affichée dans le passé et pas réaffichable
+  std::map<int, int> _map_id; // map des id des cartes du jeu : int pour donner une indication sur leur affichage : 1 = carte affichée, 0 = carte pas encore affichée et -1 = carte affichée dans le passé et pas réaffichable
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
 
 public:
