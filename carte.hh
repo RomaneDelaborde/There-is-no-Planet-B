@@ -3,8 +3,7 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <map>
-#include <set>
+#include <vector>
 
 class Carte{
 
@@ -16,9 +15,9 @@ protected:
   int _id;                // id propre à chaque carte (déterminé par nous à la main)
 
 
-  std::set<int, bool> _cartes_anterieures;  // ensemble des cartes permettant d’afficher cette carte
-  std::set<int, bool> _cartes_posterieures; // ensemble des cartes suivantes à afficher
-  std::set<int, bool> _cartes_kick;         // ensemble des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
+  std::vector<int> _cartes_anterieures;  // liste des cartes permettant d’afficher cette carte --> vraiment utile ?
+  std::vector<int> _cartes_posterieures; // liste des cartes suivantes à afficher
+  std::vector<int> _cartes_kick;         // liste des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
 
 
 public:
