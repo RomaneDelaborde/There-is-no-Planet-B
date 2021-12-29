@@ -12,12 +12,13 @@ private:
 
 protected:
 
-  int _id;                // id propre à chaque carte (déterminé par nous à la main)
+  int _id;                // id=identifiant propre à chaque carte (déterminé par nous à la main)
 
 
-  std::vector<int> _cartes_anterieures;  // liste des cartes permettant d’afficher cette carte --> vraiment utile ?
-  std::vector<int> _cartes_posterieures; // liste des cartes suivantes à afficher
-  std::vector<int> _cartes_kick;         // liste des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
+  //std::vector<int> _id_cartes_anterieures;  // liste des id des cartes permettant d’afficher cette carte --> vraiment utile ?
+  std::vector<int> _id_cartes_posterieures; // liste des id des cartes suivantes à afficher
+  //std::vector<int> _id_cartes_posterieures_secretes; // liste des id des cartes suivantes à afficher qui sont déblocables seulement par combinaison/énigme
+  std::vector<int> _id_cartes_kick;         // liste des id des cartes permettant de kicker la carte de l'affichage du jeu (i.e. on en a plus besoin)
 
 
 public:
