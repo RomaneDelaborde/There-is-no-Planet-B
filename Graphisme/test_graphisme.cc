@@ -9,11 +9,18 @@
 // g++ test_graphisme.cc -o test_graphisme -std=c++0x `pkg-config gtkmm-3.0 --cflags --libs`
 
 #include <stdio.h>
+#include <iostream>
+
 #include <gtkmm/button.h>
 #include <gtkmm/main.h>
 #include <gtkmm/window.h>
 #include <gtkmm/table.h>
 #include <gtkmm/image.h>
+#include <gtkmm/eventbox.h>
+
+void yes() {
+	std::cout << "Bonjour" << std::endl;
+}
 
 int main(int argc, char* argv[]) {
 	Gtk::Main app(argc, argv);
@@ -34,7 +41,7 @@ int main(int argc, char* argv[]) {
 	
 	//bouton.signal_clicked().connect([]() { Gtk::Main::quit(); });
 	
-	Gtk::Table tableau(4, 4);
+	Gtk::Table tableau(4, 4, false);
 	fenetre.add(tableau);
 
 	//tableau.resize(2, 2);
@@ -49,8 +56,7 @@ int main(int argc, char* argv[]) {
 	//bouton3.set_can_focus(false);
 	//tableau.attach(bouton3, 0, 2, 1, 2, Gtk::FILL, Gtk::FILL, 25, 10); //Le widget prend l'espace qui lui est alloué. Ajout d'espace (25px horizontal et 10px vertical) autour du widget.
 
-	
-	
+	Gtk::EventBox boite;
 	
 	Gtk::Image image("gaston.jpeg"); //Création d'une image à partir d'un fichier.
 	Gtk::Image image2("garage.jpeg"); //Création d'une image à partir d'un fichier.
@@ -64,13 +70,20 @@ int main(int argc, char* argv[]) {
 	
 	Gtk::Image image9("right.jpeg"); //Création d'une image à partir d'un fichier.
 	Gtk::Image image10("left.jpeg"); //Création d'une image à partir d'un fichier.
+			  
 
 	tableau.attach(image, 0, 1, 2, 3);
 	tableau.attach(image2, 1, 2, 2, 3);
 	tableau.attach(image3, 2, 3, 2, 3);
 	tableau.attach(image4, 3, 4, 2, 3);
 	
-	tableau.attach(image5, 0, 1, 1, 2);
+	//tableau.attach(image5, 0, 1, 1, 2);
+	tableau.attach(boite, 0, 1, 1, 2);
+	boite.add(image5);
+	
+	boite.set_events(Gdk::BUTTON_PRESS_MASK);
+	//boite.signal_button_press_event().connect(sigc::ptr_fun(&yes));
+	boite.show_all();
 	tableau.attach(image6, 1, 2, 1, 2);
 	tableau.attach(image7, 2, 3, 1, 2);
 	tableau.attach(image8, 3, 4, 1, 2);
@@ -80,6 +93,12 @@ int main(int argc, char* argv[]) {
 
 	
 	fenetre.show_all(); //L'habituel show_all() pour afficher tous les widgets.
+	
+	Gtk::Window fenetre2;
+	Gtk::Image image11("gaston.jpeg"); //Création d'une image à partir d'un fichier.
+	fenetre2.add(image11);
+	fenetre2.set_position(Gtk::WIN_POS_CENTER); //positionner la fenetre au centre de l'ecran
+	fenetre2.show_all();
 	
 	Gtk::Main::run(fenetre);
 	return 0;
