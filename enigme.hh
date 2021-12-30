@@ -13,7 +13,6 @@ private:
 protected:
   int _code_solution; // code de la solution de l'énigme : code ou id d'objet (Charlie) -> à ne pas mettre dans le constructeur car calculé par des méthodes sauf pour Charlie : 2 constructeurs à faire
 
-
 public:
   // Constructeurs
   Enigme(std::string nom_carte, int id, int id_enigme, int nb_essais): Carte(nom_carte, id), _id_enigme(id_enigme), _nb_essais(nb_essais){};
