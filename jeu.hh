@@ -3,6 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <list>
+#include <algorithm>
+
 #include "carte.hh"
 #include "objet.hh"
 #include "enigme.hh"
@@ -25,7 +31,15 @@ public:
   // Destructeur (vide normalement)
   ~Jeu(){};
 
-  // Méthodes (des getter vont peut-être être nécessaires dans d'autres classes pour accéder à certains attributs privés)
+
+  // Méthodes
+  std::vector<int> lecture_str_tab(std::string chaine); // lecture d'un str composé d'int séparés par des "-" (tabulats) : ces int sont retournés sous forme de vecteur
+
+  void lecture_csv_carte_basique(std::string nom_fichier); // lecture des infos sur les cartes basiques (ni objet ni énigme) depuis un csv
+  //void lecture_csv_carte_enigme(std::string nom_fichier);
+  //void lecture_csv_carte_objet(std::string nom_fichier);
+
+
   Carte carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
 
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id (si id existe alors carte correspondante existe aussi normalement)
