@@ -9,6 +9,93 @@ Jeu::Jeu()
 
 }
 
+
+
+std::vector<int> Jeu::lecture_str_tab(std::string chaine)
+{
+  std::vector<std::string> res={};
+
+  // Lecture de la chaine avec des délimiteurs
+  std::string const delims{ "-" }; // délimiteurs
+
+  size_t beg, pos = 0;
+  while ((beg = chaine.find_first_not_of(delims, pos)) != std::string::npos)
+  {
+      pos = chaine.find_first_of(delims, beg + 1);
+      res.push_back(chaine.substr(beg, pos - beg)); // Ajout dans le vecteur _chaine_eclatee
+  }
+
+  std::vector<int> res_int={};
+
+  std::transform(res.begin(), res.end(), std::back_inserter(res_int), [](const std::string& str) { return std::stoi(str); });
+
+  // Affichage de res_int
+  /*
+  for (int i:res_int)
+  {
+    std::cout << i << ' ';
+  }
+  std::cout << std::endl;
+  */
+
+  return res_int;
+
+}
+
+
+
+void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
+{
+  std::ifstream fichier(nom_fichier); // Ouverture du fichier en mode lecture
+
+  if(fichier) // Si pas de problème à l'ouverture, on fait ce qu'on a à faire
+  {
+    std::string ligne= "";
+    std::getline(fichier,ligne); // pour passer la première ligne
+    while(std::getline(fichier,ligne))
+    {
+      std::string nom_carte;
+      int id;
+      std::string post;
+      std::string kick;
+
+      std::string tempString;
+
+      std::stringstream inputString(ligne);
+
+      std::getline(inputString, nom_carte, ',');
+      std::getline(inputString, tempString, ',');
+      id=atoi(tempString.c_str());
+
+      std::getline(inputString, post, ',');
+      std::getline(inputString, kick, ',');
+
+      ligne="";
+
+      // Création d'une carte
+      std::cout << nom_carte <<  std::endl;
+      std::cout << id <<  std::endl;
+
+      std::cout << post <<  std::endl;
+      std::cout << kick <<  std::endl;
+
+
+      std::cout << "POST" << std::endl;
+      std::vector<int> v1 =lecture_str_tab(post);
+      std::cout << "KICK" << std::endl;
+      std::vector<int> v2 =lecture_str_tab(kick);
+
+    }
+  }
+  else
+  {
+    std::cout << "ERREUR : impossible d'ouvrir le fichier en lecture" << std::endl;
+  }
+}
+
+
+
+
 Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
@@ -37,7 +124,7 @@ bool Jeu::id_existe(const int id_carte) const
 
 
 
-void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule fonction pour affichage/désaffichage mais humain peut plus facilement se mélanger les pinceaux dans les valeurs
+void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule lecture_str_tab pour affichage/désaffichage mais humain peut plus facilement se mélanger les pinceaux dans les valeurs
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas on ne fait rien
   {
@@ -74,7 +161,7 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
   return 0;
 }
 
-void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une fonction qui renvoie un bool [0 si affichage carte effectué avec succès et 1 si carte pas affichée] et après on opère tous les changements (*)
+void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lecture_str_tab qui renvoie un bool [0 si affichage carte effectué avec succès et 1 si carte pas affichée] et après on opère tous les changements (*)
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas
   {
