@@ -14,16 +14,16 @@ private:
 
 public:
   // Constructeurs
-  Enigme(std::string nom_carte, int id, int id_enigme, int nb_essais): Carte(nom_carte, id){}, _id_enigme(id_enigme), _nb_essais(nb_essais){};
-  Enigme(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution): Carte(nom_carte, id){}, _id_enigme(id_enigme), _nb_essais(nb_essais), _code_solution(code_solution){}; // Constructeur pour Charlie
+  Enigme(std::string nom_carte, int id, int id_enigme, int nb_essais): Carte(nom_carte, id), _id_enigme(id_enigme), _nb_essais(nb_essais){};
+  Enigme(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution): Carte(nom_carte, id), _id_enigme(id_enigme), _nb_essais(nb_essais), _code_solution(code_solution){}; // Constructeur pour Charlie
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 
   // Getter
 
-  int get_id_enigme() const {return _id_enigme};
-  int get_code_solution() const {return _code_solution};
-  int get_nb_essais() const {return _nb_essais};
+  int get_id_enigme() const {return _id_enigme;};
+  int get_code_solution() const {return _code_solution;};
+  int get_nb_essais() const {return _nb_essais;};
 
   // Méthodes
   // Méthodes virtuelles communes : calcul_code_solution ?
