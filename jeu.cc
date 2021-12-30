@@ -23,7 +23,7 @@ bool Jeu::id_existe(const int id_carte) const
 
 Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
-  for(int i=0; i< _cartes_jeu.size(); i++) // boucle for mais peut-être while c'est pas mieux/ plus efficace ?
+  for(int i=0; i< _cartes_jeu.size(); i++)
   {
     if(_cartes_jeu[i]._id==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
     {
