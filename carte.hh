@@ -34,6 +34,8 @@ public:
   std::string get_nom_carte() const {return _nom_carte;};
   // Getter de _id
   int get_id() const {return _id;};
+  // Getter de _id_cartes_posterieures
+  std::vector<int> get_id_cartes_posterieures() const {return _id_cartes_posterieures;};
 
   // Méthodes
   void affichage_info_carte() const;

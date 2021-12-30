@@ -27,14 +27,14 @@ public:
 
   // Méthodes (des getter vont peut-être être nécessaires dans d'autres classes pour accéder à certains attributs privés)
   Carte carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
-  
+
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id (si id existe alors carte correspondante existe aussi normalement)
 
   void carte_map_affichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur 1
   void carte_map_desaffichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur -1
 
-  bool affichage_carte_autorise(const int id_carte) const; // indique si la carte peut-être affichée ou non
-  void demande_affichage_carte(const int id_carte) const; // demande de l'affichage d'une carte par le joueur
+  bool affichage_carte_autorise(const int id_carte); // indique si la carte peut-être affichée ou non
+  void demande_affichage_carte(const int id_carte); // demande de l'affichage d'une carte par le joueur
 
 
 

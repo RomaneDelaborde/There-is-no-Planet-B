@@ -20,13 +20,14 @@ Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une 
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur et on retourne un pointeur vide
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
-  return std::nullptr; // return NULL ou dans l'idéal faire un "throw no_such_id_error"
+  return _cartes_jeu[0];//nullptr; // faudrait renvoyer uen valeur NULL (passer par des pointeurs ??) return NULL ou dans l'idéal faire un "throw no_such_id_error"
+  // message d'erreur mais renvoie quand même la carte règles
 }
 
 
 bool Jeu::id_existe(const int id_carte) const
 {
-  if(_map_id.find(carte(id_carte))==_map_id.end()) // si l'id n'existe pas dans _map_id
+  if(_map_id.find(id_carte)==_map_id.end()) // si l'id n'existe pas dans _map_id
   {
     //std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
     return 0;
@@ -42,7 +43,7 @@ void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule f
   {
     return;
   }
-  _map_id[carte(id_carte)]=1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
+  _map_id[id_carte]=1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
 }
 
 void Jeu::carte_map_desaffichage(const int id_carte)
@@ -51,19 +52,19 @@ void Jeu::carte_map_desaffichage(const int id_carte)
   {
     return;
   }
-  _map_id[carte(id_carte)]=-1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
+  _map_id[id_carte]=-1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
 }
 
 
-bool Jeu::affichage_carte_autorise(const int id_carte) const
+bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
-    if(_map_id[_cartes_jeu[i]._id]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
+    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
     {
-      for(std::size_t j=0; j< _cartes_jeu._id_cartes_posterieures.size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
       {
-        if(_cartes_jeu._id_cartes_posterieures[j]==id_carte)
+        if(_cartes_jeu[i].get_id_cartes_posterieures()[j]==id_carte)
         {
           return 1;
         }
@@ -81,7 +82,7 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une fonc
     return;
   }
 
-  switch(_map_id[carte(id_carte)]){
+  switch(_map_id[id_carte]){
     case 1:
       //std::cout << "ERREUR : la carte est déjà affichée" << std::endl;
       // affichage pop-up pour le joueur qqpart du type "La carte souhaitée est déjà affichée."
