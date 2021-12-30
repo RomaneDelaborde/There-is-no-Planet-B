@@ -16,11 +16,12 @@ private:
 public:
 
   // Constructeur
-  Enigme1(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution, std::string phrase);
+  Enigme2(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution, std::string phrase);
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 
   // Getter
+  //std::map<char, int> get_alphabet_indices() const {return _alphabet_indices};
   std::string get_phrase() const {return _phrase};
   std::string get_phrase_codee() const {return _phrase_codee};
 

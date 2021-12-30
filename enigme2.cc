@@ -1,6 +1,6 @@
 #include "enigme2.hh"
 
-Enigme1::Enigme1(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution, std::string phrase):Enigme(nom_carte, id, id_enigme, nb_essais, code_solution), _phrase(phrase) // mettre Enigme::Enigme ou pas ??
+Enigme2::Enigme2(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution, std::string phrase):Enigme(nom_carte, id, id_enigme, nb_essais, code_solution), _phrase(phrase) // mettre Enigme::Enigme ou pas ??
 {
   std::string alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -13,7 +13,7 @@ Enigme1::Enigme1(std::string nom_carte, int id, int id_enigme, int nb_essais, in
 
 
 
-void Enigme1::codage_jules_cesar(int decalage, bool sens_decalage)
+void Enigme2::codage_jules_cesar(int decalage, bool sens_decalage)
 {
   _phrase_codee="";
 
