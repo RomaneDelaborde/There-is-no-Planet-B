@@ -8,8 +8,10 @@ class Enigme : public Carte{
 
 private:
   int _id_enigme; // code unique à chaque énigme : 1, 2 ou 3
-  int _code_solution; // code de la solution de l'énigme : code ou id d'objet (Charlie) -> à ne pas mettre dans le constructeur car calculé par des méthodes sauf pour Charlie : 2 constructeurs à faire
   int _nb_essais; // nombre d'essais pour réussir l'énigme (peut être différente pour chaque énigme mais le préciser au joueur dans ce cas)
+
+protected:
+  int _code_solution; // code de la solution de l'énigme : code ou id d'objet (Charlie) -> à ne pas mettre dans le constructeur car calculé par des méthodes sauf pour Charlie : 2 constructeurs à faire
 
 
 public:

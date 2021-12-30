@@ -22,11 +22,11 @@ public:
 
   // Getter
   //std::map<char, int> get_alphabet_indices() const {return _alphabet_indices};
-  std::string get_phrase() const {return _phrase};
-  std::string get_phrase_codee() const {return _phrase_codee};
+  std::string get_phrase() const {return _phrase;};
+  std::string get_phrase_codee() const {return _phrase_codee;};
 
   // Méthodes
-  std::string codage_jules_cesar(int decalage, bool sens_decalage);
+  void codage_jules_cesar(int decalage, bool sens_decalage);
 
 
 

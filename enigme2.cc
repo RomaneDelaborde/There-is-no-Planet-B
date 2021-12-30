@@ -56,7 +56,7 @@ void Enigme2::codage_jules_cesar(int decalage, bool sens_decalage)
             int v = iter->second; // v pour valeur
             if(v==indice)
             {
-              _phrase_codee+=v;
+              _phrase_codee+=c;
               break;
             }
             ++iter;
