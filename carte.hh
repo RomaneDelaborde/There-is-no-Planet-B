@@ -32,6 +32,8 @@ public:
   // Ajout getter et setter
   // Getter de _nom_carte
   std::string get_nom_carte() const {return _nom_carte;};
+  // Getter de _id
+  int get_id() const {return _id;};
 
   // Méthodes
   void affichage_info_carte() const;
