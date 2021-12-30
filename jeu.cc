@@ -9,21 +9,9 @@ Jeu::Jeu()
 
 }
 
-bool Jeu::id_existe(const int id_carte) const
-{
-  if(_map_id.find(carte(id_carte))==_map_id.end()) // si l'id n'existe pas dans _map_id
-  {
-    //std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
-    return 0;
-  }
-  return 1;
-}
-
-
-
 Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
-  for(int i=0; i< _cartes_jeu.size(); i++)
+  for(std::size_t i=0; i< _cartes_jeu.size(); i++)
   {
     if(_cartes_jeu[i]._id==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
     {
@@ -34,6 +22,18 @@ Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une 
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
   return std::nullptr; // return NULL ou dans l'idéal faire un "throw no_such_id_error"
 }
+
+
+bool Jeu::id_existe(const int id_carte) const
+{
+  if(_map_id.find(carte(id_carte))==_map_id.end()) // si l'id n'existe pas dans _map_id
+  {
+    //std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
+    return 0;
+  }
+  return 1;
+}
+
 
 
 void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule fonction pour affichage/désaffichage mais humain peut plus facilement se mélanger les pinceaux dans les valeurs
