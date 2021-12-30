@@ -13,7 +13,7 @@ Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une 
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
   {
-    if(_cartes_jeu[i]._id==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
+    if(_cartes_jeu[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
     {
       return _cartes_jeu[i];
     }
@@ -57,11 +57,11 @@ void Jeu::carte_map_desaffichage(const int id_carte)
 
 bool Jeu::affichage_carte_autorise(const int id_carte) const
 {
-  for(int i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
+  for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
     if(_map_id[_cartes_jeu[i]._id]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
     {
-      for(int j=0; j< _cartes_jeu._id_cartes_posterieures.size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      for(std::size_t j=0; j< _cartes_jeu._id_cartes_posterieures.size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
       {
         if(_cartes_jeu._id_cartes_posterieures[j]==id_carte)
         {
