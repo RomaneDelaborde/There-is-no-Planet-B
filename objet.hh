@@ -23,6 +23,6 @@ public:
   // Méthodes
 
   // Getter _objets_combinables
-  std::map<int, int> get_objets_combinables() const {return _objets_combinables};
+  std::map<int, int> get_objets_combinables() const {return _objets_combinables;};
 
 };
