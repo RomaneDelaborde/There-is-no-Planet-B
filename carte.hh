@@ -27,18 +27,21 @@ public:
   // Destructeur
   ~Carte(){}; // vide car pas de mémoire associée à un pointeur à libérer pour le moment
 
-  // Méthodes
+
 
   // Ajout getter et setter
   // Getter de _nom_carte
   std::string get_nom_carte() const {return _nom_carte};
+
+  // Méthodes
+  void affichage_info_carte() const;
 
 
 
   // En lien avec l'interface graphique (à mettre ici ou dans une autre classe ?):
   // méthode pour afficher la carte
   // méthode pour retirer la carte
-  
+
   // méthode pour zoomer sur la carte (faire peut-être appel à une imgae de meilleure qualité : dans ce cas rajouter un attribut std::string _nom_carte_zoomee qui correpond au nom de l'image ayant une qualité supérieure)
 
 
