@@ -5,9 +5,11 @@
 //  Created by Maëlle Jolivet on 29/12/2021.
 //
 
-#include "Fenetre.hh" 
+#include "Fenetre.hh"
 
-Fenetre::Fenetre() : white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"), combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), objet_3("objet n°3"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
+bool Fenetre::gastonChange = false;
+
+Fenetre::Fenetre() : white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"), combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	
 	set_title("There is no Planet B");
 	set_border_width(10);
@@ -38,8 +40,6 @@ Fenetre::Fenetre() : white_0101("white.jpeg"), white_1201("white.jpeg"), white_2
 	table_zones_texte->attach(entry_objet_1, 1, 2, 1, 2);
 	table_zones_texte->attach(objet_2, 0, 1, 2, 3);
 	table_zones_texte->attach(entry_objet_2, 1, 2, 2, 3);
-	table_zones_texte->attach(objet_3, 0, 1, 3, 4);
-	table_zones_texte->attach(entry_objet_3, 1, 2, 3, 4);
 
 	table_zones_texte->attach(reponse_enigme, 2, 4, 0, 1);
 	table_zones_texte->attach(id_enigme, 2, 3, 1, 2);
@@ -117,9 +117,18 @@ void Fenetre::afficherEntree() {
 }
 
 void Fenetre::changerWhitetoGaston() {
-	table_images->remove(white_0101);
-	table_images->attach(gaston, 0, 1, 0, 1);
-	show_all();
+	if (gastonChange == false) {
+		table_images->remove(white_0101);
+		table_images->attach(gaston, 0, 1, 0, 1);
+		show_all();
+		gastonChange = true;
+	}
+	else {
+		table_images->remove(gaston);
+		table_images->attach(white_0101, 0, 1, 0, 1);
+		show_all();
+		gastonChange = false;
+	}
 }
 
 Fenetre::~Fenetre() {

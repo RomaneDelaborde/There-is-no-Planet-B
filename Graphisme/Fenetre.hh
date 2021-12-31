@@ -21,7 +21,10 @@
 
 
 class Fenetre : public Gtk::Window {
+		
 	public :
+		static bool gastonChange;
+
 		//Utiles
 		Fenetre();
 		void afficherApropos();
@@ -66,14 +69,12 @@ class Fenetre : public Gtk::Window {
 	
 		Gtk::Label objet_1;
 		Gtk::Label objet_2;
-		Gtk::Label objet_3;
 		Gtk::Label id_enigme;
 		Gtk::Label reponse_enigme_l;
 		Gtk::Label carte_num;
 	
 		Gtk::Entry entry_objet_1;
 		Gtk::Entry entry_objet_2;
-		Gtk::Entry entry_objet_3;
 		Gtk::Entry entry_id_enigme;
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
