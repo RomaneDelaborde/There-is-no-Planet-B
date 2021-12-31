@@ -11,6 +11,8 @@ private:
   std::string _nom_carte;  // nom de l'image associée à la carte (au format XX)
 
 protected:
+	
+	//attribut Gtk::Image ....
 
   int _id;    // id=identifiant propre à chaque carte (déterminé par nous à la main)
 

@@ -16,3 +16,9 @@ int main()
 
   return 0;
 }
+
+
+//int tab[5] = {0, 1, 2, 3, 4};
+//tab[0] == 0
+
+//list[i] = new Carte(....)
