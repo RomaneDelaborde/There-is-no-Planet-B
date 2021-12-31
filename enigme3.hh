@@ -16,7 +16,7 @@ private:
 public:
 
   // Constructeur
-  Enigme3(std::string nom_carte, int id, int id_enigme, int nb_essais, std::string chaine);
+  Enigme3(std::string nom_carte, int id, int nb_essais, std::string chaine);
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 

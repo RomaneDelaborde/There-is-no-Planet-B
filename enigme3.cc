@@ -1,6 +1,6 @@
 #include "enigme3.hh"
 
-Enigme3::Enigme3(std::string nom_carte, int id, int id_enigme, int nb_essais, std::string chaine):Enigme(nom_carte, id, id_enigme, nb_essais), _chaine(chaine) // mettre Enigme::Enigme ou pas ??
+Enigme3::Enigme3(std::string nom_carte, int id, int nb_essais, std::string chaine):Enigme(nom_carte, id, nb_essais), _chaine(chaine) // mettre Enigme::Enigme ou pas ??
 {
   _lettres= {{'V', 2}, {'T', 3}, {'J', 5}, {'S', 6}, {'U', 7}, {'N', 8}, {'B', 9}}; // this-> nécessaire ou pas ??
 }
