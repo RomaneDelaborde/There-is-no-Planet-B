@@ -87,6 +87,11 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::cout << "KICK" << std::endl;
       std::vector<int> v2 =lecture_str_tab(kick);
 
+      // _cartes_jeu.push_back(Carte(paramètres)); --> et le pointeur mdr ? (on pourrait donc ne pas passer par des pointeurs)
+      //_cartes_jeu[i]=new Carte(paramètres);
+      // _cartes_jeu.push_back(new Carte(paramètres)); --> à tester
+      // _cartes_jeu.push_back(Carte*(paramètres)); --> à tester
+
     }
   }
   else
