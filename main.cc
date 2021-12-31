@@ -1,5 +1,5 @@
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
 #include "jeu.hh"
 #include "carte.hh"
 #include "objet.hh"
@@ -12,9 +12,12 @@ int main()
 {
   Carte regles("regles.jpeg",0);
   std::cout << "Nom de la carte : " << regles.get_nom_carte() << std::endl;
-  std::cout << "Id de la carte : " << regles.get_id() << std::endl;
+  std::cout << "Id de la carte : " << regles.get_id() << std::endl << std::endl;
 
+  std::cout << "Nom de la carte : " << Carte("regles.jpeg",0).get_nom_carte() << std::endl;
+  std::cout << "Id de la carte : " << Carte("regles.jpeg",0).get_id() << std::endl;
   return 0;
+
 }
 
 
