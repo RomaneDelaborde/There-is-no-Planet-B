@@ -7,42 +7,74 @@
 
 #include "Fenetre.hh" 
 
-Fenetre::Fenetre() {
-	//Modification de la fenêtre.
-	set_title("Ma fenêtre héritée !");
+Fenetre::Fenetre() : white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"), combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), objet_3("objet n°3"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
+	
+	set_title("There is no Planet B");
 	set_border_width(10);
 	set_position(Gtk::WIN_POS_CENTER);
 	
-	table = new Gtk::Table(4, 4);
-	add(*table);
+	table_big = new Gtk::Table(3, 1);
+	add(*table_big);
 	
-	//si attribut bouton
-	//bouton.show(); //Ne pas oublier l'affichage du bouton.
-	//bouton.set_can_focus(false); //Nous pouvons aussi modifier le bouton.
-	//add(bouton); //Ajouter le bouton à la fenêtre.
+	table_zones_texte = new Gtk::Table(5, 8);
+	table_big->attach(*table_zones_texte, 0, 1, 0, 1);
 	
-	//si attribut pointeur sur bouton
+	//Initialisation du tableau d'images : déclaration de 8 images "white.jpeg"
+	//Étape suivante : déclarer une list d'eventbox en attribut de la fenetre ?
+	table_images = new Gtk::Table(2, 4);
+	table_big->attach(*table_images, 0, 1, 1, 2);
+
+	table_images->attach(white_0101, 0, 1, 0, 1);
+	table_images->attach(white_1201, 1, 2, 0, 1);
+	table_images->attach(white_2301, 2, 3, 0, 1);
+	table_images->attach(white_3401, 3, 4, 0, 1);
+	table_images->attach(white_0112, 0, 1, 1, 2);
+	table_images->attach(white_1212, 1, 2, 1, 2);
+	table_images->attach(white_2312, 2, 3, 1, 2);
+	table_images->attach(white_3412, 3, 4, 1, 2);
+	
+	table_zones_texte->attach(combinaisons, 0, 2, 0, 1);
+	table_zones_texte->attach(objet_1, 0, 1, 1, 2);
+	table_zones_texte->attach(entry_objet_1, 1, 2, 1, 2);
+	table_zones_texte->attach(objet_2, 0, 1, 2, 3);
+	table_zones_texte->attach(entry_objet_2, 1, 2, 2, 3);
+	table_zones_texte->attach(objet_3, 0, 1, 3, 4);
+	table_zones_texte->attach(entry_objet_3, 1, 2, 3, 4);
+
+	table_zones_texte->attach(reponse_enigme, 2, 4, 0, 1);
+	table_zones_texte->attach(id_enigme, 2, 3, 1, 2);
+	table_zones_texte->attach(entry_id_enigme, 3, 4, 1, 2);
+	table_zones_texte->attach(reponse_enigme_l, 2, 3, 2, 3);
+	table_zones_texte->attach(entry_reponse_enigme_l, 3, 4, 2, 3);
+	
+	table_zones_texte->attach(tirer_carte_1, 4, 6, 0, 1);
+	table_zones_texte->attach(tirer_carte_2, 4, 6, 1, 2);
+	table_zones_texte->attach(carte_num, 4, 5, 2, 3);
+	table_zones_texte->attach(entry_carte_num, 5, 6, 2, 3);
+	
+
 	bouton = new Gtk::Button("Super bouton");
-	//bouton->show();
 	bouton->set_can_focus(false);
 	//bouton->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
-	//bouton->signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(this, &Fenetre::set_title), "Titre de la fenêtre"));
-	//Lorsque l'utilisateur cliquera sur le bouton, le titre de la fenêtre changera.
-	//Si nous voulons envoyer plusieurs paramètres, il suffit de les séparer par des virgules aux deux endroits (entre les chevrons et après le nom de la fonction de rappel).
+	table_zones_texte->attach(*bouton, 0, 2, 4, 5);
+	bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::changerWhitetoGaston));
 	
-	//on connecte à notre fonction de rappel
-	//bouton->signal_clicked().connect(sigc::bind<int, int>(sigc::mem_fun(*this, &Fenetre::augmenterTaille), 130, 140));
-	//bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherErreur));
-	//bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherApropos));
-	bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherEntree));
-
-	table->attach(*bouton, 0, 1, 3, 4);
-	
-	
-	entree = new Gtk::Entry;
-	entree->signal_activate().connect(sigc::mem_fun(*this, &Fenetre::afficherEntree)); //quand l'utilisateur appuie sur la touche entrée, la fonction afficherEntree est appelée
-	table->attach(*entree, 1, 2, 0, 1);
-	
+//	//bouton->signal_clicked().connect(sigc::bind<std::string>(sigc::mem_fun(this, &Fenetre::set_title), "Titre de la fenêtre"));
+//	//Lorsque l'utilisateur cliquera sur le bouton, le titre de la fenêtre changera.
+//	//Si nous voulons envoyer plusieurs paramètres, il suffit de les séparer par des virgules aux deux endroits (entre les chevrons et après le nom de la fonction de rappel).
+//
+//	//on connecte à notre fonction de rappel
+//	//bouton->signal_clicked().connect(sigc::bind<int, int>(sigc::mem_fun(*this, &Fenetre::augmenterTaille), 130, 140));
+//	//bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherErreur));
+//	//bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherApropos));
+//	bouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherEntree));
+//
+//	table_big->attach(*bouton, 0, 1, 3, 4);
+//
+//
+//	entree = new Gtk::Entry;
+//	entree->signal_activate().connect(sigc::mem_fun(*this, &Fenetre::afficherEntree)); //quand l'utilisateur appuie sur la touche entrée, la fonction afficherEntree est appelée
+//	table_big->attach(*entree, 1, 2, 0, 1);
 	
 	show_all();
 }
@@ -58,13 +90,12 @@ void Fenetre::augmenterTaille(int augmentationLargeur, int augmentationHauteur) 
 
 void Fenetre::afficherErreur() {
 	Gtk::MessageDialog dialogue(*this, "Erreur : vous ne pouvez pas tirer cette carte", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
-		//Comme cette classe hérite de Gtk::Window, il est possible d'appeler des méthodes de cette dernière classe.
 	dialogue.set_title("Avertissement");
-		//Ajouter un texte secondaire.
-		//dialogue.set_secondary_text("Et <i>ceci</i> est le texte secondaire qui explique quelque chose.", true);
-	dialogue.run(); //Lancer la boîte de dialogue.
+	//dialogue.set_secondary_text("Et <i>ceci</i> est le texte secondaire qui explique quelque chose.", true); //Ajouter un texte secondaire.
+	dialogue.run();
 }
 
+//Fenêtre A Propos, pop-up quand on clique sur l'icône correspondante
 void Fenetre::afficherApropos() {
 	//reste à ajouter le logo avec dialogue.set_logo(Gdk::Pixbuf::create_from_file("name.png"));
 	Gtk::AboutDialog dialogue;
@@ -85,9 +116,17 @@ void Fenetre::afficherEntree() {
 	std::cout << texte << std::endl;
 }
 
+void Fenetre::changerWhitetoGaston() {
+	table_images->remove(white_0101);
+	table_images->attach(gaston, 0, 1, 0, 1);
+	show_all();
+}
+
 Fenetre::~Fenetre() {
 	delete bouton;
-	delete table;
-	delete entree;
+	delete table_zones_texte;
+	delete table_images;
+	delete table_big;
+	//delete entree;
 }
 
