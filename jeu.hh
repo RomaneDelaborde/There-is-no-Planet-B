@@ -14,9 +14,14 @@
 #include "enigme.hh"
 // #include "inventaire.hh"
 
-#define NB_CARTES 44
+# define NB_CARTES 44
 // vérifier nb_cartes et checker si on en a vraiment besoin ou pas (=somme nb lignes csv)
-// peut-être fa
+
+// define nom_string "blabla" --> de type std::string
+# define nom_csv_cartes_basiques "cartes_basiques.csv"
+# define nom_csv_cartes_enigmes "cartes_enigmes.csv"
+# define nom_csv_cartes_objets "cartes_objets.csv"
+
 class Jeu{
 
 private:
