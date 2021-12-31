@@ -14,12 +14,14 @@
 #include "enigme.hh"
 // #include "inventaire.hh"
 
-
+#define NB_CARTES 44
+// vérifier nb_cartes et checker si on en a vraiment besoin ou pas (=somme nb lignes csv)
+// peut-être fa
 class Jeu{
 
 private:
 
-  std::vector<Carte> _cartes_jeu; // liste des cartes du jeu
+  std::vector<Carte*> _cartes_jeu; // liste des cartes du jeu // on compte déclarer des cartes dynamiquement d'où * (le pointeur)
   std::map<int, int> _map_id; // map des id des cartes du jeu : int pour donner une indication sur leur affichage : 1 = carte affichée, 0 = carte pas encore affichée et -1 = carte affichée dans le passé et pas réaffichable
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
 
@@ -28,7 +30,7 @@ public:
   // Constructeur sans paramètres pour l'instant : quels paramètres à mettre dedans sinon ?
   Jeu();
 
-  // Destructeur (vide normalement)
+  // Destructeur (vide normalement -> non il faut détruire chaque carte du vecteur _cartes_jeu)
   ~Jeu(){};
 
 
@@ -40,7 +42,7 @@ public:
   //void lecture_csv_carte_objet(std::string nom_fichier);
 
 
-  Carte carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
+  Carte* carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
 
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id (si id existe alors carte correspondante existe aussi normalement)
 

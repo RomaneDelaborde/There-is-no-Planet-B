@@ -3,6 +3,8 @@
 
 Jeu::Jeu()
 {
+  //parcours vecteur _cartes_jeu
+  // _cartes_jeu[i]=new Carte(paramètres)
   // remplissage _cartes_jeu et __map_id en même temps (3 fichiers csv : cartes normales, cartes énigmes et cartes objets)
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
   // vérifier qu'il y ait le même nb d'éléments dans _cartes_jeu et _map_id après la création de ces 2 conteneurs (sécurité)
@@ -96,18 +98,18 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
 
 
 
-Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
+Carte* Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
   {
-    if(_cartes_jeu[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
+    if(_cartes_jeu[i]->get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
     {
       return _cartes_jeu[i];
     }
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur et on retourne un pointeur vide
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
-  return _cartes_jeu[0];//nullptr; // faudrait renvoyer uen valeur NULL (passer par des pointeurs ??) return NULL ou dans l'idéal faire un "throw no_such_id_error"
+  return _cartes_jeu[0];//nullptr; // faudrait renvoyer une valeur NULL (passer par des pointeurs ??) return NULL ou dans l'idéal faire un "throw no_such_id_error"
   // message d'erreur mais renvoie quand même la carte règles
 }
 
@@ -147,11 +149,11 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
-    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
+    if(_map_id[_cartes_jeu[i]->get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
     {
-      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      for(std::size_t j=0; j< _cartes_jeu[i]->get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
       {
-        if(_cartes_jeu[i].get_id_cartes_posterieures()[j]==id_carte)
+        if(_cartes_jeu[i]->get_id_cartes_posterieures()[j]==id_carte)
         {
           return 1;
         }
