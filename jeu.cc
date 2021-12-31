@@ -97,7 +97,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
 
 
 
-
+// la fonction à la ligne ci-dessus créée-t-elle une nouveau pointeur (qu'il faut donc supprimer?) si on fait juste par exemple carte(0).get_nom_carte()   ??
 Carte* Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
