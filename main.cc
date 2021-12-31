@@ -8,6 +8,7 @@
 #include "enigme2.hh"
 #include "enigme3.hh"
 
+
 int main()
 {
   Carte regles("regles.jpeg",0);
