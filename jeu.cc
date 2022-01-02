@@ -242,9 +242,9 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
   {
     if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
     {
-      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
       {
-        if(_cartes_jeu[i].get_id_cartes_posterieures()[j]==id_carte)
+        if(_cartes_jeu[i].get_id_cartes_suivantes()[j]==id_carte)
         {
           return 1;
         }
