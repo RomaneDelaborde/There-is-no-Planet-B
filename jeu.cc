@@ -6,8 +6,10 @@ Jeu::Jeu()
   lecture_csv_carte_basique(nom_csv_cartes_basiques);
   lecture_csv_carte_objet(nom_csv_cartes_objets);
 
+  int nb=5; // nombre d'essais (ici commun à toutes les énigmes mais chacune pourrait avoir sa propre valeur), 5 est une valeur arbitraire
+
   // Enigmes entrées à la main car il y en a que 3
-  Enigme2 charlie("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL");
+  Enigme2 charlie("zoom_livres",32,{33},nb,311,33,"TIRER LE LIVRE DE ROALD DAHL");
   //charlie.codage_jules_cesar(7,1); // fonction utile seulement à la création des énigmes
   //std::cout << charlie.get_phrase() << std::endl;
   //std::cout << charlie.get_phrase_codee() << std::endl;
@@ -15,7 +17,7 @@ Jeu::Jeu()
   _cartes_jeu.push_back(charlie);
   //_cartes_jeu.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
 
-  Enigme3 planete("coffre_fort",45,{50},5,46, "UNJUST+B");
+  Enigme3 planete("coffre_fort",45,{50},nb,46, "UNJUST+B");
   //std::cout << planete.get_chaine << std::endl;
   //std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
