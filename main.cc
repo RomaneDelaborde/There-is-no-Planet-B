@@ -27,12 +27,17 @@ int main()
   */
 
   /*
-  Enigme2 charlie("radio",13,5,311,"TIRER LE LIVRE DE ROALD DAHL");
+  Enigme2 charlie("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL");
   charlie.codage_jules_cesar(7,1);
   std::cout << charlie.get_phrase() << std::endl;
   std::cout << charlie.get_phrase_codee() << std::endl;
-  */
 
+
+  Enigme3 planete("coffre_fort",45,{50},5,46, "UNJUST+B");
+  std::cout << planete.get_chaine << std::endl;
+  std::cout << planete.get_code_solution() << std::endl<< std::endl;
+
+  */
   Jeu();
 
   return 0;

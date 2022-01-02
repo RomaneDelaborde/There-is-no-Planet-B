@@ -1,8 +1,8 @@
 #include "enigme3.hh"
 
-Enigme3::Enigme3(std::string nom_carte, int id, int nb_essais, std::string chaine):Enigme(nom_carte, id, nb_essais), _chaine(chaine) // mettre Enigme::Enigme ou pas ??
-{
+Enigme3::Enigme3(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int id_carte_debloquee, std::string chaine):Enigme(nom_carte, id, id_cartes_kick, nb_essais, id_carte_debloquee), _chaine(chaine){
   _lettres= {{'V', 2}, {'T', 3}, {'J', 5}, {'S', 6}, {'U', 7}, {'N', 8}, {'B', 9}}; // this-> nécessaire ou pas ??
+  codage_chaine_planete();
 }
 
 bool Enigme3::lettre_existe(char l) const // l pour lettre
@@ -18,7 +18,6 @@ bool Enigme3::lettre_existe(char l) const // l pour lettre
 
 int Enigme3::codage_mot_planete(std::string mot)
 {
-
   int code=0;
   int z=pow(10,mot.length()-1);
 
@@ -51,14 +50,17 @@ void Enigme3::codage_chaine_planete()
     {
         _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
     }
+    else
+    {
+      if(_chaine[pos]== '+' || pos== std::string::npos)
+      {
+          _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
+      }
+      else if(_chaine[pos]== '-' || pos== std::string::npos)
+      {
+          _code_solution-=codage_mot_planete(_chaine.substr(beg, pos - beg));
+      }
+    }
 
-    if(_chaine[pos]== '+')
-    {
-        _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
-    }
-    else if(_chaine[pos]== '-')
-    {
-        _code_solution-=codage_mot_planete(_chaine.substr(beg, pos - beg));
-    }
   }
 }
