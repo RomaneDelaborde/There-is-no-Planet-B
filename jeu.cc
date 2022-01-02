@@ -4,10 +4,22 @@
 Jeu::Jeu()
 {
   lecture_csv_carte_basique(nom_csv_cartes_basiques);
+  lecture_csv_carte_objet(nom_csv_cartes_objets);
+
+  // Enigmes entrées à la main car il y en a que 3
+
+  _cartes_jeu.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
+
+
+  //charlie.codage_jules_cesar(7,1); // fonction utile seulement à la création des énigmes
+  //std::cout << charlie.get_phrase() << std::endl;
+  //std::cout << charlie.get_phrase_codee() << std::endl;
+
+
 
   for(std::size_t i=0;i<_cartes_jeu.size();i++)
   {
-    _cartes_jeu[i].affichage_info_carte();
+    _cartes_jeu[i].affichage_info_carte(); // attention méthode de la classe Carte donc les attributs spécifiques aux objets et aux énigmes ne seront pas affichés
   }
 
   //parcours vecteur _cartes_jeu
@@ -102,6 +114,66 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
   }
 }
 
+
+
+void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
+{
+  std::ifstream fichier(nom_fichier); // Ouverture du fichier en mode lecture
+
+  if(fichier) // Si pas de problème à l'ouverture, on fait ce qu'on a à faire
+  {
+    std::string ligne= "";
+    std::getline(fichier,ligne); // pour passer la première ligne
+    while(std::getline(fichier,ligne))
+    {
+      std::string nom_carte;
+      int id;
+      std::string objets_combinables;
+      std::string combinaisons_obtenues;
+
+      std::string tempString;
+
+      std::stringstream inputString(ligne);
+
+      std::getline(inputString, nom_carte, ',');
+      std::getline(inputString, tempString, ',');
+      id=atoi(tempString.c_str());
+
+      std::getline(inputString, objets_combinables, ',');
+      std::getline(inputString, combinaisons_obtenues, ',');
+
+      ligne="";
+
+      // Création d'une carte
+      std::vector<int> v1 =lecture_str_tab(objets_combinables); // à renommer
+      std::vector<int> v2 =lecture_str_tab(combinaisons_obtenues); // à renommer
+
+      if(v1.size()!=v2.size())
+      {
+        std::cout << "ERREUR : il n'y a pas autant d'objets combinables que de combinaisons possibles" << std::endl;
+      }
+
+      if(v1[0]!=0) // si la carte possède au moins une carte suivante
+      {
+        // Création map
+        std::map<int, int> obj; // obj pour objets combinables
+        for(std::size_t i; i<v1.size();i++)
+        {
+          obj[v1[i]]=v2[i];
+        }
+        _cartes_jeu.push_back(Objet(nom_carte, id, obj));
+      }
+      else
+      {
+        _cartes_jeu.push_back(Carte(nom_carte, id));
+      }
+    }
+  }
+  else
+  {
+    std::cout << "ERREUR : impossible d'ouvrir le fichier en lecture" << std::endl;
+  }
+}
 
 
 // la fonction à la ligne ci-dessus créée-t-elle une nouveau pointeur (qu'il faut donc supprimer?) si on fait juste par exemple carte(0).get_nom_carte()   ??

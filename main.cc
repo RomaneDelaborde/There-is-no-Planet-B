@@ -26,6 +26,13 @@ int main()
   delete test;
   */
 
+  /*
+  Enigme2 charlie("radio",13,5,311,"TIRER LE LIVRE DE ROALD DAHL");
+  charlie.codage_jules_cesar(7,1);
+  std::cout << charlie.get_phrase() << std::endl;
+  std::cout << charlie.get_phrase_codee() << std::endl;
+  */
+
   Jeu();
 
   return 0;

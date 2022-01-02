@@ -1,7 +1,6 @@
 #include "enigme2.hh"
 
-//Enigme2::Enigme2(std::string nom_carte, int id, int id_enigme, int nb_essais, int code_solution, std::string phrase):Enigme(nom_carte, id, id_enigme, nb_essais), _code_solution(code_solution), _phrase(phrase)  // mettre Enigme::Enigme ou pas ??
-Enigme2::Enigme2(std::string nom_carte, int id, int nb_essais, std::string phrase):Enigme(nom_carte, id, nb_essais), _phrase(phrase)
+Enigme2::Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee, std::string phrase):Enigme(nom_carte, id, id_cartes_kick, nb_essais, code_solution, id_carte_debloquee), _phrase(phrase)
 {
   std::string alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -31,25 +30,16 @@ void Enigme2::codage_jules_cesar(int decalage, bool sens_decalage)
 
           if(sens_decalage) // vers la droite si sens_decalage=1
           {
-            indice+=decalage%_alphabet_indices.size();
+            indice+=decalage;
 
           }
           else
           {
-            indice-=decalage%_alphabet_indices.size();
+            indice-=decalage;
           }
+          indice=indice%_alphabet_indices.size();
 
-          /*
-          for(std::map<char,int>::iterator iter = _alphabet_indices.begin(); iter != _alphabet_indices.end(); ++iter)
-          {
-            char c =  iter->first; // c pour clé
-            int v = iter->second; // v pour valeur
-            if(v==indice)
-            {
-              _phrase_codee+=v;
-            }
-          }
-          */
+
           std::map<char,int>::iterator iter = _alphabet_indices.begin();
           while(iter != _alphabet_indices.end())
           {

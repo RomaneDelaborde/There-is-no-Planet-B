@@ -16,7 +16,7 @@ private:
 public:
 
   // Constructeur
-  Objet(std::string nom_carte, int id): Carte(nom_carte, id){}; // héritage constructeur classe mère
+  Objet(std::string nom_carte, int id, std::map<int, int> objets_combinables): Carte(nom_carte, id), _objets_combinables(objets_combinables){}; // héritage constructeur classe mère
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 

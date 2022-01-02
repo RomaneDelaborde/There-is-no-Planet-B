@@ -23,8 +23,8 @@ protected:
 
 public:
 
-  // Constructeur (vérifier qu'ils sont tous pertinents)
-  Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){};
+  // Constructeur
+  Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){}; // utile à la classe fille Objet
   Carte(std::string nom_carte, int id, std::vector<int> id_cartes_posterieures, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_posterieures(id_cartes_posterieures), _id_cartes_kick(id_cartes_kick){};
   Carte(std::string nom_carte, int id, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_kick(id_cartes_kick){}; // certaines carte peuvent ne pas avoir de cartes suivantes mais toutes les cartes ont au moins une carte kick
 

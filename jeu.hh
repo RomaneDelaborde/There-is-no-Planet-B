@@ -12,6 +12,9 @@
 #include "carte.hh"
 #include "objet.hh"
 #include "enigme.hh"
+#include "enigme1.hh"
+#include "enigme2.hh"
+#include "enigme3.hh"
 // #include "inventaire.hh"
 
 # define NB_CARTES 44
@@ -43,8 +46,8 @@ public:
   std::vector<int> lecture_str_tab(std::string chaine); // lecture d'un str composé d'int séparés par des "-" (tabulats) : ces int sont retournés sous forme de vecteur
 
   void lecture_csv_carte_basique(std::string nom_fichier); // lecture des infos sur les cartes basiques (ni objet ni énigme) depuis un csv
-  //void lecture_csv_carte_enigme(std::string nom_fichier);
-  //void lecture_csv_carte_objet(std::string nom_fichier);
+  void lecture_csv_carte_objet(std::string nom_fichier);
+  //void lecture_csv_carte_enigme(std::string nom_fichier); --> inutile je pense comme il n'y a que 3 énigmes
 
 
   Carte carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
