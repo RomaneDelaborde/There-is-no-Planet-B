@@ -3,6 +3,10 @@
 
 Jeu::Jeu()
 {
+  _cartes_jeu.push_back(Carte("regles.jpeg",0));
+  std::cout << "Nom de la carte : " << _cartes_jeu[0].get_nom_carte() << std::endl;
+  std::cout << "Id de la carte : " << _cartes_jeu[0].get_id() << std::endl << std::endl;
+
   //parcours vecteur _cartes_jeu
   // _cartes_jeu[i]=new Carte(paramètres)
   // remplissage _cartes_jeu et __map_id en même temps (3 fichiers csv : cartes normales, cartes énigmes et cartes objets)
@@ -103,11 +107,11 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
 
 
 // la fonction à la ligne ci-dessus créée-t-elle une nouveau pointeur (qu'il faut donc supprimer?) si on fait juste par exemple carte(0).get_nom_carte()   ??
-Carte* Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
+Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
   {
-    if(_cartes_jeu[i]->get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
+    if(_cartes_jeu[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
     {
       return _cartes_jeu[i];
     }
@@ -154,11 +158,11 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
-    if(_map_id[_cartes_jeu[i]->get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
+    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
     {
-      for(std::size_t j=0; j< _cartes_jeu[i]->get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_posterieures().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
       {
-        if(_cartes_jeu[i]->get_id_cartes_posterieures()[j]==id_carte)
+        if(_cartes_jeu[i].get_id_cartes_posterieures()[j]==id_carte)
         {
           return 1;
         }
