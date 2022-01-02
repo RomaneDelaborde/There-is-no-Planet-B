@@ -3,9 +3,12 @@
 
 Jeu::Jeu()
 {
-  _cartes_jeu.push_back(Carte("regles.jpeg",0));
-  std::cout << "Nom de la carte : " << _cartes_jeu[0].get_nom_carte() << std::endl;
-  std::cout << "Id de la carte : " << _cartes_jeu[0].get_id() << std::endl << std::endl;
+  lecture_csv_carte_basique(nom_csv_cartes_basiques);
+
+  for(std::size_t i=0;i<_cartes_jeu.size();i++)
+  {
+    _cartes_jeu[i].affichage_info_carte();
+  }
 
   //parcours vecteur _cartes_jeu
   // _cartes_jeu[i]=new Carte(paramètres)
@@ -79,22 +82,17 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       ligne="";
 
       // Création d'une carte
-      std::cout << nom_carte <<  std::endl;
-      std::cout << id <<  std::endl;
+      std::vector<int> v1 =lecture_str_tab(post); // à renommer
+      std::vector<int> v2 =lecture_str_tab(kick); // à renommer
+      if(v1[0]!=0) // si la carte possède au moins une carte suivante
+      {
+        _cartes_jeu.push_back(Carte(nom_carte, id, v1, v2));
+      }
+      else
+      {
+        _cartes_jeu.push_back(Carte(nom_carte, id, v2));
+      }
 
-      std::cout << post <<  std::endl;
-      std::cout << kick <<  std::endl;
-
-
-      std::cout << "POST" << std::endl;
-      std::vector<int> v1 =lecture_str_tab(post);
-      std::cout << "KICK" << std::endl;
-      std::vector<int> v2 =lecture_str_tab(kick);
-
-      // _cartes_jeu.push_back(Carte(paramètres)); --> et le pointeur mdr ? (on pourrait donc ne pas passer par des pointeurs)
-      //_cartes_jeu[i]=new Carte(paramètres);
-      // _cartes_jeu.push_back(new Carte(paramètres)); --> à tester
-      // _cartes_jeu.push_back(Carte*(paramètres)); --> à tester
 
     }
   }

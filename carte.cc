@@ -15,4 +15,5 @@ void Carte::affichage_info_carte() const
   {
     std::cout << _id_cartes_kick[i] << ' ';
   }
+  std::cout << std::endl << std::endl;
 }

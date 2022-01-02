@@ -11,7 +11,7 @@ private:
   std::string _nom_carte;  // nom de l'image associée à la carte (au format XX)
 
 protected:
-	
+
 	//attribut Gtk::Image ....
 
   int _id;    // id=identifiant propre à chaque carte (déterminé par nous à la main)
@@ -23,8 +23,11 @@ protected:
 
 public:
 
-  // Constructeur
+  // Constructeur (vérifier qu'ils sont tous pertinents)
   Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){};
+  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_posterieures, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_posterieures(id_cartes_posterieures), _id_cartes_kick(id_cartes_kick){};
+  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_kick(id_cartes_kick){}; // certaines carte peuvent ne pas avoir de cartes suivantes mais toutes les cartes ont au moins une carte kick
+
 
   // Destructeur
   ~Carte(){}; // vide car pas de mémoire associée à un pointeur à libérer pour le moment
