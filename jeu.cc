@@ -21,18 +21,24 @@ Jeu::Jeu()
 
   _cartes_jeu.push_back(planete);
 
-
-
   for(std::size_t i=0;i<_cartes_jeu.size();i++)
   {
     _cartes_jeu[i].affichage_info_carte(); // attention méthode de la classe Carte donc les attributs spécifiques aux objets et aux énigmes ne seront pas affichés
+
+    if(i==0) // seule la carte regles (le premiere du vector _cartes_jeu) est initialisée à la valeur 1 dans _map_id
+    {
+      _map_id[_cartes_jeu[i].get_id()]=1;
+    }
+    else
+    {
+      _map_id[_cartes_jeu[i].get_id()]=0;
+    }
   }
 
   //parcours vecteur _cartes_jeu
   // _cartes_jeu[i]=new Carte(paramètres)
   // remplissage _cartes_jeu et __map_id en même temps (3 fichiers csv : cartes normales, cartes énigmes et cartes objets)
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
-  // vérifier qu'il y ait le même nb d'éléments dans _cartes_jeu et _map_id après la création de ces 2 conteneurs (sécurité)
 
 }
 
