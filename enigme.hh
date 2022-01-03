@@ -28,6 +28,7 @@ public:
   int get_id_carte_debloquee() const {return _id_carte_debloquee;};
 
   // Méthodes
+  void affichage_info_enigme() const;
   bool code_correct(int val); // val est l'entier proposé par le joueur comme réponse à l'énigme (peut-être bonne ou non)
 
   // Méthodes virtuelles communes : calcul_code_solution ?

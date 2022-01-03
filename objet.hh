@@ -16,13 +16,14 @@ private:
 public:
 
   // Constructeur
-  Objet(std::string nom_carte, int id, std::map<int, int> objets_combinables): Carte(nom_carte, id), _id_objets_combinables(objets_combinables){}; // héritage constructeur classe mère
+  Objet(std::string nom_carte, int id):Carte(nom_carte,id){};
+  Objet(std::string nom_carte, int id, std::map<int, int> id_objets_combinables): Carte(nom_carte, id), _id_objets_combinables(id_objets_combinables){}; // héritage constructeur classe mère
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
-
-  // Méthodes
 
   // Getter _id_objets_combinables
   std::map<int, int> get_id_objets_combinables() const {return _id_objets_combinables;};
 
+  // Méthodes
+  void affichage_info_objet() const;
 };

@@ -3,8 +3,8 @@
 
 Jeu::Jeu()
 {
-  lecture_csv_carte_basique(nom_csv_cartes_basiques);
-  lecture_csv_carte_objet(nom_csv_cartes_objets);
+  lecture_csv_carte_basique(fichier_cartes_basiques);
+  lecture_csv_carte_objet(fichier_cartes_objets);
 
   int nb=5; // nombre d'essais (ici commun à toutes les énigmes mais chacune pourrait avoir sa propre valeur), 5 est une valeur arbitraire
 
@@ -14,19 +14,23 @@ Jeu::Jeu()
   //std::cout << charlie.get_phrase() << std::endl;
   //std::cout << charlie.get_phrase_codee() << std::endl;
 
-  _cartes_jeu.push_back(charlie);
+  _cartes_enigmes.push_back(charlie);
   //_cartes_jeu.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
 
   Enigme3 planete("coffre_fort",45,{50},nb,46, "UNJUST+B");
   //std::cout << planete.get_chaine << std::endl;
   //std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
-  _cartes_jeu.push_back(planete);
+  _cartes_enigmes.push_back(planete);
+
+
+  _cartes_jeu=_cartes_basiques;
+  //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
+  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_objets.begin(), _cartes_objets.end());
+  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_enigmes.begin(), _cartes_enigmes.end());
 
   for(std::size_t i=0;i<_cartes_jeu.size();i++)
   {
-    _cartes_jeu[i].affichage_info_carte(); // attention méthode de la classe Carte donc les attributs spécifiques aux objets et aux énigmes ne seront pas affichés
-
     if(i==0) // seule la carte regles (le premiere du vector _cartes_jeu) est initialisée à la valeur 1 dans _map_id
     {
       _map_id[_cartes_jeu[i].get_id()]=1;
@@ -36,6 +40,51 @@ Jeu::Jeu()
       _map_id[_cartes_jeu[i].get_id()]=0;
     }
   }
+
+  for(std::size_t i=0;i<_cartes_basiques.size();i++)
+  {
+    _cartes_basiques[i].affichage_info_carte();
+  }
+
+  for(std::size_t i=0;i<_cartes_objets.size();i++)
+  {
+    _cartes_objets[i].affichage_info_objet();
+  }
+
+  for(std::size_t i=0;i<_cartes_enigmes.size();i++)
+  {
+    _cartes_enigmes[i].affichage_info_enigme();
+  }
+
+  /*
+  for(std::size_t i=0;i<_cartes_basiques.size();i++)
+  {
+    _cartes_basiques[i].affichage_info_carte();
+
+    if(i==0) // seule la carte regles (le premiere du vector _cartes_jeu) est initialisée à la valeur 1 dans _map_id
+    {
+      _map_id[_cartes_basiques[i].get_id()]=1;
+    }
+    else
+    {
+      _map_id[_cartes_basiques[i].get_id()]=0;
+    }
+  }
+
+  for(std::size_t i=0;i<_cartes_objets.size();i++)
+  {
+    _cartes_objets[i].affichage_info_objet();
+    _map_id[_cartes_objets[i].get_id()]=0;
+
+  }
+
+  for(std::size_t i=0;i<_cartes_enigmes.size();i++)
+  {
+    _cartes_enigmes[i].affichage_info_enigme();
+    _map_id[_cartes_enigmes[i].get_id()]=0;
+  }
+  */
+
 
   //parcours vecteur _cartes_jeu
   // _cartes_jeu[i]=new Carte(paramètres)
@@ -112,14 +161,12 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::vector<int> v2 =lecture_str_tab(kick); // à renommer
       if(v1[0]!=0) // si la carte possède au moins une carte suivante
       {
-        _cartes_jeu.push_back(Carte(nom_carte, id, v1, v2));
+        _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2));
       }
       else
       {
-        _cartes_jeu.push_back(Carte(nom_carte, id, v2));
+        _cartes_basiques.push_back(Carte(nom_carte, id, v2));
       }
-
-
     }
   }
   else
@@ -165,9 +212,9 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       if(v1.size()!=v2.size())
       {
         std::cout << "ERREUR : il n'y a pas autant d'objets combinables que de combinaisons possibles" << std::endl;
+        return;
       }
-
-      if(v1[0]!=0) // si la carte possède au moins une carte suivante
+      if(v1[0]!=0)
       {
         // Création map
         std::map<int, int> obj; // obj pour objets combinables
@@ -175,12 +222,13 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
         {
           obj[v1[i]]=v2[i];
         }
-        _cartes_jeu.push_back(Objet(nom_carte, id, obj));
+        _cartes_objets.push_back(Objet(nom_carte, id, obj));
       }
       else
       {
-        _cartes_jeu.push_back(Carte(nom_carte, id));
+        _cartes_objets.push_back(Objet(nom_carte, id));
       }
+
     }
   }
   else
@@ -190,8 +238,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
 }
 
 
-// la fonction à la ligne ci-dessus créée-t-elle une nouveau pointeur (qu'il faut donc supprimer?) si on fait juste par exemple carte(0).get_nom_carte()   ??
-Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante
+Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++)
   {
@@ -200,10 +247,9 @@ Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une 
       return _cartes_jeu[i];
     }
   }
-  // si on a pas trouvé un match des id, on affiche un message d'erreur et on retourne un pointeur vide
-  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
-  return _cartes_jeu[0];//nullptr; // faudrait renvoyer une valeur NULL (passer par des pointeurs ??) return NULL ou dans l'idéal faire un "throw no_such_id_error"
-  // message d'erreur mais renvoie quand même la carte règles
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même une carte (celle des règles du jeu)
+  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
+  return _cartes_jeu[0];
 }
 
 

@@ -19,15 +19,17 @@
 
 
 // define nom_string "blabla" --> de type std::string
-#define nom_csv_cartes_basiques "cartes_basiques.csv"
-#define nom_csv_cartes_objets "cartes_objets.csv"
+#define fichier_cartes_basiques "cartes_basiques.csv"
+#define fichier_cartes_objets "cartes_objets.csv"
 // #define nom_csv_cartes_enigmes "cartes_enigmes.csv"
 
 class Jeu{
 
 private:
-
-  std::vector<Carte> _cartes_jeu; // liste des cartes du jeu // on compte déclarer des cartes dynamiquement d'où * (le pointeur)
+  std::vector<Carte> _cartes_jeu; // liste des cartes du jeu
+  std::vector<Carte> _cartes_basiques; // liste des cartes basiques du jeu
+  std::vector<Objet> _cartes_objets; // liste des cartes objets du jeu
+  std::vector<Enigme> _cartes_enigmes; // liste des cartes enigmes du jeu
   std::map<int, int> _map_id; // map des id des cartes du jeu : int pour donner une indication sur leur affichage : 1 = carte affichée, 0 = carte pas encore affichée et -1 = carte affichée dans le passé et pas réaffichable
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
 

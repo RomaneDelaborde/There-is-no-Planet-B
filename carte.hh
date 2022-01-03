@@ -7,13 +7,10 @@
 
 class Carte{
 
-private:
-  std::string _nom_carte;  // nom de l'image associée à la carte (au format XX)
-
 protected:
 
 	//attribut Gtk::Image ....
-
+  std::string _nom_carte;  // nom de l'image associée à la carte (au format XX)
   int _id;    // id=identifiant propre à chaque carte (déterminé par nous à la main)
 
   std::vector<int> _id_cartes_suivantes; // liste des id des cartes suivantes à afficher (ne contient pas les cartes secrètes déblocables par une énigme ou une combinaison d'objets)
