@@ -10,7 +10,7 @@ Jeu::Jeu()
 
   // Enigmes entrées à la main car il y en a que 3
   Enigme2 charlie("zoom_livres",32,{33},nb,311,33,"TIRER LE LIVRE DE ROALD DAHL");
-  //charlie.codage_jules_cesar(7,1); // fonction utile seulement à la création des énigmes
+  //charlie.codage_jules_cesar(7,1); // fonction utile seulement à la création des énigmes -> c'est pour ça qu'elle n'est pas mise dans le constructeur
   //std::cout << charlie.get_phrase() << std::endl;
   //std::cout << charlie.get_phrase_codee() << std::endl;
 
@@ -295,3 +295,18 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lect
   }
   return;
 }
+
+
+/*
+bool Jeu::tentative_enigme(int id_carte_enigme, int val)
+{
+  if(!carte(id_carte_enigme))
+  {
+    // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
+    return 0;
+  }
+
+  // ENIGME.code_correct(int val)
+
+}
+*/
