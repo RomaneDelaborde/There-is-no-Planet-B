@@ -17,8 +17,6 @@
 #include "enigme3.hh"
 // #include "inventaire.hh"
 
-#define NB_CARTES 44
-// vérifier nb_cartes et checker si on en a vraiment besoin ou pas (=somme nb lignes csv)
 
 // define nom_string "blabla" --> de type std::string
 #define nom_csv_cartes_basiques "cartes_basiques.csv"
