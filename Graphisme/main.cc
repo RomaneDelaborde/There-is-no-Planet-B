@@ -13,13 +13,11 @@
 // peut-être un tableau en bas pour l'inventaire
 
 #include <gtkmm/main.h>
-#include <gtkmm/window.h>
-#include <gtkmm/button.h>
-#include <gtkmm/messagedialog.h>
-
 #include "Fenetre.hh"
 
 int main(int argc, char* argv[]) {
+	//std::vector<Image> images;
+	
 	Gtk::Main app(argc, argv);
 	Fenetre fenetre;
 	Gtk::Main::run(fenetre);
