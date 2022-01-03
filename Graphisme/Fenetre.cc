@@ -9,7 +9,10 @@
 
 bool Fenetre::gastonChange = false;
 
-Fenetre::Fenetre() : about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"), combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"), bouton_2301(white_2301) { //à l'initialisation
+Fenetre::Fenetre() :
+about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"),
+combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
+bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), bouton_2312(white_2312), bouton_3412(white_3412) { //à l'initialisation
 	
 	set_title("There is no Planet B");
 	set_border_width(10);
@@ -19,36 +22,8 @@ Fenetre::Fenetre() : about_image("about.png"), white_0101("white.jpeg"), white_1
 	add(*table_big);
 	
 	init_table_zones_texte();
-	
-	//Initialisation du tableau d'images : déclaration de 8 images "white.jpeg"
-	table_images = new Gtk::Table(2, 4);
-	table_big->attach(*table_images, 0, 1, 1, 2);
+	init_table_images();
 
-	table_images->attach(white_0101, 0, 1, 0, 1);
-	//table_images->attach(white_1201, 1, 2, 0, 1);
-	
-	bouton_1201 = new Bouton(white_1201);
-	table_images->attach(*bouton_1201, 1, 2, 0, 1);
-	bouton_1201->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherErreur));
-	
-	
-	//table_images->attach(white_2301, 2, 3, 0, 1);
-	
-	table_images->attach(bouton_2301, 2, 3, 0, 1);
-	//bouton_2301.signal_clicked().connect(sigc::bind<Bouton*>(sigc::mem_fun(*this, &Fenetre::zoom_Image), &bouton_2301));
-	
-	
-	table_images->attach(white_3401, 3, 4, 0, 1);
-	table_images->attach(white_0112, 0, 1, 1, 2);
-	table_images->attach(white_1212, 1, 2, 1, 2);
-	table_images->attach(white_2312, 2, 3, 1, 2);
-	table_images->attach(white_3412, 3, 4, 1, 2);
-	
-
-	
-	
-	
-	
 	superbouton = new Bouton("Super bouton");
 	table_zones_texte->attach(*superbouton, 0, 2, 4, 5);
 	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::changerWhitetoGaston));
@@ -80,6 +55,24 @@ void Fenetre::init_table_zones_texte() {
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherApropos));
 }
 
+void Fenetre::init_table_images() {
+	//Initialisation du tableau d'images : déclaration de 8 images "white.jpeg"
+	table_images = new Gtk::Table(2, 4);
+	table_big->attach(*table_images, 0, 1, 1, 2);
+	
+	table_images->attach(bouton_0101, 0, 1, 0, 1);
+	table_images->attach(bouton_1201, 1, 2, 0, 1);
+	table_images->attach(bouton_2301, 2, 3, 0, 1);
+	table_images->attach(bouton_3401, 3, 4, 0, 1);
+	table_images->attach(bouton_0112, 0, 1, 1, 2);
+	table_images->attach(bouton_1212, 1, 2, 1, 2);
+	table_images->attach(bouton_2312, 2, 3, 1, 2);
+	table_images->attach(bouton_3412, 3, 4, 1, 2);
+	
+	bouton_1201.signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherErreur));
+	//bouton_2301.signal_clicked().connect(sigc::bind<Bouton*>(sigc::mem_fun(*this, &Fenetre::zoom_Image), &bouton_2301));
+}
+
 
 void Fenetre::afficherErreur() {
 	Gtk::MessageDialog dialogue(*this, "Erreur : vous ne pouvez pas tirer cette carte", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
@@ -107,14 +100,14 @@ void Fenetre::afficherApropos() {
 
 void Fenetre::changerWhitetoGaston() {
 	if (gastonChange == false) {
-		table_images->remove(white_0101);
+		table_images->remove(bouton_0101);
 		table_images->attach(gaston, 0, 1, 0, 1);
 		show_all();
 		gastonChange = true;
 	}
 	else {
 		table_images->remove(gaston);
-		table_images->attach(white_0101, 0, 1, 0, 1);
+		table_images->attach(bouton_0101, 0, 1, 0, 1);
 		show_all();
 		gastonChange = false;
 	}
@@ -123,7 +116,6 @@ void Fenetre::changerWhitetoGaston() {
 Fenetre::~Fenetre() {
 	delete superbouton;
 	delete bouton_about;
-	delete bouton_1201;
 	delete table_zones_texte;
 	delete table_images;
 	delete table_big;

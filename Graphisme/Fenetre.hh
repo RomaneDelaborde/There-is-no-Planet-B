@@ -59,6 +59,7 @@ class Fenetre: public Gtk::Window {
 		//Utiles
 		Fenetre();
 		void init_table_zones_texte();
+		void init_table_images();
 		void afficherApropos();
 		~Fenetre();
 	
@@ -74,9 +75,7 @@ class Fenetre: public Gtk::Window {
 		Bouton* superbouton; //Création du pointeur sur bouton.
 	
 		Bouton* bouton_about;
-	
-		Bouton* bouton_1201;
-	
+		
 		//Utiles
 		Gtk::Table* table_big; //Grand tableau
 		Gtk::Table* table_zones_texte; //tableau du haut, pour les zones de texte et d'entrée utilisateur
@@ -94,6 +93,16 @@ class Fenetre: public Gtk::Window {
 		Image white_1212;
 		Image white_2312;
 		Image white_3412;
+	
+		Bouton bouton_0101;
+		Bouton bouton_1201;
+		Bouton bouton_2301;
+		Bouton bouton_3401;
+		Bouton bouton_0112;
+		Bouton bouton_1212;
+		Bouton bouton_2312;
+		Bouton bouton_3412;
+	
 		Image about_image;
 		Image gaston;
 	
@@ -113,9 +122,6 @@ class Fenetre: public Gtk::Window {
 		Gtk::Entry entry_id_enigme;
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
-	
-		Bouton bouton_2301;
-
 
 };
 
