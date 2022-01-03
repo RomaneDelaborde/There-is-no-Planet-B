@@ -218,7 +218,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       {
         // Création map
         std::map<int, int> obj; // obj pour objets combinables
-        for(std::size_t i; i<v1.size();i++)
+        for(std::size_t i=0; i<v1.size();i++)
         {
           obj[v1[i]]=v2[i];
         }
@@ -228,6 +228,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       {
         _cartes_objets.push_back(Objet(nom_carte, id));
       }
+
 
     }
   }

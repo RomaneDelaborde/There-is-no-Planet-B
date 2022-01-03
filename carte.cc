@@ -2,7 +2,7 @@
 
 void Carte::affichage_info_carte() const
 {
-  std::cout << "Nom carte : " << _nom_carte << std::endl;
+  std::cout << std::endl << "Nom carte : " << _nom_carte << std::endl;
   std::cout << "Id : " << _id << std::endl;
 
   std::cout << "Id cartes suivantes : ";
