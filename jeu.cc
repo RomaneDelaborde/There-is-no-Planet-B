@@ -372,8 +372,8 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lect
 }
 
 
-/*
-bool Jeu::solution_enigme_valide(int id_carte_enigme, int val)
+
+bool Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 {
   if(!id_existe(id_carte_enigme))
   {
@@ -387,7 +387,7 @@ bool Jeu::solution_enigme_valide(int id_carte_enigme, int val)
   return 0;
 
 }
-*/
+
 
 /*
 bool Jeu::combinaison_realisable(int id_obj_1, int id_obj_2)

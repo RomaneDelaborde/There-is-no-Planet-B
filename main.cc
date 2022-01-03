@@ -11,6 +11,7 @@
 
 int main()
 {
+  // PENSER A ENREGISTRER MAIN AUTRE PART AVANT DE SUPPRIMER TOUS LES TESTS (peut être utile de jeter un oeil à ces tests)
   /*
   Carte regles("regles.jpeg",0);
   std::cout << "Nom de la carte : " << regles.get_nom_carte() << std::endl;
@@ -38,7 +39,11 @@ int main()
   std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
   */
-  Jeu();
+  // Jeu();
+  Jeu test(); // Jeu test(); faux car il déclare une fonction
+  std::cout << test.solution_enigme_valide(32, 311) << std::endl;
+  std::cout << test.solution_enigme_valide(32, 312) << std::endl;
+
 
   return 0;
 
