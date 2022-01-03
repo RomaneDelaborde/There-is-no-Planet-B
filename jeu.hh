@@ -59,7 +59,9 @@ public:
   void demande_affichage_carte(const int id_carte); // demande de l'affichage d'une carte par le joueur
 
 
-  //bool tentative_enigme(int id_carte_enigme, int val); // renvoie 1 si la réponse est bonne et 0 sinon et modifications en adéquation
+  //bool solution_enigme_valide(int id_carte_enigme, int val); // renvoie 1 si la réponse est bonne et 0 sinon (et modifications en adéquation)
+
+  //bool combinaison_realisable(int id_obj_1, int id_obj_2); // renvoie 1 si la combinaison est réalisable et 0 sinon (et modifications en adéquation)
 
   // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
   // affichage des cartes ? -> voir tous les bails graphiques à faire : ça serait bien affichage carte en fonction de l'id

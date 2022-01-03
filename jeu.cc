@@ -298,9 +298,9 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lect
 
 
 /*
-bool Jeu::tentative_enigme(int id_carte_enigme, int val)
+bool Jeu::solution_enigme_valide(int id_carte_enigme, int val)
 {
-  if(!carte(id_carte_enigme))
+  if(!id_existe(id_carte_enigme))
   {
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
     return 0;
@@ -308,5 +308,15 @@ bool Jeu::tentative_enigme(int id_carte_enigme, int val)
 
   // ENIGME.code_correct(int val)
 
+}
+*/
+
+/*
+bool Jeu::combinaison_realisable(int id_obj_1, int id_obj_2)
+{
+  if(!id_existe(id_obj_1) || !id_existe(id_obj_2))
+  {
+    return 0;
+  }
 }
 */
