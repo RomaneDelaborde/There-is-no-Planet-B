@@ -9,6 +9,7 @@
 #define DEF_FENETRE
 
 #include <gtkmm/main.h>
+#include <gtkmm/image.h>
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
 #include <gtkmm/table.h>
@@ -16,13 +17,28 @@
 #include <gtkmm/label.h>
 #include <gtkmm/messagedialog.h>
 #include <gtkmm/aboutdialog.h>
+#include <gtkmm/eventbox.h>
 #include <string>
 #include <iostream>
 
 
-class Fenetre : public Gtk::Window {
+class Bouton : public Gtk::Button {
+	
+public:
+	//Utiles
+	Bouton(Gtk::Image& image);
+	//~Bouton();
+
+private:
+	std::string name;
+	
+	
+};
+
+
+class Fenetre: public Gtk::Window {
 		
-	public :
+	public:
 		static bool gastonChange;
 
 		//Utiles
@@ -36,9 +52,11 @@ class Fenetre : public Gtk::Window {
 		void afficherEntree();
 		void changerWhitetoGaston();
 	
-	private :
+	private:
 		//Expérimentations
 		Gtk::Button* bouton; //Création du pointeur sur bouton.
+		Gtk::Button* bouton_about;
+		Gtk::Button* bouton_1201;
 	
 		//Utiles
 		Gtk::Table* table_big; //Grand tableau
@@ -46,6 +64,8 @@ class Fenetre : public Gtk::Window {
 		Gtk::Table* table_images; //tableau du milieu, pour les images en taille petite
 		Gtk::Entry* entree;
 		std::string texte;
+	
+		//Gtk::EventBox box_about;
 	
 		//DECLARER TOOOOOOOOUTES LES IMAGES DONT ON AURA BESOIN
 		//Même si 2 widgets utilisent la même image, il faut déclarer 2 Gtk::Image avec 2 noms différents
@@ -59,6 +79,7 @@ class Fenetre : public Gtk::Window {
 		Gtk::Image white_1212;
 		Gtk::Image white_2312;
 		Gtk::Image white_3412;
+		Gtk::Image about_image;
 	
 		Gtk::Image gaston;
 	
@@ -78,8 +99,11 @@ class Fenetre : public Gtk::Window {
 		Gtk::Entry entry_id_enigme;
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
+	
+		Bouton* bouton_2301;
 
 
 };
+
 
 #endif
