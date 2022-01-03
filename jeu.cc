@@ -390,7 +390,7 @@ bool Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 
 
 
-bool Jeu::combinaison_realisable(int id_obj_1, int id_obj_2) const
+bool Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
 {
   if(!id_existe(id_obj_1) || !id_existe(id_obj_2))
   {
