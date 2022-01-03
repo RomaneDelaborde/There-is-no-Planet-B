@@ -20,7 +20,7 @@ void Enigme::affichage_info_enigme() const
 
 bool Enigme::code_correct(int val)
 {
-  if(val==_code_solution)
+  if(val==_code_solution) // le joueur a bon, on renvoie 0
   {
     return 1;
   }

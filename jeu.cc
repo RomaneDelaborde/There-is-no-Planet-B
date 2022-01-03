@@ -15,7 +15,7 @@ Jeu::Jeu()
   //std::cout << charlie.get_phrase_codee() << std::endl;
 
   _cartes_enigmes.push_back(charlie);
-  //_cartes_jeu.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
+  //_cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
 
   Enigme3 planete("coffre_fort",45,{50},nb,46, "UNJUST+B");
   //std::cout << planete.get_chaine << std::endl;
@@ -24,103 +24,58 @@ Jeu::Jeu()
   _cartes_enigmes.push_back(planete);
 
 
-  _cartes_jeu=_cartes_basiques;
+  _cartes_jeu=_cartes_basiques;                                                                   // ajout des cartes basiques dans _cartes_jeu
   //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
-  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_objets.begin(), _cartes_objets.end());
-  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_enigmes.begin(), _cartes_enigmes.end());
+  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_objets.begin(), _cartes_objets.end());            // ajout des cartes objets dans _cartes_jeu
+  _cartes_jeu.insert(_cartes_jeu.end(), _cartes_enigmes.begin(), _cartes_enigmes.end());          // ajout des cartes enigmes dans _cartes_jeu
 
-  for(std::size_t i=0;i<_cartes_jeu.size();i++)
+  for(std::size_t i=0;i<_cartes_jeu.size();i++) // parcours de _cartes_jeu
   {
-    if(i==0) // seule la carte regles (le premiere du vector _cartes_jeu) est initialisée à la valeur 1 dans _map_id
+    if(i==0) // seule la carte regles (le première de_cartes_jeu) est initialisée à la valeur 1 dans _map_id
     {
       _map_id[_cartes_jeu[i].get_id()]=1;
     }
-    else
+    else    // sinon mise à 0 pour toutes les autres cartes
     {
       _map_id[_cartes_jeu[i].get_id()]=0;
     }
   }
 
-  for(std::size_t i=0;i<_cartes_basiques.size();i++)
+  for(std::size_t i=0;i<_cartes_basiques.size();i++)  // Affichage des informations sur les cartes basiques
   {
     _cartes_basiques[i].affichage_info_carte();
   }
 
-  for(std::size_t i=0;i<_cartes_objets.size();i++)
+  for(std::size_t i=0;i<_cartes_objets.size();i++)    // Affichage des informations sur les cartes objets
   {
     _cartes_objets[i].affichage_info_objet();
   }
 
-  for(std::size_t i=0;i<_cartes_enigmes.size();i++)
+  for(std::size_t i=0;i<_cartes_enigmes.size();i++)   // Affichage des informations sur les cartes enigmes
   {
     _cartes_enigmes[i].affichage_info_enigme();
   }
-
-  /*
-  for(std::size_t i=0;i<_cartes_basiques.size();i++)
-  {
-    _cartes_basiques[i].affichage_info_carte();
-
-    if(i==0) // seule la carte regles (le premiere du vector _cartes_jeu) est initialisée à la valeur 1 dans _map_id
-    {
-      _map_id[_cartes_basiques[i].get_id()]=1;
-    }
-    else
-    {
-      _map_id[_cartes_basiques[i].get_id()]=0;
-    }
-  }
-
-  for(std::size_t i=0;i<_cartes_objets.size();i++)
-  {
-    _cartes_objets[i].affichage_info_objet();
-    _map_id[_cartes_objets[i].get_id()]=0;
-
-  }
-
-  for(std::size_t i=0;i<_cartes_enigmes.size();i++)
-  {
-    _cartes_enigmes[i].affichage_info_enigme();
-    _map_id[_cartes_enigmes[i].get_id()]=0;
-  }
-  */
-
-
-  //parcours vecteur _cartes_jeu
-  // _cartes_jeu[i]=new Carte(paramètres)
-  // remplissage _cartes_jeu et __map_id en même temps (3 fichiers csv : cartes normales, cartes énigmes et cartes objets)
-  // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
-
 }
 
 
 
 std::vector<int> Jeu::lecture_str_tab(std::string chaine)
 {
-  std::vector<std::string> res={};
+  std::vector<std::string> res={}; // res pour résultat
 
-  // Lecture de la chaine avec des délimiteurs
-  std::string const delims{ "-" }; // délimiteurs
+  // Lecture de la chaine avec un délimiteur
+  std::string const delims{ "-" }; // délimiteur
 
   size_t beg, pos = 0;
   while ((beg = chaine.find_first_not_of(delims, pos)) != std::string::npos)
   {
       pos = chaine.find_first_of(delims, beg + 1);
-      res.push_back(chaine.substr(beg, pos - beg)); // Ajout dans le vecteur _chaine_eclatee
+      res.push_back(chaine.substr(beg, pos - beg)); // Ajout de chaque int (séparé par des tabulats) sous forme d'un str dans le vecteur res
   }
 
   std::vector<int> res_int={};
 
-  std::transform(res.begin(), res.end(), std::back_inserter(res_int), [](const std::string& str) { return std::stoi(str); });
-
-  // Affichage de res_int
-  /*
-  for (int i:res_int)
-  {
-    std::cout << i << ' ';
-  }
-  std::cout << std::endl;
-  */
+  std::transform(res.begin(), res.end(), std::back_inserter(res_int), [](const std::string& str) { return std::stoi(str); }); // conversion du vecteur res de str en vecteur res_int d'entiers
 
   return res_int;
 
@@ -135,13 +90,13 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
   if(fichier) // Si pas de problème à l'ouverture, on fait ce qu'on a à faire
   {
     std::string ligne= "";
-    std::getline(fichier,ligne); // pour passer la première ligne
+    std::getline(fichier,ligne); // pour passer la première ligne (celle avec le nom des colonnes)
     while(std::getline(fichier,ligne))
     {
       std::string nom_carte;
       int id;
-      std::string post;
-      std::string kick;
+      std::string suiv; // id des cartes suivantes sous forme de string (valeurs séparées par des tabulats)
+      std::string kick; // id des cartes permettant de kicker la carte (valeurs séparées par des tabulats)
 
       std::string tempString;
 
@@ -151,25 +106,26 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::getline(inputString, tempString, ',');
       id=atoi(tempString.c_str());
 
-      std::getline(inputString, post, ',');
+      std::getline(inputString, suiv, ',');
       std::getline(inputString, kick, ',');
 
       ligne="";
 
       // Création d'une carte
-      std::vector<int> v1 =lecture_str_tab(post); // à renommer
-      std::vector<int> v2 =lecture_str_tab(kick); // à renommer
+      std::vector<int> v1 =lecture_str_tab(suiv); // v1 = vecteur des id des cartes suivantes sous forme de int
+      std::vector<int> v2 =lecture_str_tab(kick); // v2 = vecteur des id des cartes kick sous forme de int
+
       if(v1[0]!=0) // si la carte possède au moins une carte suivante
       {
         _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2));
       }
-      else
+      else // sinon
       {
         _cartes_basiques.push_back(Carte(nom_carte, id, v2));
       }
     }
   }
-  else
+  else // s'il y a un problème à l'ouverture, on affiche un message d'erreur
   {
     std::cout << "ERREUR : impossible d'ouvrir le fichier en lecture" << std::endl;
   }
@@ -184,13 +140,13 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
   if(fichier) // Si pas de problème à l'ouverture, on fait ce qu'on a à faire
   {
     std::string ligne= "";
-    std::getline(fichier,ligne); // pour passer la première ligne
+    std::getline(fichier,ligne); // pour passer la première ligne (celle avec le nom des colonnes)
     while(std::getline(fichier,ligne))
     {
       std::string nom_carte;
       int id;
-      std::string objets_combinables;
-      std::string combinaisons_obtenues;
+      std::string objets_combinables; // id des cartes des objets combinables sous forme de string (valeurs séparées par des tabulats)
+      std::string combinaisons_obtenues; // id des cartes obtenues par combinaison sous forme de string (valeurs séparées par des tabulats)
 
       std::string tempString;
 
@@ -206,15 +162,16 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       ligne="";
 
       // Création d'une carte
-      std::vector<int> v1 =lecture_str_tab(objets_combinables); // à renommer
-      std::vector<int> v2 =lecture_str_tab(combinaisons_obtenues); // à renommer
+      std::vector<int> v1 =lecture_str_tab(objets_combinables); // v1 = vecteur des id des cartes des objets combinables sous forme de int
+      std::vector<int> v2 =lecture_str_tab(combinaisons_obtenues); // v2 = vecteur des id des cartes obtenues par combinaison sous forme de int
 
-      if(v1.size()!=v2.size())
+      if(v1.size()!=v2.size()) // si jamais v1 et v2 ne sont pas de la même taille, on affiche un message d'erreur (car 1 combinaison = 1 carte obtenue)
       {
         std::cout << "ERREUR : il n'y a pas autant d'objets combinables que de combinaisons possibles" << std::endl;
         return;
       }
-      if(v1[0]!=0)
+
+      if(v1[0]!=0) // si l'objet n'est pas combinable avec d'autres objets
       {
         // Création map
         std::map<int, int> obj; // obj pour objets combinables
@@ -224,22 +181,20 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
         }
         _cartes_objets.push_back(Objet(nom_carte, id, obj));
       }
-      else
+      else // sinon si l'objet n'est pas combinable avec d'autres objets (ex: certificat)
       {
         _cartes_objets.push_back(Objet(nom_carte, id));
       }
-
-
     }
   }
-  else
+  else // s'il y a un problème à l'ouverture, on affiche un message d'erreur
   {
     std::cout << "ERREUR : impossible d'ouvrir le fichier en lecture" << std::endl;
   }
 }
 
 
-Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie sa carte (basique) correspondante
+Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id (unique) d'une carte basique, renvoie sa carte correspondante
 {
   for(std::size_t i=0; i< _cartes_basiques.size(); i++)
   {
@@ -248,12 +203,12 @@ Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une 
       return _cartes_basiques[i];
     }
   }
-  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même une carte (celle des règles du jeu)
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même une carte (celle des règles du jeu)
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
   return _cartes_basiques[0];
 }
 
-Objet Jeu::objet(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie son objet correspondant
+Objet Jeu::objet(const int id_carte) const // à partir d'une valeur d'id (unique) d'une carte objet, renvoie son objet correspondant
 {
   for(std::size_t i=0; i< _cartes_objets.size(); i++)
   {
@@ -262,12 +217,12 @@ Objet Jeu::objet(const int id_carte) const // à partir d'une valeur d'id d'une 
       return _cartes_objets[i];
     }
   }
-  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même un objet
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même un objet
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucun objet" << std::endl;
   return _cartes_objets[0];
 }
 
-Enigme Jeu::enigme(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie son énigme correspondante
+Enigme Jeu::enigme(const int id_carte) const // à partir d'une valeur d'id (unique) d'une carte enigme, renvoie son énigme correspondante
 {
   for(std::size_t i=0; i< _cartes_enigmes.size(); i++)
   {
@@ -276,7 +231,7 @@ Enigme Jeu::enigme(const int id_carte) const // à partir d'une valeur d'id d'un
       return _cartes_enigmes[i];
     }
   }
-  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même une énigme
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même une énigme
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
   return _cartes_enigmes[0];
 }
@@ -289,7 +244,7 @@ bool Jeu::id_existe(const int id_carte) const
     //std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte" << std::endl;
     return 0;
   }
-  return 1;
+  return 1; // sinon tout va bien, il existe et on renvoie 1
 }
 
 
@@ -317,10 +272,9 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
-    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes postérieures
+    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes suivantes
     {
-      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes postérieures, on a id_carte alors on retourne 1 mais ATTENTION : cela signifie que dans les cartes postérieures il ne faut pas mettre les cartes déblocables (il faudrait séparer les cartes secrètes des cartes sans conditions)
-      {
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes suivantes, on a id_carte alors on retourne 1 
         if(_cartes_jeu[i].get_id_cartes_suivantes()[j]==id_carte)
         {
           return 1;

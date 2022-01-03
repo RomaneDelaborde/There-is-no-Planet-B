@@ -26,7 +26,7 @@ int main()
 
   delete test;
   */
-
+  // _cartes_jeu[i]=new Carte(paramètres)
   /*
   Enigme2 charlie("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL");
   charlie.codage_jules_cesar(7,1);
@@ -48,7 +48,7 @@ int main()
   std::cout << test.combinaison_realisable(101, 302) << std::endl; // true
   std::cout << test.combinaison_realisable(101, 666) << std::endl;  // false
   */
-  
+
   Jeu();
 
   return 0;
