@@ -389,12 +389,22 @@ bool Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 }
 
 
-/*
-bool Jeu::combinaison_realisable(int id_obj_1, int id_obj_2)
+
+bool Jeu::combinaison_realisable(int id_obj_1, int id_obj_2) const
 {
   if(!id_existe(id_obj_1) || !id_existe(id_obj_2))
   {
+    // affichage pop-up du type : "1 des objets n'existe pas"
     return 0;
   }
+
+  if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
+  {
+    // afficher la carte qui résulte de la combinaison
+    return 1;
+  }
+  // affichage pop-up du type : "les 2 objets ne sont pas combinables"
+  return 0;
+
+
 }
-*/

@@ -39,11 +39,17 @@ int main()
   std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
   */
-  // Jeu();
-  Jeu test(); // Jeu test(); faux car il déclare une fonction
-  std::cout << test.solution_enigme_valide(32, 311) << std::endl;
-  std::cout << test.solution_enigme_valide(32, 312) << std::endl;
 
+  /*
+  Jeu test; // Jeu test(); faux car il déclare une fonction
+  std::cout << test.solution_enigme_valide(32, 311) << std::endl; // true
+  std::cout << test.solution_enigme_valide(32, 312) << std::endl; // false
+
+  std::cout << test.combinaison_realisable(101, 302) << std::endl; // true
+  std::cout << test.combinaison_realisable(101, 666) << std::endl;  // false
+  */
+  
+  Jeu();
 
   return 0;
 

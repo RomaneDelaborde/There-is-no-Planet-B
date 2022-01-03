@@ -21,3 +21,13 @@ void Objet::affichage_info_objet() const
 
   std::cout << std::endl << std::endl;
 }
+
+
+bool Objet::id_obj_est_combinable(int id_obj) const
+{
+  if(_id_objets_combinables.find(id_obj)!=_id_objets_combinables.end()) // si l'id de l'objet est dans le map c'est bon
+  {
+    return 1;
+  }
+  return 0;
+}

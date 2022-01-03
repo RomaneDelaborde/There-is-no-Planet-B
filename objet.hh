@@ -26,4 +26,5 @@ public:
 
   // Méthodes
   void affichage_info_objet() const;
+  bool id_obj_est_combinable(int id_obj) const;
 };

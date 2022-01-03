@@ -65,7 +65,7 @@ public:
 
   bool solution_enigme_valide(int id_carte_enigme, int val) const; // renvoie 1 si la réponse est bonne et 0 sinon (et modifications en adéquation)
 
-  //bool combinaison_realisable(int id_obj_1, int id_obj_2); // renvoie 1 si la combinaison est réalisable et 0 sinon (et modifications en adéquation)
+  bool combinaison_realisable(int id_obj_1, int id_obj_2) const; // renvoie 1 si la combinaison est réalisable et 0 sinon (et modifications en adéquation)
 
   // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
   // affichage des cartes ? -> voir tous les bails graphiques à faire : ça serait bien affichage carte en fonction de l'id
