@@ -239,18 +239,46 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
 }
 
 
-Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie sa carte correspondante
+Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie sa carte (basique) correspondante
 {
-  for(std::size_t i=0; i< _cartes_jeu.size(); i++)
+  for(std::size_t i=0; i< _cartes_basiques.size(); i++)
   {
-    if(_cartes_jeu[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte correspondante
+    if(_cartes_basiques[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte (basique) correspondante
     {
-      return _cartes_jeu[i];
+      return _cartes_basiques[i];
     }
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même une carte (celle des règles du jeu)
   std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
-  return _cartes_jeu[0];
+  return _cartes_basiques[0];
+}
+
+Objet Jeu::objet(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie son objet correspondant
+{
+  for(std::size_t i=0; i< _cartes_objets.size(); i++)
+  {
+    if(_cartes_objets[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne l'objet correspondant
+    {
+      return _cartes_objets[i];
+    }
+  }
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même un objet
+  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucun objet" << std::endl;
+  return _cartes_objets[0];
+}
+
+Enigme Jeu::enigme(const int id_carte) const // à partir d'une valeur d'id d'une carte (unique), renvoie son énigme correspondante
+{
+  for(std::size_t i=0; i< _cartes_enigmes.size(); i++)
+  {
+    if(_cartes_enigmes[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne l'énigme correspondante
+    {
+      return _cartes_enigmes[i];
+    }
+  }
+  // si on a pas trouvé un match des id, on affiche un message d'erreur mais renvoie quand même une énigme
+  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
+  return _cartes_enigmes[0];
 }
 
 
@@ -352,8 +380,11 @@ bool Jeu::solution_enigme_valide(int id_carte_enigme, int val)
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
     return 0;
   }
-
-  // ENIGME.code_correct(int val)
+  if(enigme(id_carte_enigme).code_correct(val))
+  {
+    return 1;
+  }
+  return 0;
 
 }
 */

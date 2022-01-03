@@ -51,6 +51,8 @@ public:
 
 
   Carte carte(const int id_carte) const; // à partir d'une valeur d'id d'une carte (unique), renvoit sa carte correspondante si celle-ci existe
+  Objet objet(const int id_carte) const;
+  Enigme enigme(const int id_carte) const;
 
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id (si id existe alors carte correspondante existe aussi normalement)
 
