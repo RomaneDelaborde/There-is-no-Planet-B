@@ -2,3 +2,4 @@ nom_carte,id,int_objets_combinables,id_carte_obtenue_par_combinaison
 epingle_cheveux,101,302,40
 cesar,204,0,0
 pied_biche,205,203-404,30-501
+porte_cachee_o,302,101,40
