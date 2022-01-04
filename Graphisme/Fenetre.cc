@@ -14,6 +14,8 @@ about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), wh
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
 bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), bouton_2312(white_2312), bouton_3412(white_3412) { //à l'initialisation
 	
+	//commencer par un écran d'accueil....
+	
 	set_title("There is no Planet B");
 	set_border_width(10);
 	set_position(Gtk::WIN_POS_CENTER);
@@ -25,14 +27,14 @@ bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouto
 	init_table_images();
 
 	superbouton = new Bouton("Super bouton");
-	table_zones_texte->attach(*superbouton, 0, 2, 4, 5);
+	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
 	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::changerWhitetoGaston));
 	
 	show_all();
 }
 
 void Fenetre::init_table_zones_texte() {
-	table_zones_texte = new Gtk::Table(5, 8);
+	table_zones_texte = new Gtk::Table(6, 8);
 	table_big->attach(*table_zones_texte, 0, 1, 0, 1);
 	
 	table_zones_texte->attach(combinaisons, 0, 2, 0, 1);
@@ -51,8 +53,18 @@ void Fenetre::init_table_zones_texte() {
 	table_zones_texte->attach(entry_carte_num, 5, 6, 2, 3);
 	
 	bouton_about = new Bouton(about_image);
-	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2);
+	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2, Gtk::SHRINK);
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherApropos));
+	
+	bouton_combinaisons = new Bouton("Envoyer");
+	table_zones_texte->attach(*bouton_combinaisons, 0, 1, 4, 5, Gtk::SHRINK);
+	
+	bouton_enigme = new Bouton("Envoyer");
+	table_zones_texte->attach(*bouton_enigme, 2, 3, 4, 5, Gtk::SHRINK);
+	
+	bouton_carte = new Bouton("Envoyer");
+	table_zones_texte->attach(*bouton_carte, 4, 5, 4, 5, Gtk::SHRINK);
+
 }
 
 void Fenetre::init_table_images() {
@@ -116,6 +128,9 @@ void Fenetre::changerWhitetoGaston() {
 Fenetre::~Fenetre() {
 	delete superbouton;
 	delete bouton_about;
+	delete bouton_combinaisons;
+	delete bouton_enigme;
+	delete bouton_carte;
 	delete table_zones_texte;
 	delete table_images;
 	delete table_big;
@@ -130,13 +145,6 @@ Bouton::Bouton(Image& image) : Gtk::Button() {
 }
 
 /*
- 
- 
-void Fenetre::afficherEntree() {
-	 texte = entree->get_text();
-	 std::cout << texte << std::endl;
- }
-
 void Bouton::zoom_Image() {
 	Gtk::Window fenetre_temp;
 	fenetre_temp.set_title("Zoom sur l'image");
@@ -158,3 +166,4 @@ Image& Image::operator=(const Image& image) {
 	name = image.name;
 	return *this;
 }
+ 

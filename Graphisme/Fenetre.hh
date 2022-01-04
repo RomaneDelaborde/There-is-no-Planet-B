@@ -5,8 +5,7 @@
 //  Created by Maëlle Jolivet on 29/12/2021.
 //
 
-#ifndef DEF_FENETRE
-#define DEF_FENETRE
+#pragma once
 
 #include <gtkmm/main.h>
 #include <gtkmm/image.h>
@@ -22,32 +21,32 @@
 #include <iostream>
 
 class Image: public Gtk::Image {
-	
-public:
-	Image(const std::string & file) : Gtk::Image(file) {name = file;}
-	Image() : Gtk::Image() {}
-	Image& operator=(const Image& image);
-	
-private:
-	std::string name;
+		
+	public:
+		Image(const std::string & file) : Gtk::Image(file) {name = file;}
+		Image() : Gtk::Image() {}
+		Image& operator=(const Image& image);
+		
+	private:
+		std::string name;
 	
 };
 
 
 class Bouton: public Gtk::Button {
-	
-public:
-	//Utiles
-	Bouton() : Gtk::Button() {}
-	Bouton(const Glib::ustring& label, bool mnemonic=false) : Gtk::Button (label, false) {set_can_focus(false);}
-	Bouton(Image& image);
-	//void zoom_Image();
-	//~Bouton();
+		
+	public:
+		//Utiles
+		Bouton() : Gtk::Button() {}
+		Bouton(const Glib::ustring& label, bool mnemonic=false) : Gtk::Button (label, false) {set_can_focus(false);}
+		Bouton(Image& image);
+		//void zoom_Image();
+		//~Bouton();
 
-private:
-	std::string name;
-	Image tiny_image;
-	
+	private:
+		std::string name;
+		Image tiny_image;
+		
 };
 
 
@@ -58,22 +57,34 @@ class Fenetre: public Gtk::Window {
 
 		//Utiles
 		Fenetre();
+	
+		//passer les init en privé ?
 		void init_table_zones_texte();
 		void init_table_images();
+	
 		void afficherApropos();
+	
+		std::string get_entry_objet_1() {return entry_objet_1.get_text();}
+		std::string get_entry_objet_2() {return entry_objet_2.get_text();}
+		std::string get_entry_id_enigme() {return entry_id_enigme.get_text();}
+		std::string get_entry_reponse_enigme_l() {return entry_reponse_enigme_l.get_text();}
+		std::string get_entry_carte_num() {return entry_carte_num.get_text();}
+
 		~Fenetre();
 	
 		//Expérimentations
 		void afficherErreur();
-		//void afficherEntree();
 		void changerWhitetoGaston();
 		//Image& getImagefromName(std::string name);
 		//void zoom_Image(Bouton& bouton);
 	
 	private:
 		//Expérimentations
-		Bouton* superbouton; //Création du pointeur sur bouton.
-	
+		Bouton* superbouton;
+		Bouton* bouton_combinaisons;
+		Bouton* bouton_enigme;
+		Bouton* bouton_carte;
+
 		Bouton* bouton_about;
 		
 		//Utiles
@@ -122,8 +133,4 @@ class Fenetre: public Gtk::Window {
 		Gtk::Entry entry_id_enigme;
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
-
 };
-
-
-#endif
