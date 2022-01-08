@@ -13,9 +13,10 @@ private:
   std::string _phrase_codee;             // phrase codée en fonction du décalage et du sens du décalage indiqués par l'utilisateur dans les paramètres de la fonction codage_jules_cesar
 
   // REMARQUE : _phrase et _phrase_codee contiennent uniquement des lettres en majuscules et/ou des espaces
-  
+
 public:
   // Constructeur
+  Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee):Enigme(nom_carte, id, id_cartes_kick, nb_essais, code_solution, id_carte_debloquee){};
   Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee, std::string phrase);
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
