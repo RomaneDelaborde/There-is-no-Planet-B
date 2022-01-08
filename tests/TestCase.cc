@@ -34,9 +34,11 @@ TEST_CASE("3: Classe Enigme"){
   REQUIRE(livre1.get_nb_essais()==5);
   REQUIRE(livre1.get_code_solution()==311);
   REQUIRE(livre1.get_id_carte_debloquee()==33);
+  
 }
 
 TEST_CASE("4: Classe Enigme1"){
+
   Enigme1 radio("radio", 13, {14}, 5, 14, 8, 7, 9);
   REQUIRE(radio.get_nom_carte() == "radio");
   REQUIRE(radio.get_id()==13);

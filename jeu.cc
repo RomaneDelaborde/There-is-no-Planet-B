@@ -1,6 +1,5 @@
 #include "jeu.hh"
 
-
 Jeu::Jeu()
 {
   lecture_csv_carte_basique(fichier_cartes_basiques);
@@ -9,18 +8,13 @@ Jeu::Jeu()
   int nb=5; // nombre d'essais (ici commun à toutes les énigmes mais chacune pourrait avoir sa propre valeur), 5 est une valeur arbitraire
 
   // Enigmes entrées à la main car il y en a que 3
+  Enigme1 radio("radio", 13, {14}, 5, 14, 8, 7, 9);
   Enigme2 charlie("zoom_livres",32,{33},nb,311,33,"TIRER LE LIVRE DE ROALD DAHL");
-  //charlie.codage_jules_cesar(7,1); // fonction utile seulement à la création des énigmes -> c'est pour ça qu'elle n'est pas mise dans le constructeur
-  //std::cout << charlie.get_phrase() << std::endl;
-  //std::cout << charlie.get_phrase_codee() << std::endl;
-
-  _cartes_enigmes.push_back(charlie);
-  //_cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
-
   Enigme3 planete("coffre_fort",45,{50},nb,46, "UNJUST+B");
-  //std::cout << planete.get_chaine << std::endl;
-  //std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
+  // Ajout des énigmes dans la liste des énigmes
+  _cartes_enigmes.push_back(radio);
+  _cartes_enigmes.push_back(charlie); // OU _cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
   _cartes_enigmes.push_back(planete);
 
 
