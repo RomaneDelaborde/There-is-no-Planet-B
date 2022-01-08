@@ -61,6 +61,7 @@ class Fenetre: public Gtk::Window {
 		//passer les init en privé ?
 		void init_table_zones_texte();
 		void init_table_images();
+		void init_table_inventory();
 	
 		void afficherApropos();
 	
@@ -91,6 +92,7 @@ class Fenetre: public Gtk::Window {
 		Gtk::Table* table_big; //Grand tableau
 		Gtk::Table* table_zones_texte; //tableau du haut, pour les zones de texte et d'entrée utilisateur
 		Gtk::Table* table_images; //tableau du milieu, pour les images en taille petite
+		Gtk::Table* table_inventory;
 		
 		//DECLARER TOOOOOOOOUTES LES IMAGES DONT ON AURA BESOIN
 		//Même si 2 widgets utilisent la même image, il faut déclarer 2 Gtk::Image avec 2 noms différents
@@ -105,6 +107,14 @@ class Fenetre: public Gtk::Window {
 		Image white_2312;
 		Image white_3412;
 	
+		Image inventory1;
+		Image inventory2;
+		Image inventory3;
+		Image inventory4;
+		Image inventory5;
+		Image inventory6;
+		Image inventory7;
+
 		Bouton bouton_0101;
 		Bouton bouton_1201;
 		Bouton bouton_2301;
@@ -114,6 +124,14 @@ class Fenetre: public Gtk::Window {
 		Bouton bouton_2312;
 		Bouton bouton_3412;
 	
+		Bouton bouton_inventory1;
+		Bouton bouton_inventory2;
+		Bouton bouton_inventory3;
+		Bouton bouton_inventory4;
+		Bouton bouton_inventory5;
+		Bouton bouton_inventory6;
+		Bouton bouton_inventory7;
+
 		Image about_image;
 		Image gaston;
 	
