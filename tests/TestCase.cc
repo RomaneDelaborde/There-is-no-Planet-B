@@ -37,6 +37,18 @@ TEST_CASE("3: Classe Enigme"){
 }
 
 TEST_CASE("4: Classe Enigme1"){
+  Enigme1 radio("radio", 13, {14}, 5, 14, 8, 7, 9);
+  REQUIRE(radio.get_nom_carte() == "radio");
+  REQUIRE(radio.get_id()==13);
+  REQUIRE(radio.get_nb_essais()==5);
+  REQUIRE(radio.get_id_carte_debloquee()==14);
+  REQUIRE(radio.get_alpha()==8);
+  REQUIRE(radio.get_beta()==7);
+  REQUIRE(radio.get_gamma()==9);
+  REQUIRE(radio.get_val1()==24);
+  REQUIRE(radio.get_val2()==22);
+  REQUIRE(radio.get_val3()==25);
+  REQUIRE(radio.get_code_solution()==87);
 
 }
 
@@ -84,10 +96,8 @@ TEST_CASE("6: Classe Enigme3"){
   Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
   REQUIRE(planete2.get_code_solution()==2356780);
 
-
-
 }
 
-TEST_CASE("7: Classe Enigme3"){
+TEST_CASE("7: Classe Jeu"){
 
 }
