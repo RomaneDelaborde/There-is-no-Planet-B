@@ -274,7 +274,8 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
   {
     if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes suivantes
     {
-      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes suivantes, on a id_carte alors on retourne 1 
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes suivantes, on a id_carte alors on retourne 1
+      {
         if(_cartes_jeu[i].get_id_cartes_suivantes()[j]==id_carte)
         {
           return 1;
