@@ -6,7 +6,7 @@ Enigme2::Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick,
 
   for(std::string::size_type i=0; i<alphabet.length(); i++) // création de _alphabet_indices
   {
-      _alphabet_indices[alphabet[i]]=i+1; // +1 car on vaut A=1 et pas A=0
+      _alphabet_indices[alphabet[i]]=i; // A=0
   }
   codage_jules_cesar(7,1); // à modifier pour changer l'énigme
 }

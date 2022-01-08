@@ -23,12 +23,12 @@ int Enigme3::codage_mot_planete(std::string mot)
 
   for(std::string::size_type i=0; i<mot.length(); i++) // pour chaque lettre du mot
   {
-      if(!lettre_existe(mot[i])) // si la lettre n'existe pas on renvoie -1
-      {
-          return -1;
-      }
-      code+=z*_lettres[mot[i]]; // sinon on ajoute le chiffre correspondant à la lettre (donné par _lettres) dans le mot codé
-      z=z/10;                   // divison par 10 pour passer à la puissance inférieure
+    if(!lettre_existe(mot[i])) // si la lettre n'existe pas on renvoie -1
+    {
+      return -1;
+    }
+    code+=z*_lettres[mot[i]]; // sinon on ajoute le chiffre correspondant à la lettre (donné par _lettres) dans le mot codé
+    z=z/10;                   // divison par 10 pour passer à la puissance inférieure
   }
   return code;
 }
@@ -42,24 +42,24 @@ void Enigme3::codage_chaine_planete()
   std::string const delims{ "-+" }; // délimiteurs
 
   size_t beg, pos = 0;
-  while ((beg = _chaine.find_first_not_of(delims, pos)) != std::string::npos) // parcours de la _chaine
+
+  if((beg = _chaine.find_first_not_of(delims, pos)) != std::string::npos) // récupération du premier mot de _chaine s'il existe
   {
     pos = _chaine.find_first_of(delims, beg + 1);
+    _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
+  }
 
-    if(beg==0) // codage pour le premier mot
+  while ((beg = _chaine.find_first_not_of(delims, pos)) != std::string::npos) // parcours de la _chaine
+  {
+    if(_chaine[pos]== '+') // on somme le prochain mot si on tombe sur un signe +
     {
-        _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
+      pos = _chaine.find_first_of(delims, beg + 1); // récupération du prochain mot
+      _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
     }
-    else // codage pour les potentiels mots suivants
+    else if(_chaine[pos]== '-') // on soustrait le prochain mot si on tombe sur un signe -
     {
-      if(_chaine[pos]== '+' || pos== std::string::npos) // on somme si on tombe sur un signe +
-      {
-          _code_solution+=codage_mot_planete(_chaine.substr(beg, pos - beg));
-      }
-      else if(_chaine[pos]== '-' || pos== std::string::npos) // on soustrait si on tombe sur un signe -
-      {
-          _code_solution-=codage_mot_planete(_chaine.substr(beg, pos - beg));
-      }
+      pos = _chaine.find_first_of(delims, beg + 1); // récupération du prochain mot
+      _code_solution-=codage_mot_planete(_chaine.substr(beg, pos - beg));
     }
   }
 }

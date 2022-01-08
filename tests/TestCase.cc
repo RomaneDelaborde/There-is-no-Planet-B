@@ -17,7 +17,7 @@ using namespace std;
 
 
 TEST_CASE("1: Classe Carte"){
-  
+
   Carte regles("regles",1);
   REQUIRE(regles.get_nom_carte() == "regles");
   REQUIRE(regles.get_id()==1);
@@ -57,13 +57,34 @@ TEST_CASE("5: Classe Enigme2"){
   REQUIRE(charlie.get_nb_essais()==5);
   REQUIRE(charlie.get_code_solution()==311);
   REQUIRE(charlie.get_id_carte_debloquee()==33);
-
   REQUIRE(charlie.get_phrase()=="TIRER LE LIVRE DE ROALD DAHL");
   REQUIRE(charlie.get_phrase_codee()=="APYLY SL SPCYL KL YVHSK KHOS");
+
+  Enigme2 charlie1("zoom_livres",32,{33},5,311,33,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  REQUIRE(charlie1.get_phrase_codee()==           "HIJKLMNOPQRSTUVWXYZABCDEFG");
+
+  Enigme2 charlie2("zoom_livres",32,{33},5,311,33,"S");
+  REQUIRE(charlie2.get_phrase_codee()=="Z");
 
 }
 
 TEST_CASE("6: Classe Enigme3"){
+
+  Enigme3 planete("coffre_fort",45,{50},5,46, "UNJUST+B");
+  REQUIRE(planete.get_nom_carte() == "coffre_fort");
+  REQUIRE(planete.get_id()==45);
+  REQUIRE(planete.get_nb_essais()==5);
+  REQUIRE(planete.get_id_carte_debloquee()==46);
+  REQUIRE(planete.get_chaine()=="UNJUST+B");
+  REQUIRE(planete.get_code_solution()==(785772));
+
+  Enigme3 planete1("coffre_fort",45,{50},5,46, "VTJSUNB");
+  REQUIRE(planete1.get_code_solution()==2356789);
+
+  Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
+  REQUIRE(planete2.get_code_solution()==2356780);
+
+
 
 }
 
