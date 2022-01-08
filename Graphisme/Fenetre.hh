@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <gtkmm/main.h>
+#include <gtkmm/overlay.h>
 #include <gtkmm/image.h>
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
@@ -18,6 +20,19 @@
 #include <string>
 #include <iostream>
 #include "Widgets.hh"
+
+
+class FenetreAccueil: public Gtk::Window {
+	
+	public:
+		FenetreAccueil();
+	
+	private:
+		Image galaxy;
+		Bouton bouton_galaxy;
+	
+};
+
 
 
 class FenetreJeu: public Gtk::Window {
@@ -122,5 +137,3 @@ class FenetreJeu: public Gtk::Window {
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
 };
-
-

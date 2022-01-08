@@ -16,6 +16,8 @@ int main(int argc, char* argv[]) {
 	//std::vector<Image> images;
 	
 	Gtk::Main app(argc, argv);
+	FenetreAccueil accueil;
+	Gtk::Main::run(accueil);
 	FenetreJeu fenetre;
 	Gtk::Main::run(fenetre);
 

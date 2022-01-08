@@ -10,6 +10,19 @@
 
 bool FenetreJeu::gastonChange = false;
 
+
+FenetreAccueil::FenetreAccueil() : galaxy("galaxy.jpg"), bouton_galaxy(galaxy) {
+	set_title("There is no Planet B");
+	set_position(Gtk::WIN_POS_CENTER);
+	
+	bouton_galaxy.signal_clicked().connect(sigc::mem_fun(*this, &FenetreAccueil::hide));
+
+	add(bouton_galaxy);
+	
+	show_all();
+}
+
+
 FenetreJeu::FenetreJeu() :
 about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"),
 inventory1("white_inventory.jpeg"), inventory2("white_inventory.jpeg"), inventory3("white_inventory.jpeg"), inventory4("white_inventory.jpeg"), inventory5("white_inventory.jpeg"), inventory6("white_inventory.jpeg"), inventory7("white_inventory.jpeg"),
