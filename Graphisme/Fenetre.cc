@@ -8,10 +8,10 @@
 #include "Fenetre.hh"
 #include "Widgets.hh"
 
-bool FenetreJeu::gastonChange = false;
+bool FenetreJeu::retroviseurChange = false;
 
 
-FenetreAccueil::FenetreAccueil() : galaxy("galaxy.jpg"), bouton_galaxy(galaxy) {
+FenetreAccueil::FenetreAccueil() : galaxy("Images/galaxy.jpg"), bouton_galaxy(galaxy) {
 	set_title("There is no Planet B");
 	set_position(Gtk::WIN_POS_CENTER);
 	
@@ -24,8 +24,8 @@ FenetreAccueil::FenetreAccueil() : galaxy("galaxy.jpg"), bouton_galaxy(galaxy) {
 
 
 FenetreJeu::FenetreJeu() :
-about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"),
-inventory1("white_inventory.jpeg"), inventory2("white_inventory.jpeg"), inventory3("white_inventory.jpeg"), inventory4("white_inventory.jpeg"), inventory5("white_inventory.jpeg"), inventory6("white_inventory.jpeg"), inventory7("white_inventory.jpeg"),
+about_image("Images/about.png"), white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"), white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"), white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), retroviseur("Images/retroviseur.jpg"),
+inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), inventory7("Images/white_inventory.jpg"),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
 bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), bouton_2312(white_2312), bouton_3412(white_3412),
 bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(inventory3), bouton_inventory4(inventory4), bouton_inventory5(inventory5), bouton_inventory6(inventory6), bouton_inventory7(inventory7) { //à l'initialisation
@@ -45,7 +45,7 @@ bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(
 
 	superbouton = new Bouton("Super bouton");
 	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
-	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoGaston));
+	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
 	
 	show_all();
 }
@@ -140,18 +140,18 @@ void FenetreJeu::afficherApropos() {
 }
 
 
-void FenetreJeu::changerWhitetoGaston() {
-	if (gastonChange == false) {
+void FenetreJeu::changerWhitetoRetroviseur() {
+	if (retroviseurChange == false) {
 		table_images->remove(bouton_0101);
-		table_images->attach(gaston, 0, 1, 0, 1);
+		table_images->attach(retroviseur, 0, 1, 0, 1);
 		show_all();
-		gastonChange = true;
+		retroviseurChange = true;
 	}
 	else {
-		table_images->remove(gaston);
+		table_images->remove(retroviseur);
 		table_images->attach(bouton_0101, 0, 1, 0, 1);
 		show_all();
-		gastonChange = false;
+		retroviseurChange = false;
 	}
 }
 

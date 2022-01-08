@@ -38,7 +38,7 @@ class FenetreAccueil: public Gtk::Window {
 class FenetreJeu: public Gtk::Window {
 		
 	public:
-		static bool gastonChange;
+		static bool retroviseurChange;
 
 		//Utiles
 		FenetreJeu();
@@ -60,7 +60,7 @@ class FenetreJeu: public Gtk::Window {
 	
 		//Expérimentations
 		void afficherErreur();
-		void changerWhitetoGaston();
+		void changerWhitetoRetroviseur();
 		//Image& getImagefromName(std::string name);
 		//void zoom_Image(Bouton& bouton);
 	
@@ -118,7 +118,7 @@ class FenetreJeu: public Gtk::Window {
 		Bouton bouton_inventory7;
 
 		Image about_image;
-		Image gaston;
+		Image retroviseur;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;
