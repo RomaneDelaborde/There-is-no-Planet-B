@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <gtkmm/main.h>
 #include <gtkmm/image.h>
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
@@ -16,47 +15,18 @@
 #include <gtkmm/label.h>
 #include <gtkmm/messagedialog.h>
 #include <gtkmm/aboutdialog.h>
-#include <gtkmm/eventbox.h>
 #include <string>
 #include <iostream>
-
-class Image: public Gtk::Image {
-		
-	public:
-		Image(const std::string & file) : Gtk::Image(file) {name = file;}
-		Image() : Gtk::Image() {}
-		Image& operator=(const Image& image);
-		
-	private:
-		std::string name;
-	
-};
+#include "Widgets.hh"
 
 
-class Bouton: public Gtk::Button {
-		
-	public:
-		//Utiles
-		Bouton() : Gtk::Button() {}
-		Bouton(const Glib::ustring& label, bool mnemonic=false) : Gtk::Button (label, false) {set_can_focus(false);}
-		Bouton(Image& image);
-		//void zoom_Image();
-		//~Bouton();
-
-	private:
-		std::string name;
-		Image tiny_image;
-		
-};
-
-
-class Fenetre: public Gtk::Window {
+class FenetreJeu: public Gtk::Window {
 		
 	public:
 		static bool gastonChange;
 
 		//Utiles
-		Fenetre();
+		FenetreJeu();
 	
 		//passer les init en privé ?
 		void init_table_zones_texte();
@@ -71,7 +41,7 @@ class Fenetre: public Gtk::Window {
 		std::string get_entry_reponse_enigme_l() {return entry_reponse_enigme_l.get_text();}
 		std::string get_entry_carte_num() {return entry_carte_num.get_text();}
 
-		~Fenetre();
+		~FenetreJeu();
 	
 		//Expérimentations
 		void afficherErreur();
@@ -152,3 +122,5 @@ class Fenetre: public Gtk::Window {
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
 };
+
+

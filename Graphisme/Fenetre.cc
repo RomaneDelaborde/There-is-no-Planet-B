@@ -6,10 +6,11 @@
 //
 
 #include "Fenetre.hh"
+#include "Widgets.hh"
 
-bool Fenetre::gastonChange = false;
+bool FenetreJeu::gastonChange = false;
 
-Fenetre::Fenetre() :
+FenetreJeu::FenetreJeu() :
 about_image("about.png"), white_0101("white.jpeg"), white_1201("white.jpeg"), white_2301("white.jpeg"), white_3401("white.jpeg"), white_0112("white.jpeg"), white_1212("white.jpeg"), white_2312("white.jpeg"), white_3412("white.jpeg"), gaston("gaston.jpeg"),
 inventory1("white_inventory.jpeg"), inventory2("white_inventory.jpeg"), inventory3("white_inventory.jpeg"), inventory4("white_inventory.jpeg"), inventory5("white_inventory.jpeg"), inventory6("white_inventory.jpeg"), inventory7("white_inventory.jpeg"),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
@@ -31,12 +32,12 @@ bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(
 
 	superbouton = new Bouton("Super bouton");
 	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
-	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::changerWhitetoGaston));
+	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoGaston));
 	
 	show_all();
 }
 
-void Fenetre::init_table_zones_texte() {
+void FenetreJeu::init_table_zones_texte() {
 	table_zones_texte = new Gtk::Table(6, 8);
 	table_big->attach(*table_zones_texte, 0, 1, 0, 1);
 	
@@ -57,7 +58,7 @@ void Fenetre::init_table_zones_texte() {
 	
 	bouton_about = new Bouton(about_image);
 	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2, Gtk::SHRINK);
-	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherApropos));
+	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherApropos));
 	
 	bouton_combinaisons = new Bouton("Envoyer");
 	table_zones_texte->attach(*bouton_combinaisons, 0, 1, 4, 5, Gtk::SHRINK);
@@ -70,7 +71,7 @@ void Fenetre::init_table_zones_texte() {
 
 }
 
-void Fenetre::init_table_images() {
+void FenetreJeu::init_table_images() {
 	//Initialisation du tableau d'images : déclaration de 8 images "white.jpeg"
 	table_images = new Gtk::Table(2, 4);
 	table_big->attach(*table_images, 0, 1, 1, 2);
@@ -84,11 +85,11 @@ void Fenetre::init_table_images() {
 	table_images->attach(bouton_2312, 2, 3, 1, 2);
 	table_images->attach(bouton_3412, 3, 4, 1, 2);
 	
-	bouton_1201.signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::afficherErreur));
+	bouton_1201.signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherErreur));
 	//bouton_2301.signal_clicked().connect(sigc::bind<Bouton*>(sigc::mem_fun(*this, &Fenetre::zoom_Image), &bouton_2301));
 }
 
-void Fenetre::init_table_inventory() {
+void FenetreJeu::init_table_inventory() {
 	table_inventory = new Gtk::Table(2, 7);
 	table_big->attach(*table_inventory, 0, 1, 2, 3);
 	
@@ -99,11 +100,10 @@ void Fenetre::init_table_inventory() {
 	table_inventory->attach(bouton_inventory5, 4, 5, 1, 2);
 	table_inventory->attach(bouton_inventory6, 5, 6, 1, 2);
 	table_inventory->attach(bouton_inventory7, 6, 7, 1, 2);
-	
 }
 
 
-void Fenetre::afficherErreur() {
+void FenetreJeu::afficherErreur() {
 	Gtk::MessageDialog dialogue(*this, "Erreur : vous ne pouvez pas tirer cette carte", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
 	dialogue.set_title("Avertissement");
 	//dialogue.set_secondary_text("Et <i>ceci</i> est le texte secondaire qui explique quelque chose.", true); //Ajouter un texte secondaire.
@@ -111,7 +111,7 @@ void Fenetre::afficherErreur() {
 }
 
 //Fenêtre A Propos, pop-up quand on clique sur l'icône correspondante
-void Fenetre::afficherApropos() {
+void FenetreJeu::afficherApropos() {
 	//reste à ajouter le logo avec dialogue.set_logo(Gdk::Pixbuf::create_from_file("name.png"));
 	Gtk::AboutDialog dialogue;
 	dialogue.set_program_name("There is no planet B");
@@ -127,7 +127,7 @@ void Fenetre::afficherApropos() {
 }
 
 
-void Fenetre::changerWhitetoGaston() {
+void FenetreJeu::changerWhitetoGaston() {
 	if (gastonChange == false) {
 		table_images->remove(bouton_0101);
 		table_images->attach(gaston, 0, 1, 0, 1);
@@ -142,7 +142,7 @@ void Fenetre::changerWhitetoGaston() {
 	}
 }
 
-Fenetre::~Fenetre() {
+FenetreJeu::~FenetreJeu() {
 	delete superbouton;
 	delete bouton_about;
 	delete bouton_combinaisons;
@@ -153,23 +153,7 @@ Fenetre::~Fenetre() {
 	delete table_big;
 }
 
-
-Bouton::Bouton(Image& image) : Gtk::Button() {
-	set_image(image);
-	set_relief(Gtk::RELIEF_NONE);
-	set_can_focus(false);
-	tiny_image = image;
-}
-
 /*
-void Bouton::zoom_Image() {
-	Gtk::Window fenetre_temp;
-	fenetre_temp.set_title("Zoom sur l'image");
-	fenetre_temp.add();
-	fenetre_temp.set_position(Gtk::WIN_POS_CENTER);
-	fenetre_temp.show_all();
-}
-
 
 void Fenetre::zoom_Image(std::string name) {
 	Gtk::Window fenetre_temp;
@@ -178,9 +162,3 @@ void Fenetre::zoom_Image(std::string name) {
 	fenetre_temp.set_position(Gtk::WIN_POS_CENTER);
 	fenetre_temp.show_all();
 }*/
-
-Image& Image::operator=(const Image& image) {
-	name = image.name;
-	return *this;
-}
- 
