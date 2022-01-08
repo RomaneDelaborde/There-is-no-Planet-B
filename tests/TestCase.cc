@@ -24,6 +24,10 @@ TEST_CASE("1: Classe Carte"){
 }
 
 TEST_CASE("2: Classe Objet"){
+  std::map<int, int> map={{302, 40}};
+  Objet epingle_cheveux("epingle_cheveux", 101, map);
+  REQUIRE(epingle_cheveux.get_nom_carte() == "epingle_cheveux");
+  REQUIRE(epingle_cheveux.get_id()==101);
 }
 
 TEST_CASE("3: Classe Enigme"){
@@ -34,7 +38,7 @@ TEST_CASE("3: Classe Enigme"){
   REQUIRE(livre1.get_nb_essais()==5);
   REQUIRE(livre1.get_code_solution()==311);
   REQUIRE(livre1.get_id_carte_debloquee()==33);
-  
+
 }
 
 TEST_CASE("4: Classe Enigme1"){
