@@ -28,7 +28,7 @@ about_image("Images/about.png"), white_0101("Images/white.jpg"), white_1201("Ima
 inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), inventory7("Images/white_inventory.jpg"),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
 bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), bouton_2312(white_2312), bouton_3412(white_3412),
-bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(inventory3), bouton_inventory4(inventory4), bouton_inventory5(inventory5), bouton_inventory6(inventory6), bouton_inventory7(inventory7) { //à l'initialisation
+bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(inventory3), bouton_inventory4(inventory4), bouton_inventory5(inventory5), bouton_inventory6(inventory6), bouton_inventory7(inventory7), bouton_retroviseur(retroviseur) { //à l'initialisation
 	
 	//commencer par un écran d'accueil....
 	
@@ -43,7 +43,7 @@ bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(
 	init_table_images();
 	init_table_inventory();
 
-	superbouton = new Bouton("Super bouton");
+	superbouton = new BoutonTexte("Super bouton");
 	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
 	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
 	
@@ -69,18 +69,19 @@ void FenetreJeu::init_table_zones_texte() {
 	table_zones_texte->attach(carte_num, 4, 5, 2, 3);
 	table_zones_texte->attach(entry_carte_num, 5, 6, 2, 3);
 	
-	bouton_about = new Bouton(about_image);
+	bouton_about = new BoutonAccueil(about_image);
 	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2, Gtk::SHRINK);
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherApropos));
 	
-	bouton_combinaisons = new Bouton("Envoyer");
+	bouton_combinaisons = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_combinaisons, 0, 1, 4, 5, Gtk::SHRINK);
 	
-	bouton_enigme = new Bouton("Envoyer");
+	bouton_enigme = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_enigme, 2, 3, 4, 5, Gtk::SHRINK);
 	
-	bouton_carte = new Bouton("Envoyer");
+	bouton_carte = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_carte, 4, 5, 4, 5, Gtk::SHRINK);
+	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherErreur));
 
 }
 
@@ -98,7 +99,6 @@ void FenetreJeu::init_table_images() {
 	table_images->attach(bouton_2312, 2, 3, 1, 2);
 	table_images->attach(bouton_3412, 3, 4, 1, 2);
 	
-	bouton_1201.signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherErreur));
 	//bouton_2301.signal_clicked().connect(sigc::bind<Bouton*>(sigc::mem_fun(*this, &Fenetre::zoom_Image), &bouton_2301));
 }
 
@@ -143,12 +143,12 @@ void FenetreJeu::afficherApropos() {
 void FenetreJeu::changerWhitetoRetroviseur() {
 	if (retroviseurChange == false) {
 		table_images->remove(bouton_0101);
-		table_images->attach(retroviseur, 0, 1, 0, 1);
+		table_images->attach(bouton_retroviseur, 0, 1, 0, 1);
 		show_all();
 		retroviseurChange = true;
 	}
 	else {
-		table_images->remove(retroviseur);
+		table_images->remove(bouton_retroviseur);
 		table_images->attach(bouton_0101, 0, 1, 0, 1);
 		show_all();
 		retroviseurChange = false;
@@ -167,7 +167,6 @@ FenetreJeu::~FenetreJeu() {
 }
 
 /*
-
 void Fenetre::zoom_Image(std::string name) {
 	Gtk::Window fenetre_temp;
 	fenetre_temp.set_title("Zoom sur l'image");

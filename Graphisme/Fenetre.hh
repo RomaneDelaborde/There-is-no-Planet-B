@@ -1,5 +1,5 @@
 //
-//  Fenetre.hpp
+//  Fenetre.hh
 //  
 //
 //  Created by Maëlle Jolivet on 29/12/2021.
@@ -29,7 +29,7 @@ class FenetreAccueil: public Gtk::Window {
 	
 	private:
 		Image galaxy;
-		Bouton bouton_galaxy;
+		BoutonAccueil bouton_galaxy;
 	
 };
 
@@ -66,12 +66,12 @@ class FenetreJeu: public Gtk::Window {
 	
 	private:
 		//Expérimentations
-		Bouton* superbouton;
-		Bouton* bouton_combinaisons;
-		Bouton* bouton_enigme;
-		Bouton* bouton_carte;
+		BoutonTexte* superbouton;
+		BoutonTexte* bouton_combinaisons;
+		BoutonTexte* bouton_enigme;
+		BoutonTexte* bouton_carte;
 
-		Bouton* bouton_about;
+		BoutonAccueil* bouton_about;
 		
 		//Utiles
 		Gtk::Table* table_big; //Grand tableau
@@ -100,25 +100,26 @@ class FenetreJeu: public Gtk::Window {
 		Image inventory6;
 		Image inventory7;
 
-		Bouton bouton_0101;
-		Bouton bouton_1201;
-		Bouton bouton_2301;
-		Bouton bouton_3401;
-		Bouton bouton_0112;
-		Bouton bouton_1212;
-		Bouton bouton_2312;
-		Bouton bouton_3412;
+		BoutonCarte bouton_0101;
+		BoutonCarte bouton_1201;
+		BoutonCarte bouton_2301;
+		BoutonCarte bouton_3401;
+		BoutonCarte bouton_0112;
+		BoutonCarte bouton_1212;
+		BoutonCarte bouton_2312;
+		BoutonCarte bouton_3412;
 	
-		Bouton bouton_inventory1;
-		Bouton bouton_inventory2;
-		Bouton bouton_inventory3;
-		Bouton bouton_inventory4;
-		Bouton bouton_inventory5;
-		Bouton bouton_inventory6;
-		Bouton bouton_inventory7;
+		BoutonCarte bouton_inventory1;
+		BoutonCarte bouton_inventory2;
+		BoutonCarte bouton_inventory3;
+		BoutonCarte bouton_inventory4;
+		BoutonCarte bouton_inventory5;
+		BoutonCarte bouton_inventory6;
+		BoutonCarte bouton_inventory7;
 
 		Image about_image;
 		Image retroviseur;
+		BoutonCarte bouton_retroviseur;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;
