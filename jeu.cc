@@ -91,6 +91,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       int id;
       std::string suiv; // id des cartes suivantes sous forme de string (valeurs séparées par des tabulats)
       std::string kick; // id des cartes permettant de kicker la carte (valeurs séparées par des tabulats)
+      int choix; // id de la carte autre choix
 
       std::string tempString;
 
@@ -103,6 +104,9 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::getline(inputString, suiv, ',');
       std::getline(inputString, kick, ',');
 
+      std::getline(inputString, tempString, ',');
+      choix=atoi(tempString.c_str());
+
       ligne="";
 
       // Création d'une carte
@@ -111,11 +115,11 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
 
       if(v1[0]!=0) // si la carte possède au moins une carte suivante
       {
-        _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2));
+        _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2, choix));
       }
       else // sinon
       {
-        _cartes_basiques.push_back(Carte(nom_carte, id, v2));
+        _cartes_basiques.push_back(Carte(nom_carte, id, v2, choix));
       }
     }
   }
