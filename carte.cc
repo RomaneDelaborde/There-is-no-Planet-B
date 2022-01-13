@@ -16,6 +16,7 @@ void Carte::affichage_info_carte() const
   {
     std::cout << _id_cartes_kick[i] << ' ';
   }
-
-  std::cout << std::endl << std::endl;
+  std::cout << std::endl;
+  std::cout << "Id carte autre choix (vaut 0 s'il y en a pas): " << _id_carte_autre_choix << std::endl;
+  std::cout << std::endl;
 }
