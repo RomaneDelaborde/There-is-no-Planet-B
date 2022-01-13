@@ -138,6 +138,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       int id;
       std::string objets_combinables; // id des cartes des objets combinables sous forme de string (valeurs séparées par des tabulats)
       std::string combinaisons_obtenues; // id des cartes obtenues par combinaison sous forme de string (valeurs séparées par des tabulats)
+      bool est_objet_inventaire;
 
       std::string tempString;
 
@@ -149,6 +150,9 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
 
       std::getline(inputString, objets_combinables, ',');
       std::getline(inputString, combinaisons_obtenues, ',');
+
+      std::getline(inputString, tempString, ',');
+      est_objet_inventaire=atoi(tempString.c_str());
 
       ligne="";
 
@@ -170,11 +174,11 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
         {
           obj[v1[i]]=v2[i];
         }
-        _cartes_objets.push_back(Objet(nom_carte, id, obj));
+        _cartes_objets.push_back(Objet(nom_carte, id, obj, est_objet_inventaire));
       }
       else // sinon si l'objet n'est pas combinable avec d'autres objets (ex: certificat)
       {
-        _cartes_objets.push_back(Objet(nom_carte, id));
+        _cartes_objets.push_back(Objet(nom_carte, id, est_objet_inventaire));
       }
     }
   }

@@ -19,6 +19,8 @@ void Objet::affichage_info_objet() const
     ++iter;
   }
 
+  std::cout << "Bool inventaire : " << _est_objet_inventaire << std::endl;
+
   std::cout << std::endl << std::endl;
 }
 
