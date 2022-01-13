@@ -267,7 +267,7 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
   {
-    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt ses cartes suivantes
+    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on parcourt les id qui se trouvent dans son attribut _id_cartes_suivantes
     {
       for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes suivantes, on a id_carte alors on retourne 1
       {
@@ -291,18 +291,15 @@ void Jeu::demande_affichage_carte(const int id_carte)
 
   switch(_map_id[id_carte]){
     case 1:
-      //std::cout << "ERREUR : la carte est déjà affichée" << std::endl;
       // affichage pop-up pour le joueur qqpart du type "La carte souhaitée est déjà affichée."
       break;
 
     case -1:
-      //std::cout << "ERREUR : la carte a déjà été affichée" << std::endl;
-      // affichage pop-up pour le joueur qqpart du type "La carte souhaitée a été défaussée car elle n'est plus utile."
-
+      // affichage pop-up pour le joueur qqpart du type "La carte souhaitée ne peut pas être affichée."
       break;
 
     case 0:
-      if(affichage_carte_autorise(id_carte))
+      if(affichage_carte_autorise(id_carte)) // si la carte peut-être autorisée à être affichée, on l'affiche sinon pop-up d'erreur
       {
         // afficher carte dans la fenêtre graphique
         //remplacer bouton blanc par bouton image
@@ -314,9 +311,6 @@ void Jeu::demande_affichage_carte(const int id_carte)
       }
 
       break;
-
-    //default:
-      //break;
   }
 }
 
@@ -331,8 +325,20 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
   }
   if(enigme(id_carte_enigme).code_correct(val))
   {
-    //afficher la carte qui est debloquée par l'enigme
-    //kicker les cartes plus utiles, données en paramètres (vector(int)) ou appel fct carte()
+    // affichage pop-up du style : "Bonne réponse !"
+    // afficher la carte qui est debloquée par l'enigme (sauf pour le pied de biche --> ajouter condition compteur pour vérifier que le mec ait tout regardé dans le garage)
+    // kicker les cartes plus utiles, données en paramètres (vector(int)) ou appel fct carte() --> pq pas créer une SEULE fonction au lieu de le refaire à chaque fois qu'on veut afficher une nouvelle carte hummm
+  }
+  else
+  {
+    if(enigme(id_carte_enigme).get_nb_essais()>0) // s'il reste encore des tentatives en stock on affiche un message
+    {
+      // affichage pop-up du style : "Réponse fausse ... Vous avez encore X tentatives pour résoudre cette énigme" avec X=enigme(id_carte_enigme).get_nb_essais()
+    }
+    else // il ne reste plus aucune chance de tenter l'énigme
+    {
+      // affichage pop-up du style : "Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ... "
+    }
   }
 
 }
@@ -346,13 +352,15 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
     // affichage pop-up du type : "1 des objets n'existe pas"
     return;
   }
-
-  if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
+  if(std::count(_inventaire.begin(), _inventaire.end(), id_obj_1) && std::count(_inventaire.begin(), _inventaire.end(), id_obj_2))
   {
-    // afficher la carte qui résulte de la combinaison
+    if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
+    {
+      // afficher la carte qui résulte de la combinaison
+    }
+    // affichage pop-up du type : "les 2 objets ne sont pas combinables"
   }
-  // affichage pop-up du type : "les 2 objets ne sont pas combinables"
-
+  // affichage pop-up du type : "Au moins 1 des 2 objets ne se situe pas dans l'inventaire"
 }
 
 
