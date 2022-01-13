@@ -32,6 +32,11 @@ private:
 
   std::vector<int> _inventaire; // id des objets présents dans l'inventaire
 
+  // peut-être faire un map genre std::vector<Carte, int> _cartes_jeu; avec valeur 0 si carte est basique, valeur 1 si carte est objet et valeur 2 si carte est énigme mais il faudrait tout changer dans jeu.cc pour _cartes_jeu
+  std::vector<int> _id_cartes_basiques;   // liste des id des cartes basiques du jeu
+  std::vector<int> _id_cartes_objets;     // liste des id des cartes objets du jeu
+  std::vector<int> _id_cartes_enigmes;    // liste des id des cartes enigmes du jeu
+
 public:
 
   // Constructeur sans paramètres
@@ -54,10 +59,13 @@ public:
 
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id et 0 sinon (i.e. s'il existe)
 
+  // 2 méthode qui suivent pas utiles je pense
   void carte_map_affichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur 1
   void carte_map_desaffichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur -1
 
   bool affichage_carte_autorise(const int id_carte); // indique si la carte peut-être affichée ou non
+
+  void affichage_carte(const int id_carte); // permet l'affichage d'une carte ainsi que les modifications qui en découlent
 
 
   void demande_affichage_carte(const int id_carte); // demande de l'affichage d'une carte par le joueur (fonction qui renvoie un bool comme celles d'en-dessous plutôt non ?)
@@ -66,11 +74,5 @@ public:
   void solution_enigme_valide(int id_carte_enigme, int val) const; // renvoie 1 si la réponse est bonne et 0 sinon (et modifications en adéquation)
 
   void combinaison_valide(int id_obj_1, int id_obj_2) const; // renvoie 1 si la combinaison est réalisable et 0 sinon (et modifications en adéquation)
-
-
-  // màj valeurs clés de chaque map des cartes contenues dans _cartes_affichees
-  // affichage des cartes ? -> voir tous les bails graphiques à faire : ça serait bien affichage carte en fonction de l'id
-
-  // méthodes pour taper les codes : s'ils sont valides alors on débloque des cartes
 
 };

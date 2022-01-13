@@ -9,6 +9,7 @@ class Objet : public Carte{
 private:
   std::map<int, int> _id_objets_combinables; // id des objets combinables avec cet objet en clés et id de la carte résultante de cette combinaison en valeur
   bool _est_objet_inventaire; // vaut 1 si l'objet peut-être placé dans l'inventaire et 0 sinon
+
 public:
 
   // Constructeurs avec héritage du constructeur de la classe mère

@@ -17,6 +17,10 @@ Jeu::Jeu()
   _cartes_enigmes.push_back(charlie); // OU _cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
   _cartes_enigmes.push_back(planete);
 
+  _id_cartes_enigmes.push_back(radio.get_id());
+  _id_cartes_enigmes.push_back(charlie.get_id());
+  _id_cartes_enigmes.push_back(planete.get_id());
+
 
   _cartes_jeu=_cartes_basiques;                                                                   // ajout des cartes basiques dans _cartes_jeu
   //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
@@ -114,6 +118,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::vector<int> v2 =lecture_str_tab(kick); // v2 = vecteur des id des cartes kick sous forme de int
 
       _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2, choix));
+      _id_cartes_basiques.push_back(id);
     }
   }
   else // s'il y a un problème à l'ouverture, on affiche un message d'erreur
@@ -179,6 +184,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier)
       else // sinon si l'objet n'est pas combinable avec d'autres objets (ex: certificat)
       {
         _cartes_objets.push_back(Objet(nom_carte, id, est_objet_inventaire));
+        _id_cartes_objets.push_back(id);
       }
     }
   }
@@ -243,7 +249,7 @@ bool Jeu::id_existe(const int id_carte) const
 }
 
 
-
+// fonction pas utilisée pour le moment
 void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule lecture_str_tab pour affichage/désaffichage mais humain peut plus facilement se mélanger les pinceaux dans les valeurs
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas on ne fait rien
@@ -253,6 +259,7 @@ void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule l
   _map_id[id_carte]=1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
 }
 
+// fonction pas utilisée pour le moment
 void Jeu::carte_map_desaffichage(const int id_carte)
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas on ne fait rien
@@ -281,6 +288,55 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
   return 0;
 }
 
+void Jeu::affichage_carte(const int id_carte)
+{
+
+  // affichage carte interface graphique (ou ailleurs idk)
+
+  // modifications communes aux différentes types de cartes
+  // kick les cartes : si des cartes actuellement affichées peuvent être kick par l'arrivée de cette carte alors on les tej
+  for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
+  {
+    if(_map_id[_cartes_jeu[i].get_id()]==1) // Si la carte du jeu est affichée dans _map_id, on regarde son attribut id_cartes_kick
+    {
+      for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_kick().size(); j++) // Si id_carte se trouve dans _id_cartes_kick, on peut tej la carte correspondate
+      {
+        if(_cartes_jeu[i].get_id_cartes_kick()[j]==id_carte)
+        {
+          _map_id[_cartes_jeu[i].get_id()]=-1;
+        }
+      }
+    }
+  }
+
+  _map_id[id_carte]=1; // indiquer que la carte est affichée dans _map_id
+
+
+  if(std::count(_id_cartes_basiques.begin(), _id_cartes_basiques.end(), id_carte)) // si la carte est une carte basique
+  {
+    if(carte(id_carte).get_id_carte_autre_choix() !=0) // s'il s'agit d'une carte choix (attribut _id_carte_autre_choix rempli seulement pour les cartes basiques)
+    {
+      _map_id[carte(id_carte).get_id_carte_autre_choix()]=-1; // on empêche le joueur d'accèder aux cartes des autres choix
+    }
+  }
+
+  /*
+  else if(std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte)) // si la carte est une carte énigme
+  {
+  }
+  */
+
+  else if(std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet
+  {
+    if(objet(id_carte).get_est_objet_inventaire()) // si c'est une carte objet inventaire, on l'ajoute à l'inventaire
+    {
+      _inventaire.push_back(id_carte);
+    }
+  }
+
+}
+
+
 void Jeu::demande_affichage_carte(const int id_carte)
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas
@@ -301,9 +357,9 @@ void Jeu::demande_affichage_carte(const int id_carte)
     case 0:
       if(affichage_carte_autorise(id_carte)) // si la carte peut-être autorisée à être affichée, on l'affiche sinon pop-up d'erreur
       {
-        // afficher carte dans la fenêtre graphique
+        // affichage_carte(id_carte); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
         //remplacer bouton blanc par bouton image
-        // faire passer carte à la valeur 1 et tout le blabla -> à faire ici ou là (*) ?
+
       }
       else
       {
@@ -318,7 +374,7 @@ void Jeu::demande_affichage_carte(const int id_carte)
 
 void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 {
-  if(!id_existe(id_carte_enigme))
+  if(!std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte_enigme)) // si la carte n'est pas une carte énigme
   {
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
     return;
@@ -327,7 +383,8 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
   {
     // affichage pop-up du style : "Bonne réponse !"
     // afficher la carte qui est debloquée par l'enigme (sauf pour le pied de biche --> ajouter condition compteur pour vérifier que le mec ait tout regardé dans le garage)
-    // kicker les cartes plus utiles, données en paramètres (vector(int)) ou appel fct carte() --> pq pas créer une SEULE fonction au lieu de le refaire à chaque fois qu'on veut afficher une nouvelle carte hummm
+    // affichage_carte(enigme(id_carte_enigme).get_id_cart_debloquee()); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
+
   }
   else
   {
@@ -347,7 +404,7 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 
 void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
 {
-  if(!id_existe(id_obj_1) || !id_existe(id_obj_2))
+  if(!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) // si au moins l'un des objets n'existe pas 
   {
     // affichage pop-up du type : "1 des objets n'existe pas"
     return;
@@ -357,6 +414,8 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
     if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
     {
       // afficher la carte qui résulte de la combinaison
+      // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
+
     }
     // affichage pop-up du type : "les 2 objets ne sont pas combinables"
   }
