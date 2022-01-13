@@ -281,7 +281,7 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
   return 0;
 }
 
-void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lecture_str_tab qui renvoie un bool [0 si affichage carte effectué avec succès et 1 si carte pas affichée] et après on opère tous les changements (*)
+void Jeu::demande_affichage_carte(const int id_carte)
 {
   if(!id_existe(id_carte)) // si l'id n'existe pas
   {
@@ -317,48 +317,41 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lect
 
     //default:
       //break;
-
   }
-  return;
 }
 
 
 
-bool Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
+void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
 {
   if(!id_existe(id_carte_enigme))
   {
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
-    return 0;
+    return;
   }
   if(enigme(id_carte_enigme).code_correct(val))
   {
-    return 1;
     //afficher la carte qui est debloquée par l'enigme
     //kicker les cartes plus utiles, données en paramètres (vector(int)) ou appel fct carte()
   }
-  return 0;
 
 }
 
 
 
-bool Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
+void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
 {
   if(!id_existe(id_obj_1) || !id_existe(id_obj_2))
   {
     // affichage pop-up du type : "1 des objets n'existe pas"
-    return 0;
+    return;
   }
 
   if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
   {
     // afficher la carte qui résulte de la combinaison
-    return 1;
   }
   // affichage pop-up du type : "les 2 objets ne sont pas combinables"
-  return 0;
-
 
 }
 
