@@ -30,6 +30,8 @@ private:
   std::map<int, int> _map_id;            // map des id des cartes du jeu : valeur de la clé = int pour donner une indication sur leur affichage : 1 = carte affichée, 0 = carte pas encore affichée et -1 = carte pas affichable (car déjà affichée avant ou correspond à un autre choix que celui fait par le joueur (exemple biche et gun))
   // toutes les valeurs de _map_id sont initialisées à 0 sauf la carte règles qui vaut 1
 
+  std::vector<int> _inventaire; // id des objets présents dans l'inventaire
+  
 public:
 
   // Constructeur sans paramètres
