@@ -304,6 +304,7 @@ void Jeu::demande_affichage_carte(const int id_carte) // pourrait être une lect
       if(affichage_carte_autorise(id_carte))
       {
         // afficher carte dans la fenêtre graphique
+        //remplacer bouton blanc par bouton image
         // faire passer carte à la valeur 1 et tout le blabla -> à faire ici ou là (*) ?
       }
       else
@@ -332,6 +333,8 @@ bool Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
   if(enigme(id_carte_enigme).code_correct(val))
   {
     return 1;
+    //afficher la carte qui est debloquée par l'enigme
+    //kicker les cartes plus utiles, données en paramètres (vector(int)) ou appel fct carte()
   }
   return 0;
 
@@ -357,3 +360,8 @@ bool Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
 
 
 }
+
+
+
+
+//Fenetre kick les cartes, 

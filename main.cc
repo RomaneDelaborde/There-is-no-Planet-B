@@ -52,7 +52,7 @@ int main()
   //Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
   //std::cout << planete2.get_code_solution() << std::endl;
 
-  //Jeu();
+  Jeu();
 
   return 0;
 
