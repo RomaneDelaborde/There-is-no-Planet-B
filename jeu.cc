@@ -113,14 +113,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::vector<int> v1 =lecture_str_tab(suiv); // v1 = vecteur des id des cartes suivantes sous forme de int
       std::vector<int> v2 =lecture_str_tab(kick); // v2 = vecteur des id des cartes kick sous forme de int
 
-      if(v1[0]!=0) // si la carte possède au moins une carte suivante
-      {
-        _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2, choix));
-      }
-      else // sinon
-      {
-        _cartes_basiques.push_back(Carte(nom_carte, id, v2, choix));
-      }
+      _cartes_basiques.push_back(Carte(nom_carte, id, v1, v2, choix));
     }
   }
   else // s'il y a un problème à l'ouverture, on affiche un message d'erreur
@@ -368,4 +361,4 @@ bool Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
 
 
 
-//Fenetre kick les cartes, 
+//Fenetre kick les cartes,

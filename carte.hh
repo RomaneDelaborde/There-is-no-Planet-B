@@ -22,8 +22,7 @@ public:
 
   // Constructeurs
   Carte(std::string nom_carte, int id): _nom_carte(nom_carte), _id(id){}; // constructeur utile à la classe fille Objet
-  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_posterieures, std::vector<int> id_cartes_kick, int id_carte_autre_choix): _nom_carte(nom_carte), _id(id), _id_cartes_suivantes(id_cartes_posterieures), _id_cartes_kick(id_cartes_kick), _id_carte_autre_choix(id_carte_autre_choix){}; // avec kick et autre choix
-  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int id_carte_autre_choix): _nom_carte(nom_carte), _id(id), _id_cartes_kick(id_cartes_kick), _id_carte_autre_choix(id_carte_autre_choix){}; // certaines carte peuvent ne pas avoir de cartes suivantes mais toutes les cartes ont au moins une carte kick
+  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_posterieures, std::vector<int> id_cartes_kick, int id_carte_autre_choix): _nom_carte(nom_carte), _id(id), _id_cartes_suivantes(id_cartes_posterieures), _id_cartes_kick(id_cartes_kick), _id_carte_autre_choix(id_carte_autre_choix){};
   Carte(std::string nom_carte, int id, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_kick(id_cartes_kick){}; // pour la classe fille Enigme
 
   // Destructeur
