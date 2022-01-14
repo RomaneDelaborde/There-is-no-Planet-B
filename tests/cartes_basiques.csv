@@ -1,0 +1,4 @@
+nom_carte,id,id_carte_suivantes,id_cartes_kick
+regles,1,10,10,0
+voiture,10,11-12-13,14,0
+frequences,11,0,14,0

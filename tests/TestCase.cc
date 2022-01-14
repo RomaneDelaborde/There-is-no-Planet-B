@@ -25,9 +25,10 @@ TEST_CASE("1: Classe Carte"){
 
 TEST_CASE("2: Classe Objet"){
   std::map<int, int> map={{302, 40}};
-  Objet epingle_cheveux("epingle_cheveux", 101, map);
+  Objet epingle_cheveux("epingle_cheveux", 101, map, 1);
   REQUIRE(epingle_cheveux.get_nom_carte() == "epingle_cheveux");
   REQUIRE(epingle_cheveux.get_id()==101);
+  REQUIRE(epingle_cheveux.get_est_objet_inventaire());
 }
 
 TEST_CASE("3: Classe Enigme"){
@@ -105,5 +106,9 @@ TEST_CASE("6: Classe Enigme3"){
 }
 
 TEST_CASE("7: Classe Jeu"){
+  Jeu jeu; // Jeu jeu(); faux car il déclare une fonction
+  REQUIRE(jeu.get_map_id()[1]==1);
+  REQUIRE(jeu.get_map_id()[10]==0);
 
+  
 }

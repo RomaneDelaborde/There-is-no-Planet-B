@@ -1,0 +1,12 @@
+nom_carte,id,_id_objets_combinables,_id_resultats_combinaisons,bool
+epingle_cheveux,101,302,40,1
+morceau1,201,202,25,1
+morceau2,202,201,25,1
+porte_electronique,203,205,30,0
+cesar,204,0,0,1
+pied_biche,205,203-404,30-501,1
+porte_cachee_o,302,101,40,0
+revolver,401,404,502,1
+ticket_dore_o,402,0,0,1
+certificat_o,403,0,0,1
+boss_o,404,205-401,501-502,0
