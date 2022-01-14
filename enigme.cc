@@ -26,5 +26,6 @@ bool Enigme::code_correct(int val)
   }
   // sinon le joueur a faux et on diminue le nombre de chances qu'il lui reste pour répondre juste à l'éngime
   _nb_essais--; // checker ici ou dans la fonction de Jeu si le _nb_essais n'est pas négatif + messages d'erreurs/pop-up
+
   return 0;
 }

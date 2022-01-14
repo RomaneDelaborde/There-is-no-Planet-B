@@ -39,6 +39,7 @@ Jeu::Jeu()
     }
   }
 
+  /*
   for(std::size_t i=0;i<_cartes_basiques.size();i++)  // Affichage des informations sur les cartes basiques
   {
     _cartes_basiques[i].affichage_info_carte();
@@ -53,6 +54,8 @@ Jeu::Jeu()
   {
     _cartes_enigmes[i].affichage_info_enigme();
   }
+
+  */
 }
 
 
@@ -323,7 +326,6 @@ void Jeu::demande_affichage_carte(const int id_carte)
     // affichage pop-up pour le joueur qqpart du type "Cet id ne correspond à aucune carte."
     return;
   }
-
   switch(_map_id[id_carte]){
     case 1:
       // affichage pop-up pour le joueur qqpart du type "La carte souhaitée est déjà affichée."
@@ -336,7 +338,7 @@ void Jeu::demande_affichage_carte(const int id_carte)
     case 0:
       if(affichage_carte_autorise(id_carte)) // si la carte peut-être autorisée à être affichée, on l'affiche sinon pop-up d'erreur
       {
-        // affichage_carte(id_carte); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
+        affichage_carte(id_carte); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
         //remplacer bouton blanc par bouton image
       }
       else
@@ -359,7 +361,7 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val)
   if(enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
     // affichage pop-up du style : "Bonne réponse !"
-    // affichage_carte(enigme(id_carte_enigme).get_id_cart_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
+    affichage_carte(enigme(id_carte_enigme).get_id_carte_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
   }
   else // si réponse incorrecte
   {
@@ -389,7 +391,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
     {
       if(id_obj_1!=203 || id_obj_2!=203) // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
       {
-        // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+        affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
       }
 
       else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
@@ -398,7 +400,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
         {
           if(_map_id[26]==1) // si le joueur a affiché la roue de césar i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
           {
-            // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+            affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
           }
         }
         else

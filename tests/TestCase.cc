@@ -109,6 +109,53 @@ TEST_CASE("7: Classe Jeu"){
   Jeu jeu; // Jeu jeu(); faux car il déclare une fonction
   REQUIRE(jeu.get_map_id()[1]==1);
   REQUIRE(jeu.get_map_id()[10]==0);
+  REQUIRE(jeu.get_map_id()[40]==0);
 
-  
+  jeu.demande_affichage_carte(40);
+  REQUIRE(jeu.get_map_id()[1]==1);
+  REQUIRE(jeu.get_map_id()[40]==0);
+
+  jeu.demande_affichage_carte(10);
+  REQUIRE(jeu.get_map_id()[1]==-1);
+  REQUIRE(jeu.get_map_id()[10]==1);
+
+  jeu.demande_affichage_carte(11);
+  REQUIRE(jeu.get_map_id()[1]==-1);
+  REQUIRE(jeu.get_map_id()[10]==1);
+  REQUIRE(jeu.get_map_id()[11]==1);
+  REQUIRE(jeu.get_map_id()[12]==0);
+  REQUIRE(jeu.get_map_id()[13]==0);
+
+
+  jeu.demande_affichage_carte(12);
+  REQUIRE(jeu.get_map_id()[1]==-1);
+  REQUIRE(jeu.get_map_id()[10]==1);
+  REQUIRE(jeu.get_map_id()[11]==1);
+  REQUIRE(jeu.get_map_id()[12]==1);
+  REQUIRE(jeu.get_map_id()[13]==0);
+
+
+  jeu.demande_affichage_carte(13);
+  REQUIRE(jeu.get_map_id()[1]==-1);
+  REQUIRE(jeu.get_map_id()[10]==1);
+  REQUIRE(jeu.get_map_id()[11]==1);
+  REQUIRE(jeu.get_map_id()[12]==1);
+  REQUIRE(jeu.get_map_id()[13]==1);
+
+  REQUIRE(jeu.enigme(13).get_nb_essais()==5);
+
+  jeu.solution_enigme_valide(13,666);
+  REQUIRE(jeu.get_map_id()[13]==1);
+  REQUIRE(jeu.get_map_id()[14]==0);
+  // REQUIRE(jeu.enigme(13).get_nb_essais()==4); // test ne passe pas cela signifie que le nombre d'essais ne diminue pas quand le joueur entre une mauvaise réponse
+
+  /*
+  jeu.demande_affichage_carte(11);
+  REQUIRE(jeu.get_map_id()[1]==-1);
+  REQUIRE(jeu.get_map_id()[10]==1);
+  REQUIRE(jeu.get_map_id()[11]==1);
+  REQUIRE(jeu.get_map_id()[12]==0);
+  REQUIRE(jeu.get_map_id()[13]==0);
+  */
+
 }
