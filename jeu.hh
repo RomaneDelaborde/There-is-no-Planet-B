@@ -45,6 +45,23 @@ public:
   // Destructeur vide
   ~Jeu(){};
 
+  // Getters
+  std::vector<Carte> get_cartes_jeu() const {return _cartes_jeu;};
+  std::vector<Carte> get_cartes_basiques() const {return _cartes_basiques;};
+  std::vector<Objet> get_cartes_objets() const {return _cartes_objets;};
+  std::vector<Enigme> get_cartes_enigmes() const {return _cartes_enigmes;};
+  std::map<int, int> get_map_id() const {return _map_id;};
+  std::vector<int> get_inventaire() const {return _inventaire;};
+  std::vector<int> get_id_cartes_basiques() const {return _id_cartes_basiques;};
+  std::vector<int> get_id_cartes_objets() const {return _id_cartes_objets;};
+  std::vector<int> get_id_cartes_enigmes() const {return _id_cartes_enigmes;};
+
+
+
+
+
+
+
   // Méthodes
 
   std::vector<int> lecture_str_tab(std::string chaine);     // lecture d'un str composé d'int séparés par des "-" (tabulats) : ces int sont retournés sous forme d'un vecteur
