@@ -149,13 +149,24 @@ TEST_CASE("7: Classe Jeu"){
   REQUIRE(jeu.get_map_id()[14]==0);
   // REQUIRE(jeu.enigme(13).get_nb_essais()==4); // test ne passe pas cela signifie que le nombre d'essais ne diminue pas quand le joueur entre une mauvaise réponse
 
-  /*
-  jeu.demande_affichage_carte(11);
-  REQUIRE(jeu.get_map_id()[1]==-1);
-  REQUIRE(jeu.get_map_id()[10]==1);
-  REQUIRE(jeu.get_map_id()[11]==1);
-  REQUIRE(jeu.get_map_id()[12]==0);
-  REQUIRE(jeu.get_map_id()[13]==0);
-  */
+  jeu.solution_enigme_valide(13,87);
+  REQUIRE(jeu.get_map_id()[14]==1);
+  REQUIRE(jeu.get_map_id()[13]==-1);
+
+  jeu.demande_affichage_carte(15);
+  REQUIRE(jeu.get_map_id()[13]==-1);
+  REQUIRE(jeu.get_map_id()[14]==-1);
+  REQUIRE(jeu.get_map_id()[15]==1);
+
+  jeu.demande_affichage_carte(16);
+  REQUIRE(jeu.get_map_id()[13]==-1);
+  REQUIRE(jeu.get_map_id()[14]==-1);
+  REQUIRE(jeu.get_map_id()[15]==-1);
+  REQUIRE(jeu.get_map_id()[16]==1);
+
+  jeu.demande_affichage_carte(20);
+  REQUIRE(jeu.get_map_id()[20]==1);
+  REQUIRE(jeu.get_map_id()[17]==-1);
+
 
 }
