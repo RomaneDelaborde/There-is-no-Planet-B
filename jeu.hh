@@ -76,10 +76,6 @@ public:
 
   bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id et 0 sinon (i.e. s'il existe)
 
-  // 2 méthode qui suivent pas utiles je pense
-  void carte_map_affichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur 1
-  void carte_map_desaffichage(const int id_carte); // dans _map_id la valeur de la clé correspondant à id_carte passe à la valeur -1
-
   bool affichage_carte_autorise(const int id_carte); // indique si la carte peut-être affichée ou non
 
   void affichage_carte(const int id_carte); // permet l'affichage d'une carte ainsi que les modifications qui en découlent

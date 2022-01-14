@@ -249,27 +249,6 @@ bool Jeu::id_existe(const int id_carte) const
 }
 
 
-// fonction pas utilisée pour le moment
-void Jeu::carte_map_affichage(const int id_carte) // on pourrait faire 1 seule lecture_str_tab pour affichage/désaffichage mais humain peut plus facilement se mélanger les pinceaux dans les valeurs
-{
-  if(!id_existe(id_carte)) // si l'id n'existe pas on ne fait rien
-  {
-    return;
-  }
-  _map_id[id_carte]=1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
-}
-
-// fonction pas utilisée pour le moment
-void Jeu::carte_map_desaffichage(const int id_carte)
-{
-  if(!id_existe(id_carte)) // si l'id n'existe pas on ne fait rien
-  {
-    return;
-  }
-  _map_id[id_carte]=-1; // sinon on modifie la valeur de la clé correspondant à id_carte dans _map_id
-}
-
-
 bool Jeu::affichage_carte_autorise(const int id_carte)
 {
   for(std::size_t i=0; i< _cartes_jeu.size(); i++) // Parcours des cartes du jeu
@@ -415,7 +394,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
 
       else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
       {
-        if(id_existe(26)) // sécurité : carte 26 = carte cesar 
+        if(id_existe(26)) // sécurité : carte 26 = carte cesar
         {
           if(_map_id[26]==1) // si le joueur a affiché la roue de césar i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
           {
