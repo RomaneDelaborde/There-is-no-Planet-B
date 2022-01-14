@@ -154,11 +154,61 @@ void FenetreJeu::changerWhitetoRetroviseur() {
 		retroviseurChange = true;
 	}
 	else {
-		table_images->remove(bouton_retroviseur);
-		table_images->attach(bouton_0101, 0, 1, 0, 1);
+		//table_images->remove(bouton_retroviseur);
+		//table_images->attach(bouton_0101, 0, 1, 0, 1);
+		//attribut bouton => ses coordonnées..... les remplir à -1 si on connait pas
+		//comment recup automatiquement les coordonnées ? a etudier
+		remplacerCartetoWhite(bouton_retroviseur, 0, 0);
 		show_all();
 		retroviseurChange = false;
 	}
+}
+
+void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int ligne) {
+	table_images->remove(bouton);
+	switch (colonne) {
+		case 0:
+			switch (ligne) {
+				case 0:
+					table_images->attach(bouton_0101, 0, 1, 0, 1);
+					break;
+				case 1:
+					table_images->attach(bouton_0112, 0, 1, 1, 2);
+					break;
+			}
+			break;
+		case 1:
+			switch (ligne) {
+				case 0:
+					table_images->attach(bouton_1201, 1, 2, 0, 1);
+					break;
+				case 1:
+					table_images->attach(bouton_1212, 1, 2, 1, 2);
+					break;
+			}
+			break;
+		case 2:
+			switch (ligne) {
+				case 0:
+					table_images->attach(bouton_2301, 2, 3, 0, 1);
+					break;
+				case 1:
+					table_images->attach(bouton_2312, 2, 3, 1, 2);
+					break;
+			}
+			break;
+		case 3:
+			switch (ligne) {
+				case 0:
+					table_images->attach(bouton_3401, 3, 4, 0, 1);
+					break;
+				case 1:
+					table_images->attach(bouton_3412, 3, 4, 1, 2);
+					break;
+			}
+			break;
+	}
+
 }
 
 FenetreJeu::~FenetreJeu() {

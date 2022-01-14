@@ -61,6 +61,7 @@ class FenetreJeu: public Gtk::Window {
 		//Expérimentations
 		void popupMessage(char* message, char* title);
 		void changerWhitetoRetroviseur();
+		void remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int ligne);
 
 		//void popupInventaire();
 		//void popupErreurId();
