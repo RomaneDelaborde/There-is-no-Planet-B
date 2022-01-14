@@ -359,34 +359,30 @@ void Jeu::demande_affichage_carte(const int id_carte)
       {
         // affichage_carte(id_carte); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
         //remplacer bouton blanc par bouton image
-
       }
       else
       {
         // affichage pop-up pour le joueur qqpart du type "La carte souhaitée n'est pas accessible."
       }
-
       break;
   }
 }
 
 
 
-void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
+void Jeu::solution_enigme_valide(int id_carte_enigme, int val)
 {
   if(!std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte_enigme)) // si la carte n'est pas une carte énigme
   {
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
     return;
   }
-  if(enigme(id_carte_enigme).code_correct(val))
+  if(enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
     // affichage pop-up du style : "Bonne réponse !"
-    // afficher la carte qui est debloquée par l'enigme (sauf pour le pied de biche --> ajouter condition compteur pour vérifier que le mec ait tout regardé dans le garage)
-    // affichage_carte(enigme(id_carte_enigme).get_id_cart_debloquee()); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
-
+    // affichage_carte(enigme(id_carte_enigme).get_id_cart_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
   }
-  else
+  else // si réponse incorrecte
   {
     if(enigme(id_carte_enigme).get_nb_essais()>0) // s'il reste encore des tentatives en stock on affiche un message
     {
@@ -397,14 +393,13 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) const
       // affichage pop-up du style : "Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ... "
     }
   }
-
 }
 
 
 
-void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
+void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
 {
-  if(!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) // si au moins l'un des objets n'existe pas 
+  if(!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) // si au moins l'un des objets n'existe pas
   {
     // affichage pop-up du type : "1 des objets n'existe pas"
     return;
@@ -413,13 +408,35 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) const
   {
     if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
     {
-      // afficher la carte qui résulte de la combinaison
-      // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
+      if(id_obj_1!=203 || id_obj_2!=203) // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
+      {
+        // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+      }
 
+      else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
+      {
+        if(id_existe(26)) // sécurité : carte 26 = carte cesar 
+        {
+          if(_map_id[26]==1) // si le joueur a affiché la roue de césar i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
+          {
+            // affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+          }
+        }
+        else
+        {
+          // affichage pop-up du type : "Vous n'avez pas inspecté l'intégralité du garage OU Etes-vous certain d'avoir tout regardé ?"
+        }
+      }
     }
-    // affichage pop-up du type : "les 2 objets ne sont pas combinables"
+    else
+    {
+      // affichage pop-up du type : "les 2 objets ne sont pas combinables"
+    }
   }
-  // affichage pop-up du type : "Au moins 1 des 2 objets ne se situe pas dans l'inventaire"
+  else
+  {
+    // affichage pop-up du type : "Au moins 1 des 2 objets ne se situe pas dans l'inventaire"
+  }
 }
 
 
