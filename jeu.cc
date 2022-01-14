@@ -272,7 +272,15 @@ bool Jeu::affichage_carte_autorise(const int id_carte)
 
 void Jeu::affichage_carte(const int id_carte)
 {
-
+  if(std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet (alors on l'ajuste juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
+  {
+    if(objet(id_carte).get_est_objet_inventaire()) // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
+    {
+      _inventaire.push_back(id_carte);
+      // affichage pop-up pour le joueur qqpart du type "L'objet a été ajouté à l'inventaire."
+    }
+    return;
+  }
   // affichage carte interface graphique (ou ailleurs idk)
 
   // modifications communes aux différentes types de cartes
@@ -299,20 +307,6 @@ void Jeu::affichage_carte(const int id_carte)
     if(carte(id_carte).get_id_carte_autre_choix() !=0) // s'il s'agit d'une carte choix (attribut _id_carte_autre_choix rempli seulement pour les cartes basiques)
     {
       _map_id[carte(id_carte).get_id_carte_autre_choix()]=-1; // on empêche le joueur d'accèder aux cartes des autres choix
-    }
-  }
-
-  /*
-  else if(std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte)) // si la carte est une carte énigme
-  {
-  }
-  */
-
-  else if(std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet
-  {
-    if(objet(id_carte).get_est_objet_inventaire()) // si c'est une carte objet inventaire, on l'ajoute à l'inventaire
-    {
-      _inventaire.push_back(id_carte);
     }
   }
 
