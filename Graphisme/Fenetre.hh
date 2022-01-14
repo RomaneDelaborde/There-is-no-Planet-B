@@ -59,8 +59,11 @@ class FenetreJeu: public Gtk::Window {
 		~FenetreJeu();
 	
 		//Expérimentations
-		void afficherErreur();
+		void popupMessage(char* message, char* title);
 		void changerWhitetoRetroviseur();
+
+		//void popupInventaire();
+		//void popupErreurId();
 		//Image& getImagefromName(std::string name);
 		//void zoom_Image(Bouton& bouton);
 	

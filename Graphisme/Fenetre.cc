@@ -81,7 +81,7 @@ void FenetreJeu::init_table_zones_texte() {
 	
 	bouton_carte = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_carte, 4, 5, 4, 5, Gtk::SHRINK);
-	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherErreur));
+	//bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::popupErreur));
 
 }
 
@@ -116,10 +116,16 @@ void FenetreJeu::init_table_inventory() {
 }
 
 
-void FenetreJeu::afficherErreur() {
+/*void FenetreJeu::popupErreur() {
 	Gtk::MessageDialog dialogue(*this, "Erreur : vous ne pouvez pas tirer cette carte", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
 	dialogue.set_title("Avertissement");
 	//dialogue.set_secondary_text("Et <i>ceci</i> est le texte secondaire qui explique quelque chose.", true); //Ajouter un texte secondaire.
+	dialogue.run();
+}*/
+
+void FenetreJeu::popupMessage(char* message, char* title) {
+	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
+	dialogue.set_title(title);
 	dialogue.run();
 }
 
