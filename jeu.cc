@@ -278,6 +278,8 @@ void Jeu::affichage_carte(const int id_carte)
     {
       _inventaire.push_back(id_carte);
       // affichage pop-up pour le joueur qqpart du type "L'objet a été ajouté à l'inventaire."
+      //ligne suivante à décommenter dans le futur : (fenetre en paramètre global ??)
+      //"fenetre".popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
     }
     return;
   }
@@ -318,15 +320,19 @@ void Jeu::demande_affichage_carte(const int id_carte)
   if(!id_existe(id_carte)) // si l'id n'existe pas
   {
     // affichage pop-up pour le joueur qqpart du type "Cet id ne correspond à aucune carte."
+    //ligne suivante à décommenter dans le futur : (objet fenetre en paramètre global ??)
+    //"fenetre".popupMessage("Ce numéro ne correspond à aucune carte...", "Erreur");
     return;
   }
   switch(_map_id[id_carte]){
     case 1:
       // affichage pop-up pour le joueur qqpart du type "La carte souhaitée est déjà affichée."
+      //"fenetre".popupMessage("La carte souhaitée est déjà affichée....", "Erreur");   
       break;
 
     case -1:
       // affichage pop-up pour le joueur qqpart du type "La carte souhaitée ne peut pas être affichée."
+      //"fenetre".popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");   
       break;
 
     case 0:
@@ -338,6 +344,8 @@ void Jeu::demande_affichage_carte(const int id_carte)
       else
       {
         // affichage pop-up pour le joueur qqpart du type "La carte souhaitée n'est pas accessible."
+        //"fenetre".popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");   
+
       }
       break;
   }
@@ -350,11 +358,13 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val)
   if(!std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte_enigme)) // si la carte n'est pas une carte énigme
   {
     // affichage pop-up du style : "Vous tentez de répondre à une carte énigme qui n'existe pas"
+    //"fenetre".popupMessage("Vous tentez de répondre à une carte énigme qui n'existe pas", "Erreur");   
     return;
   }
   if(enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
     // affichage pop-up du style : "Bonne réponse !"
+    //"fenetre".popupMessage("Bonne réponse !", "Bravo");   
     affichage_carte(enigme(id_carte_enigme).get_id_carte_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
   }
   else // si réponse incorrecte
@@ -362,10 +372,15 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val)
     if(enigme(id_carte_enigme).get_nb_essais()>0) // s'il reste encore des tentatives en stock on affiche un message
     {
       // affichage pop-up du style : "Réponse fausse ... Vous avez encore X tentatives pour résoudre cette énigme" avec X=enigme(id_carte_enigme).get_nb_essais()
+      //"fenetre".popupMessage("Réponse fausse", "Erreur");   
+      //note popup : pour l'instant pas d'affichage du nombre restant, faire une autre fonction plus tard
+
     }
     else // il ne reste plus aucune chance de tenter l'énigme
     {
       // affichage pop-up du style : "Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ... "
+      //"fenetre".popupMessage("Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ...", "Echec");   
+      //écran graphique d'echec ?
     }
   }
 }
@@ -377,6 +392,8 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
   if(!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) // si au moins l'un des objets n'existe pas
   {
     // affichage pop-up du type : "1 des objets n'existe pas"
+    //"fenetre".popupMessage("Au moins 1 des 2 objets n'existe pas", "Erreur");   
+
     return;
   }
   if(std::count(_inventaire.begin(), _inventaire.end(), id_obj_1) && std::count(_inventaire.begin(), _inventaire.end(), id_obj_2))
@@ -400,17 +417,20 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2)
         else
         {
           // affichage pop-up du type : "Vous n'avez pas inspecté l'intégralité du garage OU Etes-vous certain d'avoir tout regardé ?"
+          //"fenetre".popupMessage("Etes-vous certain d'avoir tout regardé ?", "Erreur");   
         }
       }
     }
     else
     {
       // affichage pop-up du type : "les 2 objets ne sont pas combinables"
+      //"fenetre".popupMessage("Les 2 objets ne sont pas combinables", "Erreur");   
     }
   }
   else
   {
     // affichage pop-up du type : "Au moins 1 des 2 objets ne se situe pas dans l'inventaire"
+    //"fenetre".popupMessage("Au moins 1 des 2 objets ne se situe pas dans l'inventaire", "Erreur");   
   }
 }
 
