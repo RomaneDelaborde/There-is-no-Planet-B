@@ -21,6 +21,8 @@
 #include <iostream>
 #include "Widgets.hh"
 
+bool is_number(const std::string& s);
+
 
 class FenetreAccueil: public Gtk::Window {
 	
@@ -49,6 +51,7 @@ class FenetreJeu: public Gtk::Window {
 		void init_table_inventory();
 	
 		void afficherApropos();
+
 	
 		std::string get_entry_objet_1() {return entry_objet_1.get_text();}
 		std::string get_entry_objet_2() {return entry_objet_2.get_text();}
@@ -58,10 +61,12 @@ class FenetreJeu: public Gtk::Window {
 
 		~FenetreJeu();
 	
-		//Expérimentations
-		void popupMessage(char* message, char* title);
+		void popupMessage(const std::string message, const std::string title);
 		void changerWhitetoRetroviseur();
 		void remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int ligne);
+		void requestCarte();
+		void requestRepondreEnigme();
+		void requestCombinaison();
 
 		//void popupInventaire();
 		//void popupErreurId();

@@ -10,6 +10,12 @@
 
 bool FenetreJeu::retroviseurChange = false;
 
+//fonction venant de stackoverflow
+bool is_number(const std::string& s) {
+    return !s.empty() && std::find_if(s.begin(), 
+        s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
+}
+
 
 FenetreAccueil::FenetreAccueil() : galaxy("Images/galaxy.jpg"), bouton_galaxy(galaxy) {
 	set_title("There is no Planet B");
@@ -75,13 +81,15 @@ void FenetreJeu::init_table_zones_texte() {
 	
 	bouton_combinaisons = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_combinaisons, 0, 1, 4, 5, Gtk::SHRINK);
+	bouton_combinaisons->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCombinaison));
 	
 	bouton_enigme = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_enigme, 2, 3, 4, 5, Gtk::SHRINK);
+	bouton_enigme->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestRepondreEnigme));
 	
 	bouton_carte = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_carte, 4, 5, 4, 5, Gtk::SHRINK);
-	//bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::popupErreur));
+	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCarte));
 
 }
 
@@ -123,8 +131,8 @@ void FenetreJeu::init_table_inventory() {
 	dialogue.run();
 }*/
 
-void FenetreJeu::popupMessage(char* message, char* title) {
-	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
+void FenetreJeu::popupMessage(const std::string message, const std::string title) {
+	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING);//, Gtk::BUTTONS_NONE);
 	dialogue.set_title(title);
 	dialogue.run();
 }
@@ -230,3 +238,53 @@ void Fenetre::zoom_Image(std::string name) {
 	fenetre_temp.set_position(Gtk::WIN_POS_CENTER);
 	fenetre_temp.show_all();
 }*/
+
+void FenetreJeu::requestCarte() {
+
+	if (is_number(entry_carte_num.get_text())) {
+		//appeler fct qui demande a afficher une carte
+		//demande_affichage_carte(stoi(entry_carte_num.get_text());
+		return;
+	}
+	else {
+		popupMessage("Vous n'avez pas saisi un nombre entier", "Erreur");
+	}
+}
+
+
+void FenetreJeu::requestRepondreEnigme() {
+	
+	if (is_number(entry_id_enigme.get_text())) {
+		if (is_number(entry_reponse_enigme_l.get_text())) {
+			//solution_enigme_valide(stoi(entry_id_enigme.get_text()), stoi(entry_reponse_enigme_l.get_text()));
+			return;
+		}
+		else {
+			popupMessage("Vous n'avez pas saisi un nombre entier pour la réponse", "Erreur");
+
+		}
+	}
+	else {
+		popupMessage("Vous n'avez pas saisi un nombre entier pour l'énigme", "Erreur");
+	}
+}
+
+
+void FenetreJeu::requestCombinaison() {
+	
+	if (is_number(entry_objet_1.get_text())) {
+		if (is_number(entry_objet_2.get_text())) {
+			//combinaison_valide(stoi(entry_objet_1.get_text()), stoi(entry_objet_2.get_text()));
+			return;
+		}
+		else {
+			popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 2", "Erreur");
+
+		}
+	}
+	else {
+		popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 1", "Erreur");
+	}
+}
+
+
