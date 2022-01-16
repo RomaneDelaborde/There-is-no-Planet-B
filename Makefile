@@ -1,6 +1,6 @@
 CC=g++
-CCFLAGS= -Wall -Werror -std=c++11 -g
-LIBFLAGS=
+CCFLAGS= -Wall -Werror -std=c++11 `pkg-config gtkmm-3.0 --cflags --libs` -g
+LIBFLAGS= 
 SRC= $(wildcard *.cc)
 OBJ= $(SRC:.cc=.o)
 TST_DIR=tests/
@@ -15,7 +15,7 @@ testcase :
 	cd $(TST_DIR) ;  make
 
 $(EXEC): $(OBJ)
-	$(CC) $(LIBFLAGS) $^ -o $@  
+	$(CC) $(LIBFLAGS) $^ -o $@ `pkg-config gtkmm-3.0 --cflags --libs`
 
 %.o: %.cc
 	$(CC) $(CCFLAGS) -o $@ -c $<

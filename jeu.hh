@@ -17,10 +17,12 @@
 #include "enigme3.hh"
 // #include "inventaire.hh"
 
+#include "Fenetre.hh"
+
 #define fichier_cartes_basiques "cartes_basiques.csv"
 #define fichier_cartes_objets "cartes_objets.csv"
 
-class Jeu{
+class Jeu {
 
 private:
   std::vector<Carte> _cartes_jeu;        // liste des cartes du jeu
@@ -43,7 +45,7 @@ public:
   Jeu();
 
   // Destructeur vide
-  ~Jeu(){};
+  ~Jeu() {};
 
   // Getters
   std::vector<Carte> get_cartes_jeu() const {return _cartes_jeu;};

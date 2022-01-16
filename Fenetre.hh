@@ -108,6 +108,9 @@ class FenetreJeu: public Gtk::Window {
 		Image inventory5;
 		Image inventory6;
 		Image inventory7;
+ 
+		Image about_image;
+		Image retroviseur;
 
 		BoutonCarte bouton_0101;
 		BoutonCarte bouton_1201;
@@ -126,8 +129,6 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_inventory6;
 		BoutonCarte bouton_inventory7;
 
-		Image about_image;
-		Image retroviseur;
 		BoutonCarte bouton_retroviseur;
 	
 		Gtk::Label combinaisons;

@@ -7,6 +7,7 @@
 
 #include "Fenetre.hh"
 #include "Widgets.hh"
+#include "jeu.hh" 
 
 bool FenetreJeu::retroviseurChange = false;
 
@@ -28,13 +29,29 @@ FenetreAccueil::FenetreAccueil() : galaxy("Images/galaxy.jpg"), bouton_galaxy(ga
 	show_all();
 }
 
-
+ 
 FenetreJeu::FenetreJeu() :
-about_image("Images/about.png"), white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"), white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"), white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), retroviseur("Images/retroviseur.jpg"),
-inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), inventory7("Images/white_inventory.jpg"),
-combinaisons("Saisir une combinaison d'objets (au moins 2)"), reponse_enigme("Saisir la réponse à une énigme"), tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"), objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
-bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), bouton_2312(white_2312), bouton_3412(white_3412),
-bouton_inventory1(inventory1), bouton_inventory2(inventory2), bouton_inventory3(inventory3), bouton_inventory4(inventory4), bouton_inventory5(inventory5), bouton_inventory6(inventory6), bouton_inventory7(inventory7), bouton_retroviseur(retroviseur) { //à l'initialisation
+white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"), 
+white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"), 
+white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), 
+inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), 
+inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), 
+inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
+inventory7("Images/white_inventory.jpg"), about_image("Images/about.png"), 
+retroviseur("Images/retroviseur.jpg"),
+bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), 
+bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), 
+bouton_2312(white_2312), bouton_3412(white_3412), bouton_inventory1(inventory1), 
+bouton_inventory2(inventory2), bouton_inventory3(inventory3), 
+bouton_inventory4(inventory4), bouton_inventory5(inventory5), 
+bouton_inventory6(inventory6), bouton_inventory7(inventory7), 
+bouton_retroviseur(retroviseur), 
+combinaisons("Saisir une combinaison d'objets (au moins 2)"), 
+reponse_enigme("Saisir la réponse à une énigme"), 
+tirer_carte_1("Saisir le numéro de la carte à tirer"), 
+tirer_carte_2("(si vous en avez le droit)"), 
+objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), 
+reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	
 	//commencer par un écran d'accueil....
 	
