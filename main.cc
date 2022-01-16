@@ -59,13 +59,15 @@ int main(int argc, char* argv[]) {
 
   //NOTE À ROMANE : DECOMMENTER JEU() ET COMMENTER LA PARTIE GRAPHIQUE EN DESSOUS POUR TA COMPILATION
 
-  //Jeu();
+  //Jeu Game;
 
   // g++ main.cc Fenetre.cc Widgets.cc -o graphisme -std=c++0x `pkg-config gtkmm-3.0 --cflags --libs`
 
   Gtk::Main app(argc, argv);
+
   FenetreAccueil accueil;
   Gtk::Main::run(accueil);
+
   FenetreJeu fenetre;
   Gtk::Main::run(fenetre);
 

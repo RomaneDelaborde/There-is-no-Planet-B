@@ -6,8 +6,8 @@
 //
 
 #include "Fenetre.hh"
-#include "Widgets.hh"
-#include "jeu.hh" 
+#include "jeu.hh"
+
 
 bool FenetreJeu::retroviseurChange = false;
 
@@ -30,7 +30,7 @@ FenetreAccueil::FenetreAccueil() : galaxy("Images/galaxy.jpg"), bouton_galaxy(ga
 }
 
  
-FenetreJeu::FenetreJeu() :
+FenetreJeu::FenetreJeu() : 
 white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"), 
 white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"), 
 white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), 
@@ -54,6 +54,8 @@ objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"),
 reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	
 	//commencer par un écran d'accueil....
+ 
+	Game = new Jeu(*this);
 	
 	set_title("There is no Planet B");
 	set_border_width(20);
@@ -260,7 +262,7 @@ void FenetreJeu::requestCarte() {
 
 	if (is_number(entry_carte_num.get_text())) {
 		//appeler fct qui demande a afficher une carte
-		//demande_affichage_carte(stoi(entry_carte_num.get_text());
+		Game->demande_affichage_carte(std::stoi(entry_carte_num.get_text()));
 		return;
 	}
 	else {
@@ -273,7 +275,7 @@ void FenetreJeu::requestRepondreEnigme() {
 	
 	if (is_number(entry_id_enigme.get_text())) {
 		if (is_number(entry_reponse_enigme_l.get_text())) {
-			//solution_enigme_valide(stoi(entry_id_enigme.get_text()), stoi(entry_reponse_enigme_l.get_text()));
+			Game->solution_enigme_valide(std::stoi(entry_id_enigme.get_text()), std::stoi(entry_reponse_enigme_l.get_text()));
 			return;
 		}
 		else {
@@ -291,7 +293,7 @@ void FenetreJeu::requestCombinaison() {
 	
 	if (is_number(entry_objet_1.get_text())) {
 		if (is_number(entry_objet_2.get_text())) {
-			//combinaison_valide(stoi(entry_objet_1.get_text()), stoi(entry_objet_2.get_text()));
+			Game->combinaison_valide(std::stoi(entry_objet_1.get_text()), std::stoi(entry_objet_2.get_text()));
 			return;
 		}
 		else {

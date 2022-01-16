@@ -20,8 +20,11 @@
 #include <string>
 #include <iostream>
 #include "Widgets.hh"
+//#include "jeu.hh"
 
 bool is_number(const std::string& s);
+
+class Jeu;
 
 
 class FenetreAccueil: public Gtk::Window {
@@ -74,7 +77,9 @@ class FenetreJeu: public Gtk::Window {
 		//void zoom_Image(Bouton& bouton);
 	
 	private:
-		//Expérimentations
+
+		Jeu* Game;
+
 		BoutonTexte* superbouton;
 		BoutonTexte* bouton_combinaisons;
 		BoutonTexte* bouton_enigme;

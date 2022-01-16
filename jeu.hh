@@ -22,6 +22,8 @@
 #define fichier_cartes_basiques "cartes_basiques.csv"
 #define fichier_cartes_objets "cartes_objets.csv"
 
+//class FenetreJeu;
+
 class Jeu {
 
 private:
@@ -39,10 +41,14 @@ private:
   std::vector<int> _id_cartes_objets;     // liste des id des cartes objets du jeu
   std::vector<int> _id_cartes_enigmes;    // liste des id des cartes enigmes du jeu
 
+  FenetreJeu & _fenetre;
+
+
+
 public:
 
   // Constructeur sans paramètres
-  Jeu();
+  Jeu(FenetreJeu &fenetre); //FenetreJeu &fenetre
 
   // Destructeur vide
   ~Jeu() {};
@@ -59,12 +65,8 @@ public:
   std::vector<int> get_id_cartes_enigmes() const {return _id_cartes_enigmes;};
 
 
-
-
-
-
-
   // Méthodes
+
 
   std::vector<int> lecture_str_tab(std::string chaine);     // lecture d'un str composé d'int séparés par des "-" (tabulats) : ces int sont retournés sous forme d'un vecteur
   void lecture_csv_carte_basique(std::string nom_fichier);  // lecture des infos sur les cartes basiques (ni objet ni énigme) depuis un csv
