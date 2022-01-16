@@ -8,9 +8,12 @@
 #include "enigme2.hh"
 #include "enigme3.hh"
 
+#include <gtkmm/main.h>
+#include "Fenetre.hh"
+#include "Widgets.hh"
 
-int main()
-{
+
+int main(int argc, char* argv[]) {
   // PENSER A ENREGISTRER MAIN AUTRE PART AVANT DE SUPPRIMER TOUS LES TESTS (peut être utile de jeter un oeil à ces tests)
   /*
   Carte regles("regles.jpeg",0);
@@ -52,7 +55,19 @@ int main()
   //Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
   //std::cout << planete2.get_code_solution() << std::endl;
 
-  Jeu();
+
+
+  //NOTE À ROMANE : DECOMMENTER JEU() ET COMMENTER LA PARTIE GRAPHIQUE EN DESSOUS POUR TA COMPILATION
+
+  //Jeu();
+
+  // g++ main.cc Fenetre.cc Widgets.cc -o graphisme -std=c++0x `pkg-config gtkmm-3.0 --cflags --libs`
+
+  Gtk::Main app(argc, argv);
+  FenetreAccueil accueil;
+  Gtk::Main::run(accueil);
+  FenetreJeu fenetre;
+  Gtk::Main::run(fenetre);
 
   return 0;
 
