@@ -51,7 +51,7 @@ public:
   Jeu(FenetreJeu &fenetre); //FenetreJeu &fenetre
 
   // Destructeur vide
-  ~Jeu() {};
+  //~Jeu() {};
 
   // Getters
   std::vector<Carte> get_cartes_jeu() const {return _cartes_jeu;};

@@ -33,7 +33,6 @@ class BoutonTexte: public Gtk::Button {
 		
 	public:
 		BoutonTexte(const Glib::ustring& label, bool mnemonic=false) : Gtk::Button (label, false) {set_can_focus(false);}
-		//~Bouton();
 };
 
 
@@ -45,7 +44,6 @@ class BoutonCarte: public Gtk::Button {
 	private:
 		std::string name_tiny_image;
 		std::string name_big_image;
-		//Image tiny_image;
 };
 
 class BoutonAccueil: public Gtk::Button {

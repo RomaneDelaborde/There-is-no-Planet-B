@@ -56,19 +56,14 @@ int main(int argc, char* argv[]) {
   //std::cout << planete2.get_code_solution() << std::endl;
 
 
-
-  //NOTE À ROMANE : DECOMMENTER JEU() ET COMMENTER LA PARTIE GRAPHIQUE EN DESSOUS POUR TA COMPILATION
-
   //Jeu Game;
-
-  // g++ main.cc Fenetre.cc Widgets.cc -o graphisme -std=c++0x `pkg-config gtkmm-3.0 --cflags --libs`
 
   Gtk::Main app(argc, argv);
 
   FenetreAccueil accueil;
   Gtk::Main::run(accueil);
 
-  FenetreJeu fenetre;
+  FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur
   Gtk::Main::run(fenetre);
 
   return 0;

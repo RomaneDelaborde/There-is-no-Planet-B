@@ -282,8 +282,7 @@ void Jeu::affichage_carte(const int id_carte)
     {
       _inventaire.push_back(id_carte);
       // affichage pop-up pour le joueur qqpart du type "L'objet a été ajouté à l'inventaire."
-      //ligne suivante à décommenter dans le futur : (fenetre en paramètre global ??)
-      //"fenetre".popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
+      _fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
     }
     return;
   }

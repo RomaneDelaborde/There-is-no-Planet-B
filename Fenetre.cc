@@ -247,6 +247,7 @@ FenetreJeu::~FenetreJeu() {
 	delete table_zones_texte;
 	delete table_images;
 	delete table_big;
+	delete Game;
 }
 
 /*

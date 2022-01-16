@@ -45,7 +45,6 @@ class FenetreJeu: public Gtk::Window {
 	public:
 		static bool retroviseurChange;
 
-		//Utiles
 		FenetreJeu();
 	
 		//passer les init en privé ?
@@ -71,10 +70,8 @@ class FenetreJeu: public Gtk::Window {
 		void requestRepondreEnigme();
 		void requestCombinaison();
 
-		//void popupInventaire();
-		//void popupErreurId();
 		//Image& getImagefromName(std::string name);
-		//void zoom_Image(Bouton& bouton);
+
 	
 	private:
 
