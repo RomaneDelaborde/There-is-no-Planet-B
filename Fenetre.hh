@@ -70,6 +70,8 @@ class FenetreJeu: public Gtk::Window {
 		void requestRepondreEnigme();
 		void requestCombinaison();
 
+		//void ? ou struct de 2 int ? getFirstSpotAvailable(); //donner les coordonnées de la 1ère image blanche du tableau d'images, pour pouvoir ensuite la remplacer par un bouton d'une nouvelle carte
+
 		//Image& getImagefromName(std::string name);
 
 	
@@ -113,6 +115,8 @@ class FenetreJeu: public Gtk::Window {
  
 		Image about_image;
 		Image retroviseur;
+		Image coffre_fort;
+		Image dialogue_patron;
 
 		BoutonCarte bouton_0101;
 		BoutonCarte bouton_1201;
@@ -132,6 +136,8 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_inventory7;
 
 		BoutonCarte bouton_retroviseur;
+		BoutonCarte bouton_coffre_fort;
+		BoutonCarte bouton_dialogue_patron;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;

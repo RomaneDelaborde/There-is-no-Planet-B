@@ -3,8 +3,6 @@
 
 Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre)
 {
- 
-  std::cout << "Constructeur de Jeu" << std::endl; 
 
   lecture_csv_carte_basique(fichier_cartes_basiques);
   lecture_csv_carte_objet(fichier_cartes_objets);

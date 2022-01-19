@@ -39,6 +39,8 @@ inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg
 inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
 inventory7("Images/white_inventory.jpg"), about_image("Images/about.png"), 
 retroviseur("Images/retroviseur.jpg"),
+coffre_fort("Images/coffre_fort.png"),
+dialogue_patron("Images/dialogue_patron.png"),
 bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), 
 bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), 
 bouton_2312(white_2312), bouton_3412(white_3412), bouton_inventory1(inventory1), 
@@ -46,14 +48,14 @@ bouton_inventory2(inventory2), bouton_inventory3(inventory3),
 bouton_inventory4(inventory4), bouton_inventory5(inventory5), 
 bouton_inventory6(inventory6), bouton_inventory7(inventory7), 
 bouton_retroviseur(retroviseur), 
+bouton_coffre_fort(coffre_fort),
+bouton_dialogue_patron(dialogue_patron),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), 
 reponse_enigme("Saisir la réponse à une énigme"), 
 tirer_carte_1("Saisir le numéro de la carte à tirer"), 
 tirer_carte_2("(si vous en avez le droit)"), 
 objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), 
 reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
-	
-	//commencer par un écran d'accueil....
  
 	Game = new Jeu(*this);
 	
@@ -176,7 +178,7 @@ void FenetreJeu::afficherApropos() {
 void FenetreJeu::changerWhitetoRetroviseur() {
 	if (retroviseurChange == false) {
 		table_images->remove(bouton_0101);
-		table_images->attach(bouton_retroviseur, 0, 1, 0, 1);
+		table_images->attach(bouton_dialogue_patron, 0, 1, 0, 1);
 		show_all();
 		retroviseurChange = true;
 	}
@@ -185,7 +187,7 @@ void FenetreJeu::changerWhitetoRetroviseur() {
 		//table_images->attach(bouton_0101, 0, 1, 0, 1);
 		//attribut bouton => ses coordonnées..... les remplir à -1 si on connait pas
 		//comment recup automatiquement les coordonnées ? a etudier
-		remplacerCartetoWhite(bouton_retroviseur, 0, 0);
+		remplacerCartetoWhite(bouton_dialogue_patron, 0, 0);
 		show_all();
 		retroviseurChange = false;
 	}

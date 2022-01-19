@@ -16,6 +16,7 @@ BoutonCarte::BoutonCarte(Image& image) : Gtk::Button() {
 	set_image(image);
 	set_relief(Gtk::RELIEF_NONE);
 	set_can_focus(false);
+	//override_background_color(Gdk::RGBA("1.0 , 0.0 , 0.0, 1.0"));
 
 	name_tiny_image = image.get_name(); //"gaston.jpg"
 	//ne pas zoomer sur les images blanches
