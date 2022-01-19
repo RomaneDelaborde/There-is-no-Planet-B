@@ -7,7 +7,7 @@
 
 #include "Fenetre.hh"
 #include "jeu.hh"
-
+ 
 
 bool FenetreJeu::retroviseurChange = false;
 
@@ -41,9 +41,9 @@ inventory7("Images/white_inventory.jpg"), about_image("Images/about.png"),
 retroviseur("Images/retroviseur.jpg"),
 coffre_fort("Images/coffre_fort.png"),
 dialogue_patron("Images/dialogue_patron.png"),
-bouton_0101(white_0101), bouton_1201(white_1201), bouton_2301(white_2301), 
-bouton_3401(white_3401), bouton_0112(white_0112), bouton_1212(white_1212), 
-bouton_2312(white_2312), bouton_3412(white_3412), bouton_inventory1(inventory1), 
+bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0), 
+bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1), 
+bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1), 
 bouton_inventory2(inventory2), bouton_inventory3(inventory3), 
 bouton_inventory4(inventory4), bouton_inventory5(inventory5), 
 bouton_inventory6(inventory6), bouton_inventory7(inventory7), 
@@ -58,7 +58,7 @@ objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"),
 reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
  
 	Game = new Jeu(*this);
-	
+	  
 	set_title("There is no Planet B");
 	set_border_width(20);
 	set_position(Gtk::WIN_POS_CENTER);
@@ -128,7 +128,7 @@ void FenetreJeu::init_table_images() {
 	table_images->attach(bouton_2312, 2, 3, 1, 2);
 	table_images->attach(bouton_3412, 3, 4, 1, 2);
 	
-	//bouton_2301.signal_clicked().connect(sigc::bind<Bouton*>(sigc::mem_fun(*this, &Fenetre::zoom_Image), &bouton_2301));
+	//bouton_3412.signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::getFirstWhiteCartes));
 }
 
 void FenetreJeu::init_table_inventory() {
@@ -177,8 +177,9 @@ void FenetreJeu::afficherApropos() {
 
 void FenetreJeu::changerWhitetoRetroviseur() {
 	if (retroviseurChange == false) {
-		table_images->remove(bouton_0101);
-		table_images->attach(bouton_dialogue_patron, 0, 1, 0, 1);
+		//table_images->remove(bouton_0101);
+		//table_images->attach(bouton_dialogue_patron, 0, 1, 0, 1);
+		remplacerWhitetoCarte(bouton_dialogue_patron);
 		show_all();
 		retroviseurChange = true;
 	}
@@ -187,17 +188,21 @@ void FenetreJeu::changerWhitetoRetroviseur() {
 		//table_images->attach(bouton_0101, 0, 1, 0, 1);
 		//attribut bouton => ses coordonnées..... les remplir à -1 si on connait pas
 		//comment recup automatiquement les coordonnées ? a etudier
-		remplacerCartetoWhite(bouton_dialogue_patron, 0, 0);
+		remplacerCartetoWhite(bouton_dialogue_patron);
 		show_all();
 		retroviseurChange = false;
 	}
+	getFirstWhiteCartes();
 }
 
-void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int ligne) {
+void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
+	int col = bouton.get_column(), line = bouton.get_line();
 	table_images->remove(bouton);
-	switch (colonne) {
+	bouton.set_column(-1);
+	bouton.set_line(-1);
+	switch (col) {
 		case 0:
-			switch (ligne) {
+			switch (line) {
 				case 0:
 					table_images->attach(bouton_0101, 0, 1, 0, 1);
 					break;
@@ -207,7 +212,7 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int li
 			}
 			break;
 		case 1:
-			switch (ligne) {
+			switch (line) {
 				case 0:
 					table_images->attach(bouton_1201, 1, 2, 0, 1);
 					break;
@@ -217,7 +222,7 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int li
 			}
 			break;
 		case 2:
-			switch (ligne) {
+			switch (line) {
 				case 0:
 					table_images->attach(bouton_2301, 2, 3, 0, 1);
 					break;
@@ -227,7 +232,7 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int li
 			}
 			break;
 		case 3:
-			switch (ligne) {
+			switch (line) {
 				case 0:
 					table_images->attach(bouton_3401, 3, 4, 0, 1);
 					break;
@@ -240,6 +245,59 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int li
 
 }
 
+
+void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
+	
+	std::tuple<int, int> res = getFirstWhiteCartes();
+	int col = std::get<0>(res), line = std::get<1>(res);
+
+	switch (col) {
+		case 0:
+			switch (line) {
+				case 0:
+					table_images->remove(bouton_0101);
+					break;
+				case 1:
+					table_images->remove(bouton_0112);
+					break;
+			}
+			break;
+		case 1:
+			switch (line) {
+				case 0:
+					table_images->remove(bouton_1201);
+					break;
+				case 1:
+					table_images->remove(bouton_1212);
+					break;
+			}
+			break;
+		case 2:
+			switch (line) {
+				case 0:
+					table_images->remove(bouton_2301);
+					break;
+				case 1:
+					table_images->remove(bouton_2312);
+					break;
+			}
+			break;
+		case 3:
+			switch (line) {
+				case 0:
+					table_images->remove(bouton_3401);
+					break;
+				case 1:
+					table_images->remove(bouton_3412);
+					break;
+			}
+			break;
+	}
+	table_images->attach(bouton, col, col+1, line, line+1);
+	bouton.set_column(col);
+	bouton.set_line(line);
+}
+
 FenetreJeu::~FenetreJeu() {
 	delete superbouton;
 	delete bouton_about;
@@ -250,16 +308,8 @@ FenetreJeu::~FenetreJeu() {
 	delete table_images;
 	delete table_big;
 	delete Game;
+	std::cout << "fin destructeur fenetre" << std::endl;
 }
-
-/*
-void Fenetre::zoom_Image(std::string name) {
-	Gtk::Window fenetre_temp;
-	fenetre_temp.set_title("Zoom sur l'image");
-	fenetre_temp.add(getImagefromName(name));
-	fenetre_temp.set_position(Gtk::WIN_POS_CENTER);
-	fenetre_temp.show_all();
-}*/
 
 void FenetreJeu::requestCarte() {
 
@@ -310,3 +360,32 @@ void FenetreJeu::requestCombinaison() {
 }
 
 
+
+
+std::tuple<int, int> FenetreJeu::getFirstWhiteCartes() {
+
+	std::vector<Gtk::Widget*> children = table_images->get_children();
+	int column = 4, line = 4;
+
+	for (auto* it : children) {
+		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
+
+			if (test->get_name_tiny_image() == "Images/white.jpg") {
+				
+				if (test->get_column() < column || test->get_line() < line) {
+					line = test->get_line();
+					column = test->get_column();
+				}
+			}
+		}
+	}
+
+	if (line == 4 && column == 4) {
+		line = -1;
+		column = -1;
+	}
+
+	std::cout << "final : " << " column " << column << " line " << line << std::endl;
+
+	return std::make_tuple(column, line);
+}

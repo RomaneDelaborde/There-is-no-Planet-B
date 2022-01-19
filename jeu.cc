@@ -110,7 +110,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier)
       std::getline(inputString, tempString, ',');
       id=atoi(tempString.c_str());
 
-      std::getline(inputString, suiv, ',');
+      std::getline(inputString, suiv, ','); 
       std::getline(inputString, kick, ',');
 
       std::getline(inputString, tempString, ',');

@@ -38,12 +38,19 @@ class BoutonTexte: public Gtk::Button {
 
 class BoutonCarte: public Gtk::Button {
 	public:
-		BoutonCarte(Image& image);
+		BoutonCarte(Image& image, int c = -1, int l = -1);
 		void zoom_Image();
+		std::string get_name_tiny_image() {return name_tiny_image;};
+		int get_column() {return column_coordinate;};
+		int get_line() {return line_coordinate;};
+		void set_column(int col) {column_coordinate = col;};
+		void set_line(int line) {line_coordinate = line;};
 
 	private:
 		std::string name_tiny_image;
 		std::string name_big_image;
+		int column_coordinate;
+		int line_coordinate;
 };
 
 class BoutonAccueil: public Gtk::Button {

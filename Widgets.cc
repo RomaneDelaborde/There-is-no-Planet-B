@@ -3,8 +3,8 @@
 //  
 // 
 //  Created by Maëlle Jolivet on 08/01/2022.
-// 
-
+//  
+ 
 #include "Widgets.hh"
 
 std::string split_name_image(std::string name) {
@@ -12,7 +12,7 @@ std::string split_name_image(std::string name) {
 	return result;
 }
 
-BoutonCarte::BoutonCarte(Image& image) : Gtk::Button() {
+BoutonCarte::BoutonCarte(Image& image, int c, int l) : Gtk::Button(), column_coordinate(c), line_coordinate(l) {
 	set_image(image);
 	set_relief(Gtk::RELIEF_NONE);
 	set_can_focus(false);

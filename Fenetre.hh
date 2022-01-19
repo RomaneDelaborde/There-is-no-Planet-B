@@ -20,6 +20,8 @@
 #include <string>
 #include <iostream>
 #include "Widgets.hh"
+
+#include <tuple>
 //#include "jeu.hh"
 
 bool is_number(const std::string& s);
@@ -65,14 +67,13 @@ class FenetreJeu: public Gtk::Window {
 	
 		void popupMessage(const std::string message, const std::string title);
 		void changerWhitetoRetroviseur();
-		void remplacerCartetoWhite(BoutonCarte & bouton, int colonne, int ligne);
+		void remplacerCartetoWhite(BoutonCarte & bouton);
+		void remplacerWhitetoCarte(BoutonCarte & bouton);
 		void requestCarte();
 		void requestRepondreEnigme();
 		void requestCombinaison();
 
-		//void ? ou struct de 2 int ? getFirstSpotAvailable(); //donner les coordonnées de la 1ère image blanche du tableau d'images, pour pouvoir ensuite la remplacer par un bouton d'une nouvelle carte
-
-		//Image& getImagefromName(std::string name);
+		std::tuple<int, int> getFirstWhiteCartes();
 
 	
 	private:
