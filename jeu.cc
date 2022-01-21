@@ -5,7 +5,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
 
   lecture_csv_carte_basique(fichier_cartes_basiques);
   lecture_csv_carte_objet(fichier_cartes_objets);
- 
+
   int nb = 5; // nombre d'essais (ici commun à toutes les énigmes mais chacune pourrait avoir sa propre valeur), 5 est une valeur arbitraire
 
   // Enigmes entrées à la main car il y en a que 3
@@ -105,7 +105,7 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier) {
       std::getline(inputString, tempString, ',');
       id = atoi(tempString.c_str());
 
-      std::getline(inputString, suiv, ','); 
+      std::getline(inputString, suiv, ',');
       std::getline(inputString, kick, ',');
 
       std::getline(inputString, tempString, ',');
@@ -193,15 +193,15 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
 
 Carte Jeu::carte(const int id_carte) const // à partir d'une valeur d'id (unique) d'une carte basique, renvoie sa carte correspondante
 {
-  for(std::size_t i=0; i< _cartes_basiques.size(); i++) {
-    if(_cartes_basiques[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte (basique) correspondante
+  for(std::size_t i=0; i< _cartes_jeu.size(); i++) {
+    if(_cartes_jeu[i].get_id()==id_carte) // si on a trouvé un match des id, on retourne la carte (basique) correspondante
     {
-      return _cartes_basiques[i];
+      return _cartes_jeu[i];
     }
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même une carte (celle des règles du jeu)
-  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
-  return _cartes_basiques[0];
+  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte du jeu" << std::endl;
+  return _cartes_jeu[0];
 }
 
 Objet Jeu::objet(const int id_carte) const // à partir d'une valeur d'id (unique) d'une carte objet, renvoie son objet correspondant
@@ -226,7 +226,7 @@ Enigme Jeu::enigme(const int id_carte) const // à partir d'une valeur d'id (uni
     }
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même une énigme
-  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune carte basique" << std::endl;
+  std::cout << "ERREUR : l'id entré en paramètres ne correspond à aucune énigme" << std::endl;
   return _cartes_enigmes[0];
 }
 
@@ -246,6 +246,7 @@ bool Jeu::affichage_carte_autorise(const int id_carte) {
   {
     if(_map_id[_cartes_jeu[i].get_id()] == 1) // Si la carte du jeu est affichée dans _map_id, on parcourt les id qui se trouvent dans son attribut _id_cartes_suivantes
     {
+
       for(std::size_t j=0; j< _cartes_jeu[i].get_id_cartes_suivantes().size(); j++) // Si dans la liste de ses cartes suivantes, on a id_carte alors on retourne 1
       {
         if(_cartes_jeu[i].get_id_cartes_suivantes()[j]==id_carte) {return 1;}
@@ -279,7 +280,7 @@ void Jeu::affichage_carte(const int id_carte) {
 
   // modifications communes aux différentes types de cartes
   // kick les cartes : si des cartes actuellement affichées peuvent être kick par l'arrivée de cette carte alors on les tej
-  for (std::size_t i = 0; i < _cartes_jeu.size(); i++) 
+  for (std::size_t i = 0; i < _cartes_jeu.size(); i++)
   {
     if (_map_id[_cartes_jeu[i].get_id()] == 1) // Si la carte du jeu est affichée dans _map_id, on regarde son attribut id_cartes_kick
     {
@@ -311,11 +312,11 @@ void Jeu::demande_affichage_carte(const int id_carte) {
   }
   switch(_map_id[id_carte]) {
     case 1:
-      _fenetre.popupMessage("La carte souhaitée est déjà affichée....", "Erreur");   
+      _fenetre.popupMessage("La carte souhaitée est déjà affichée....", "Erreur");
       break;
 
     case -1:
-      _fenetre.popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");   
+      _fenetre.popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");
       break;
 
     case 0:
@@ -334,12 +335,12 @@ void Jeu::demande_affichage_carte(const int id_carte) {
 void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
   if(!std::count(_id_cartes_enigmes.begin(), _id_cartes_enigmes.end(), id_carte_enigme)) // si la carte n'est pas une carte énigme
   {
-    _fenetre.popupMessage("Vous tentez de répondre à une carte énigme qui n'existe pas", "Erreur");   
+    _fenetre.popupMessage("Vous tentez de répondre à une carte énigme qui n'existe pas", "Erreur");
     return;
   }
   if (enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
-    _fenetre.popupMessage("Bonne réponse !", "Bravo");   
+    _fenetre.popupMessage("Bonne réponse !", "Bravo");
     affichage_carte(enigme(id_carte_enigme).get_id_carte_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
   }
   else // si réponse incorrecte
@@ -347,13 +348,13 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
     if(enigme(id_carte_enigme).get_nb_essais() > 0) // s'il reste encore des tentatives en stock on affiche un message
     {
       // affichage pop-up du style : "Réponse fausse ... Vous avez encore X tentatives pour résoudre cette énigme" avec X=enigme(id_carte_enigme).get_nb_essais()
-      _fenetre.popupMessage("Réponse fausse", "Erreur");   
+      _fenetre.popupMessage("Réponse fausse", "Erreur");
       //note popup : pour l'instant pas d'affichage du nombre restant, faire une autre fonction plus tard
 
     }
     else // il ne reste plus aucune chance de tenter l'énigme
     {
-      _fenetre.popupMessage("Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ...", "Echec");   
+      _fenetre.popupMessage("Réponse fausse ... Vous avez épuisé le nombre de tentatives pour cette énigme, vous avez perdu ...", "Echec");
       //écran graphique d'echec ?
     }
   }
@@ -364,7 +365,7 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
 void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
   if(!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) // si au moins l'un des objets n'existe pas
   {
-    _fenetre.popupMessage("Au moins 1 des 2 objets n'existe pas", "Erreur");   
+    _fenetre.popupMessage("Au moins 1 des 2 objets n'existe pas", "Erreur");
 
     return;
   }
