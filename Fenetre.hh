@@ -121,10 +121,37 @@ class FenetreJeu: public Gtk::Window {
 		Image inventory7;
  
 		Image about_image;
-		Image retroviseur;
+	
+		Image annonce_radio;
+		Image bibliotheque;
+		Image boite_chocolat;
+		Image boite_gants;
+		Image boite_outils;
+		Image boss_assomme;
+		Image boss_enerve;
+		Image boss_mort;
+		Image bureau;
+		Image certificat;
 		Image coffre_fort;
+		Image dessin_mur;
+		Image dessin_recto;
+		Image dessin_sol;
+		Image dessin_verso;
 		Image dialogue_patron;
+		Image frequences;
+		Image garage;
+		Image non_revelation;
+		Image planetes;
+		Image porte_cachee;
+		Image pressing;
+		Image radio;
+		Image retroviseur;
+		Image revelation;
+		Image table_chevet;
+		Image ticket_dore;
+		Image tiroir;
 		Image voiture;
+		Image zoom_livres;
 
 		BoutonCarte bouton_0101;
 		BoutonCarte bouton_1201;
@@ -142,11 +169,37 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_inventory5;
 		BoutonCarte bouton_inventory6;
 		BoutonCarte bouton_inventory7;
-
-		BoutonCarte bouton_retroviseur;
+	
+		BoutonCarte bouton_annonce_radio;
+		BoutonCarte bouton_bibliotheque;
+		BoutonCarte bouton_boite_chocolat;
+		BoutonCarte bouton_boite_gants;
+		BoutonCarte bouton_boite_outils;
+		BoutonCarte bouton_boss_assomme;
+		BoutonCarte bouton_boss_enerve;
+		BoutonCarte bouton_boss_mort;
+		BoutonCarte bouton_bureau;
+		BoutonCarte bouton_certificat;
 		BoutonCarte bouton_coffre_fort;
+		BoutonCarte bouton_dessin_mur;
+		BoutonCarte bouton_dessin_recto;
+		BoutonCarte bouton_dessin_sol;
+		BoutonCarte bouton_dessin_verso;
 		BoutonCarte bouton_dialogue_patron;
+		BoutonCarte bouton_frequences;
+		BoutonCarte bouton_garage;
+		BoutonCarte bouton_non_revelation;
+		BoutonCarte bouton_planetes;
+		BoutonCarte bouton_porte_cachee;
+		BoutonCarte bouton_pressing;
+		BoutonCarte bouton_radio;
+		BoutonCarte bouton_retroviseur;
+		BoutonCarte bouton_revelation;
+		BoutonCarte bouton_table_chevet;
+		BoutonCarte bouton_ticket_dore;
+		BoutonCarte bouton_tiroir;
 		BoutonCarte bouton_voiture;
+		BoutonCarte bouton_zoom_livres;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;

@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS= -Wall -Werror -std=c++11 `pkg-config gtkmm-3.0 --cflags --libs` -g
+CCFLAGS= -Wall -std=c++11 `pkg-config gtkmm-3.0 --cflags --libs` -g
 LIBFLAGS= 
 SRC= $(wildcard *.cc)
 OBJ= $(SRC:.cc=.o)
