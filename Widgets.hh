@@ -46,6 +46,8 @@ class BoutonCarte: public Gtk::Button {
 		void set_column(int col) {column_coordinate = col;};
 		void set_line(int line) {line_coordinate = line;};
 
+		bool operator== (std::string name) {return name_tiny_image == name;};
+
 	private:
 		std::string name_tiny_image;
 		std::string name_big_image;

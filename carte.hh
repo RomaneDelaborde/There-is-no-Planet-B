@@ -5,11 +5,9 @@
 #include <list>
 #include <vector>
 
-class Carte{
+class Carte {
 
 protected:
-
-	// ajouter attribut Gtk::Image .... pour l'interface graphique
 
   std::string _nom_carte;  // nom de l'image associée à la carte (rajouter +".jpeg" par exemple pour le format)
   int _id;                 // id=identifiant propre à chaque carte (déterminé manuellement voir tableau drive)

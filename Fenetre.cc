@@ -41,6 +41,7 @@ inventory7("Images/white_inventory.jpg"), about_image("Images/about.png"),
 retroviseur("Images/retroviseur.jpg"),
 coffre_fort("Images/coffre_fort.png"),
 dialogue_patron("Images/dialogue_patron.png"),
+voiture("Images/voiture.jpg"),
 bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0), 
 bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1), 
 bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1), 
@@ -50,6 +51,7 @@ bouton_inventory6(inventory6), bouton_inventory7(inventory7),
 bouton_retroviseur(retroviseur), 
 bouton_coffre_fort(coffre_fort),
 bouton_dialogue_patron(dialogue_patron),
+bouton_voiture(voiture),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"), 
 reponse_enigme("Saisir la réponse à une énigme"), 
 tirer_carte_1("Saisir le numéro de la carte à tirer"), 
@@ -65,16 +67,26 @@ reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	
 	table_big = new Gtk::Table(3, 1);
 	add(*table_big);
-	
+	 
 	init_table_zones_texte();
 	init_table_images();
 	init_table_inventory();
+	init_allBoutonCartes();
 
 	superbouton = new BoutonTexte("Super bouton");
 	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
 	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
 	
 	show_all();
+}
+
+void FenetreJeu::init_allBoutonCartes() {
+	allBoutonCartes.push_back(&bouton_dialogue_patron);
+	allBoutonCartes.push_back(&bouton_retroviseur);
+	allBoutonCartes.push_back(&bouton_coffre_fort);
+	allBoutonCartes.push_back(&bouton_voiture);
+
+	boutonFromName("dialogue_patron");
 }
 
 void FenetreJeu::init_table_zones_texte() {
@@ -115,7 +127,7 @@ void FenetreJeu::init_table_zones_texte() {
 }
 
 void FenetreJeu::init_table_images() {
-	//Initialisation du tableau d'images : déclaration de 8 images "white.jpeg"
+
 	table_images = new Gtk::Table(2, 4);
 	table_big->attach(*table_images, 0, 1, 1, 2);
 	
@@ -127,8 +139,6 @@ void FenetreJeu::init_table_images() {
 	table_images->attach(bouton_1212, 1, 2, 1, 2);
 	table_images->attach(bouton_2312, 2, 3, 1, 2);
 	table_images->attach(bouton_3412, 3, 4, 1, 2);
-	
-	//bouton_3412.signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::getFirstWhiteCartes));
 }
 
 void FenetreJeu::init_table_inventory() {
@@ -143,14 +153,6 @@ void FenetreJeu::init_table_inventory() {
 	table_inventory->attach(bouton_inventory6, 5, 6, 1, 2);
 	table_inventory->attach(bouton_inventory7, 6, 7, 1, 2);
 }
-
-
-/*void FenetreJeu::popupErreur() {
-	Gtk::MessageDialog dialogue(*this, "Erreur : vous ne pouvez pas tirer cette carte", false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE);
-	dialogue.set_title("Avertissement");
-	//dialogue.set_secondary_text("Et <i>ceci</i> est le texte secondaire qui explique quelque chose.", true); //Ajouter un texte secondaire.
-	dialogue.run();
-}*/
 
 void FenetreJeu::popupMessage(const std::string message, const std::string title) {
 	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING);//, Gtk::BUTTONS_NONE);
@@ -180,19 +182,14 @@ void FenetreJeu::changerWhitetoRetroviseur() {
 		//table_images->remove(bouton_0101);
 		//table_images->attach(bouton_dialogue_patron, 0, 1, 0, 1);
 		remplacerWhitetoCarte(bouton_dialogue_patron);
-		show_all();
 		retroviseurChange = true;
 	}
 	else {
 		//table_images->remove(bouton_retroviseur);
 		//table_images->attach(bouton_0101, 0, 1, 0, 1);
-		//attribut bouton => ses coordonnées..... les remplir à -1 si on connait pas
-		//comment recup automatiquement les coordonnées ? a etudier
 		remplacerCartetoWhite(bouton_dialogue_patron);
-		show_all();
 		retroviseurChange = false;
 	}
-	getFirstWhiteCartes();
 }
 
 void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
@@ -242,13 +239,13 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 			}
 			break;
 	}
-
+	show_all();
 }
 
 
 void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 	
-	std::tuple<int, int> res = getFirstWhiteCartes();
+	std::tuple<int, int> res = getFirstWhiteCarte();
 	int col = std::get<0>(res), line = std::get<1>(res);
 
 	switch (col) {
@@ -296,6 +293,7 @@ void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 	table_images->attach(bouton, col, col+1, line, line+1);
 	bouton.set_column(col);
 	bouton.set_line(line);
+	show_all();
 }
 
 FenetreJeu::~FenetreJeu() {
@@ -362,7 +360,7 @@ void FenetreJeu::requestCombinaison() {
 
 
 
-std::tuple<int, int> FenetreJeu::getFirstWhiteCartes() {
+std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
 
 	std::vector<Gtk::Widget*> children = table_images->get_children();
 	int column = 4, line = 4;
@@ -370,7 +368,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCartes() {
 	for (auto* it : children) {
 		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
 
-			if (test->get_name_tiny_image() == "Images/white.jpg") {
+			if (test->get_name_tiny_image() == "white") {
 				
 				if (test->get_column() < column || test->get_line() < line) {
 					line = test->get_line();
@@ -385,7 +383,25 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCartes() {
 		column = -1;
 	}
 
-	std::cout << "final : " << " column " << column << " line " << line << std::endl;
+	//std::cout << "final : " << " column " << column << " line " << line << std::endl;
 
 	return std::make_tuple(column, line);
+}
+
+
+BoutonCarte* FenetreJeu::boutonFromName(const std::string name) {
+
+	std::cout << "name cherché : " << name << std::endl;
+
+	std::size_t i;
+	//std::vector<BoutonCarte*>::iterator it;
+	for (i = 0; i != allBoutonCartes.size(); i++) {
+		if (allBoutonCartes[i]->get_name_tiny_image() == name) {
+			//i = std::distance(allBoutonCartes, it);
+			break;
+		}
+	}
+
+	std::cout << "bouton name : " << allBoutonCartes[i]->get_name_tiny_image() << std::endl;
+	return allBoutonCartes[i];
 }

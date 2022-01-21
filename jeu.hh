@@ -84,9 +84,7 @@ public:
 
   void affichage_carte(const int id_carte); // permet l'affichage d'une carte ainsi que les modifications qui en découlent
 
-
   void demande_affichage_carte(const int id_carte); // demande de l'affichage d'une carte par le joueur (fonction qui renvoie un bool comme celles d'en-dessous plutôt non ?)
-
 
   void solution_enigme_valide(int id_carte_enigme, int val); // renvoie 1 si la réponse est bonne et 0 sinon (et modifications en adéquation)
 

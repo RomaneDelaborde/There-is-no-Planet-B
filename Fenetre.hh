@@ -49,11 +49,6 @@ class FenetreJeu: public Gtk::Window {
 
 		FenetreJeu();
 	
-		//passer les init en privé ?
-		void init_table_zones_texte();
-		void init_table_images();
-		void init_table_inventory();
-	
 		void afficherApropos();
 
 	
@@ -73,12 +68,23 @@ class FenetreJeu: public Gtk::Window {
 		void requestRepondreEnigme();
 		void requestCombinaison();
 
-		std::tuple<int, int> getFirstWhiteCartes();
+		BoutonCarte* boutonFromName(const std::string name);
+
+		std::tuple<int, int> getFirstWhiteCarte();
 
 	
 	private:
 
+		//passer les init en privé ?
+		void init_table_zones_texte();
+		void init_table_images();
+		void init_table_inventory();
+		void init_allBoutonCartes();
+
+
 		Jeu* Game;
+
+		std::vector<BoutonCarte*> allBoutonCartes;
 
 		BoutonTexte* superbouton;
 		BoutonTexte* bouton_combinaisons;
@@ -118,6 +124,7 @@ class FenetreJeu: public Gtk::Window {
 		Image retroviseur;
 		Image coffre_fort;
 		Image dialogue_patron;
+		Image voiture;
 
 		BoutonCarte bouton_0101;
 		BoutonCarte bouton_1201;
@@ -139,6 +146,7 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_retroviseur;
 		BoutonCarte bouton_coffre_fort;
 		BoutonCarte bouton_dialogue_patron;
+		BoutonCarte bouton_voiture;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;
