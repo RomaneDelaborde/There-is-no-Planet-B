@@ -17,6 +17,7 @@
 #include <gtkmm/label.h>
 #include <gtkmm/messagedialog.h>
 #include <gtkmm/aboutdialog.h>
+#include <gtkmm/separator.h>
 #include <string>
 #include <iostream>
 #include "Widgets.hh"
@@ -124,7 +125,6 @@ class FenetreJeu: public Gtk::Window {
 		Image inventory8;
  
 		Image about_image;
-		Image regles;
 		Image rules;
 	
 		Image annonce_radio;
@@ -247,4 +247,10 @@ class FenetreJeu: public Gtk::Window {
 		Gtk::Entry entry_id_enigme;
 		Gtk::Entry entry_reponse_enigme_l;
 		Gtk::Entry entry_carte_num;
+	
+		Gtk::Separator separator1;
+		Gtk::Separator separator2;
+		Gtk::Separator separator3;
+
+
 };

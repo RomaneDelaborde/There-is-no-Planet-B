@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   Carte regles("regles.jpeg",0);
   std::cout << "Nom de la carte : " << regles.get_nom_carte() << std::endl;
   std::cout << "Id de la carte : " << regles.get_id() << std::endl << std::endl;
-
+ 
   std::cout << "Nom de la carte : " << Carte("regles.jpeg",0).get_nom_carte() << std::endl;
   std::cout << "Id de la carte : " << Carte("regles.jpeg",0).get_id() << std::endl;
 
@@ -53,11 +53,11 @@ int main(int argc, char* argv[]) {
   */
 
   //Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
-  //std::cout << planete2.get_code_solution() << std::endl;
+  //std::cout << planete2.get_code_solution() << std::endl; 
 
-
+  
   //Jeu Game;
-
+ 
   Gtk::Main app(argc, argv);
 	
 	FenetreAccueil accueil("Images/galaxy.jpg");

@@ -19,7 +19,6 @@ BoutonCarte::BoutonCarte(Image& image, int c, int l) : Gtk::Button(), column_coo
 	set_can_focus(false);
 
 	name_tiny_image = split_name_image(image.get_name()); //"gaston"
-	std::cout << name_tiny_image << std::endl;
 	//ne pas zoomer sur les images blanches
 	if (name_tiny_image != "white" && name_tiny_image != "white_inventory") {
 		name_big_image = "Images/" + name_tiny_image + "_big.jpg";

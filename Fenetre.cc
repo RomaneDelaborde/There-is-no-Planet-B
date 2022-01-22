@@ -23,7 +23,7 @@ inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg
 inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), 
 inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
 inventory7("Images/white_inventory.jpg"), inventory8("Images/white_inventory.jpg"),
-about_image("Images/about.png"), regles("Images/regles.jpeg"), rules("Images/rules.png"),
+about_image("Images/about.png"), rules("Images/rules.png"),
 annonce_radio("Images/annonce_radio.jpg"),
 bibliotheque("Images/bibliotheque.jpg"),
 boite_chocolat("Images/boite_chocolat.jpg"),
@@ -112,12 +112,12 @@ bouton_porte_cachee_o(porte_cachee_o),
 bouton_porte_electronique(porte_electronique),
 bouton_revolver(revolver),
 bouton_ticket_dore_o(ticket_dore_o),
-combinaisons("Saisir une combinaison d'objets (au moins 2)"),
+combinaisons("Saisir une combinaison d'objets"),
 reponse_enigme("Saisir la réponse à une énigme"), 
 tirer_carte_1("Saisir le numéro de la carte à tirer"), 
 tirer_carte_2("(si vous en avez le droit)"), 
 objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), 
-reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
+reponse_enigme_l("réponse"), carte_num("n° carte"), separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() { //à l'initialisation
 	
 	std::cout << "entree constructeur" << std::endl;
  
@@ -127,7 +127,7 @@ reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	set_border_width(20);
 	set_position(Gtk::WIN_POS_CENTER);
 	
-	table_big = new Gtk::Table(3, 1);
+	table_big = new Gtk::Table(4, 1);
 	add(*table_big);
 	 
 	init_table_zones_texte();
@@ -173,7 +173,6 @@ void FenetreJeu::init_allBoutonCartes() {
 }
 
 void FenetreJeu::init_allBoutonObjets() {
-	std::cout << "objets" << std::endl;
 	allBoutonObjets.push_back(&bouton_boss_o);
 	allBoutonObjets.push_back(&bouton_certificat_o);
 	allBoutonObjets.push_back(&bouton_cesar);
@@ -185,47 +184,48 @@ void FenetreJeu::init_allBoutonObjets() {
 	allBoutonObjets.push_back(&bouton_porte_electronique);
 	allBoutonObjets.push_back(&bouton_revolver);
 	allBoutonObjets.push_back(&bouton_ticket_dore_o);
-	std::cout << "fin objets" << std::endl;
 }
 
 
 void FenetreJeu::init_table_zones_texte() {
-	table_zones_texte = new Gtk::Table(6, 9);
+	table_zones_texte = new Gtk::Table(7, 9);
 	table_big->attach(*table_zones_texte, 0, 1, 0, 1);
 	
-	table_zones_texte->attach(combinaisons, 0, 2, 0, 1);
+	table_zones_texte->attach(combinaisons, 1, 2, 0, 1, Gtk::FILL, Gtk::FILL, 0, 5);
 	table_zones_texte->attach(objet_1, 0, 1, 1, 2);
-	table_zones_texte->attach(entry_objet_1, 1, 2, 1, 2);
+	table_zones_texte->attach(entry_objet_1, 1, 2, 1, 2, Gtk::FILL, Gtk::FILL, 0, 5);
 	table_zones_texte->attach(objet_2, 0, 1, 2, 3);
 	table_zones_texte->attach(entry_objet_2, 1, 2, 2, 3);
-	table_zones_texte->attach(reponse_enigme, 2, 4, 0, 1);
+	table_zones_texte->attach(reponse_enigme, 3, 4, 0, 1, Gtk::FILL, Gtk::FILL, 0, 5);
 	table_zones_texte->attach(id_enigme, 2, 3, 1, 2);
-	table_zones_texte->attach(entry_id_enigme, 3, 4, 1, 2);
+	table_zones_texte->attach(entry_id_enigme, 3, 4, 1, 2, Gtk::FILL, Gtk::FILL, 0, 5);
 	table_zones_texte->attach(reponse_enigme_l, 2, 3, 2, 3);
 	table_zones_texte->attach(entry_reponse_enigme_l, 3, 4, 2, 3);
-	table_zones_texte->attach(tirer_carte_1, 4, 6, 0, 1);
-	table_zones_texte->attach(tirer_carte_2, 4, 6, 1, 2);
+	table_zones_texte->attach(tirer_carte_1, 5, 6, 0, 1);
+	table_zones_texte->attach(tirer_carte_2, 5, 6, 1, 2, Gtk::FILL, Gtk::FILL, 0, 5);
 	table_zones_texte->attach(carte_num, 4, 5, 2, 3);
 	table_zones_texte->attach(entry_carte_num, 5, 6, 2, 3);
 	
+	table_zones_texte->attach(separator2, 0, 9, 5, 6, Gtk::FILL, Gtk::FILL, 5, 20);
+	
 	bouton_about = new BoutonAccueil(about_image);
-	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_about, 8, 9, 0, 2, Gtk::SHRINK);
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherApropos));
 	
 	bouton_rules = new BoutonAccueil(rules);
-	table_zones_texte->attach(*bouton_rules, 8, 9, 0, 2, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_rules, 7, 8, 0, 2, Gtk::SHRINK);
 	bouton_rules->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherRegles));
 	
 	bouton_combinaisons = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_combinaisons, 1, 2, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_combinaisons, 1, 2, 4, 5,  Gtk::FILL, Gtk::FILL, 80, 5);
 	bouton_combinaisons->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCombinaison));
 	
 	bouton_enigme = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_enigme, 3, 4, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_enigme, 3, 4, 4, 5, Gtk::FILL, Gtk::FILL, 80, 5);
 	bouton_enigme->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestRepondreEnigme));
 	
 	bouton_carte = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_carte, 5, 6, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_carte, 5, 6, 4, 5, Gtk::FILL, Gtk::FILL, 80, 5);
 	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCarte));
 
 }
@@ -246,7 +246,9 @@ void FenetreJeu::init_table_images() {
 
 void FenetreJeu::init_table_inventory() {
 	table_inventory = new Gtk::Table(2, 8);
-	table_big->attach(*table_inventory, 0, 1, 2, 3);
+	table_big->attach(*table_inventory, 0, 1, 3, 4);
+	table_big->attach(separator3, 0, 1, 2, 3, Gtk::FILL, Gtk::FILL, 5, 20);
+
 	
 	table_inventory->attach(bouton_inventory1, 0, 1, 1, 2);
 	table_inventory->attach(bouton_inventory2, 1, 2, 1, 2);
