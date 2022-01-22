@@ -247,6 +247,12 @@ void Jeu::affichage_carte(const int id_carte) {
       _inventaire.push_back(id_carte);
       _fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
     }
+
+    // déclenchement arrivée du patron
+    if((id_carte==402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
+    {
+      affichage_carte(50);
+    }
     return;
   }
 
@@ -284,10 +290,19 @@ void Jeu::affichage_carte(const int id_carte) {
 
 
 void Jeu::demande_affichage_carte(const int id_carte) {
+
+  // si la carte zoom livres est affichée et que le joueur tente d'afficher une carte livre (qui n'existe pas ...)
+  if(_map_id[32]==1 && (id_carte==308 || id_carte==309 || id_carte==310 || id_carte==311 || id_carte==312 || id_carte==313)) // pas très joli ces conditions : moyen de faire ça plus condensé genre if id_carte is in LISTE ??
+  {
+    _fenetre.popupMessage("Cette carte n'est pas affichable, il pourrait potentiellement s'agir d'une réponse à une énigme ...", "Erreur");
+    return;
+  }
+
   if(!id_existe(id_carte)) {
     _fenetre.popupMessage("Ce numéro ne correspond à aucune carte...", "Erreur");
     return;
   }
+
   switch(_map_id[id_carte]) {
     case 1:
       _fenetre.popupMessage("La carte souhaitée est déjà affichée....", "Erreur");
