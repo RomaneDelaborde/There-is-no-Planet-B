@@ -347,7 +347,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
     return;
   }
 
-  // si au moins un des 2 objets doit être dans l'inventaire et qu'il n'y ait pas, ça ne marche pas
+  // si au moins un des 2 objets doit être dans l'inventaire et qu'il n'y est pas, ça ne marche pas
   if((objet(id_obj_1).get_est_objet_inventaire() && !std::count(_inventaire.begin(), _inventaire.end(), id_obj_1)) || (objet(id_obj_2).get_est_objet_inventaire() && !std::count(_inventaire.begin(), _inventaire.end(), id_obj_2)))
   {
     _fenetre.popupMessage("Au moins 1 des 2 objets ne se situe pas dans l'inventaire", "Erreur");
