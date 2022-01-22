@@ -39,6 +39,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
     _cartes_basiques[i].affichage_info_carte();
   }
 
+
   for(std::size_t i=0;i<_cartes_objets.size();i++)    // Affichage des informations sur les cartes objets
   {
     _cartes_objets[i].affichage_info_objet();
@@ -50,6 +51,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
   }
 
   */
+
 }
 
 
@@ -166,8 +168,8 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
       else // sinon si l'objet n'est pas combinable avec d'autres objets (ex: certificat)
       {
         _cartes_objets.push_back(Objet(nom_carte, id, est_objet_inventaire));
-        _id_cartes_objets.push_back(id);
       }
+      _id_cartes_objets.push_back(id);
     }
   }
   else {std::cout << "ERREUR : impossible d'ouvrir le fichier en lecture" << std::endl;}
@@ -238,7 +240,7 @@ bool Jeu::affichage_carte_autorise(const int id_carte) {
 }
 
 void Jeu::affichage_carte(const int id_carte) {
-  if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet (alors on l'ajuste juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
+  if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
   {
     if (objet(id_carte).get_est_objet_inventaire()) // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
     {
@@ -368,6 +370,3 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
   }
   else {_fenetre.popupMessage("Au moins 1 des 2 objets ne se situe pas dans l'inventaire", "Erreur");}
 }
-
-
-
