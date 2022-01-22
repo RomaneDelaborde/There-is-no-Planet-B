@@ -346,27 +346,32 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
 
     return;
   }
-  if(std::count(_inventaire.begin(), _inventaire.end(), id_obj_1) && std::count(_inventaire.begin(), _inventaire.end(), id_obj_2)) {
-    if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
-    {
-      if(id_obj_1!=203 || id_obj_2!=203) // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
-      {
-        affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
-      }
 
-      else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
-      {
-        if(id_existe(26)) // sécurité : carte 26 = carte cesar
-        {
-          if(_map_id[26]==1) // si le joueur a affiché la roue de césar i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
-          {
-            affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
-          }
-        }
-        else {_fenetre.popupMessage("Etes-vous certain d'avoir tout regardé ?", "Erreur");}
-      }
-    }
-    else {_fenetre.popupMessage("Les 2 objets ne sont pas combinables", "Erreur");}
+  // si au moins un des 2 objets doit être dans l'inventaire et qu'il n'y ait pas, ça ne marche pas
+  if((objet(id_obj_1).get_est_objet_inventaire() && !std::count(_inventaire.begin(), _inventaire.end(), id_obj_1)) || (objet(id_obj_2).get_est_objet_inventaire() && !std::count(_inventaire.begin(), _inventaire.end(), id_obj_2)))
+  {
+    _fenetre.popupMessage("Au moins 1 des 2 objets ne se situe pas dans l'inventaire", "Erreur");
+    return;
   }
-  else {_fenetre.popupMessage("Au moins 1 des 2 objets ne se situe pas dans l'inventaire", "Erreur");}
+
+  if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
+  {
+    if(id_obj_1!=203 || id_obj_2!=203) // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
+    {
+      affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+    }
+
+    else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
+    {
+      if(id_existe(26)) // sécurité : carte 26 = carte cesar
+      {
+        if(_map_id[26]==1) // si le joueur a affiché la roue de césar i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
+        {
+          affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+        }
+      }
+      else {_fenetre.popupMessage("Etes-vous certain d'avoir tout regardé ?", "Erreur");}
+    }
+  }
+    else {_fenetre.popupMessage("Les 2 objets ne sont pas combinables", "Erreur");}
 }
