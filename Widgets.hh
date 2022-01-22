@@ -22,12 +22,12 @@ class Image: public Gtk::Image {
 		Image(const std::string & file) : Gtk::Image(file) {name = file;}
 		Image() : Gtk::Image() {}
 		Image& operator=(const Image& image);
-		std::string get_name() {return name;}
+		std::string get_name() const {return name;}
 		
 	private:
 		std::string name;
-	
 };
+
 
 class BoutonTexte: public Gtk::Button {
 		
@@ -41,8 +41,8 @@ class BoutonCarte: public Gtk::Button {
 		BoutonCarte(Image& image, int c = -1, int l = -1);
 		void zoom_Image();
 		std::string get_name_tiny_image() {return name_tiny_image;};
-		int get_column() {return column_coordinate;};
-		int get_line() {return line_coordinate;};
+		int get_column() const {return column_coordinate;};
+		int get_line() const {return line_coordinate;};
 		void set_column(int col) {column_coordinate = col;};
 		void set_line(int line) {line_coordinate = line;};
 

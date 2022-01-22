@@ -4,7 +4,7 @@
 // 
 //  Created by Maëlle Jolivet on 08/01/2022.
 //  
-  
+   
 #include "Widgets.hh"
 
 std::string split_name_image(std::string name) {

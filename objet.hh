@@ -13,8 +13,8 @@ private:
 public:
 
   // Constructeurs avec héritage du constructeur de la classe mère
-  Objet(std::string nom_carte, int id, bool est_objet_inventaire):Carte(nom_carte,id), _est_objet_inventaire(est_objet_inventaire){}; // certains objets (ticket_dore_o, certificat, ...) ne se combinent avec rien
-  Objet(std::string nom_carte, int id, std::map<int, int> id_objets_combinables, bool est_objet_inventaire): Carte(nom_carte, id), _id_objets_combinables(id_objets_combinables), _est_objet_inventaire(est_objet_inventaire){};
+  Objet(std::string nom_carte, int id, bool est_objet_inventaire):Carte(nom_carte,id), _est_objet_inventaire(est_objet_inventaire) {}; // certains objets (ticket_dore_o, certificat, ...) ne se combinent avec rien
+  Objet(std::string nom_carte, int id, std::map<int, int> id_objets_combinables, bool est_objet_inventaire): Carte(nom_carte, id), _id_objets_combinables(id_objets_combinables), _est_objet_inventaire(est_objet_inventaire) {};
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 

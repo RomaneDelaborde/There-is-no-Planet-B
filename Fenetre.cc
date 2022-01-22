@@ -8,25 +8,10 @@
 #include "Fenetre.hh"
 #include "jeu.hh"
  
-
-//bool FenetreJeu::retroviseurChange = false;
-
 //fonction venant de stackoverflow
 bool is_number(const std::string& s) {
     return !s.empty() && std::find_if(s.begin(), 
         s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
-}
-
-
-FenetreAccueil::FenetreAccueil() : galaxy("Images/galaxy.jpg"), bouton_galaxy(galaxy) {
-	set_title("There is no Planet B");
-	set_position(Gtk::WIN_POS_CENTER);
-	
-	bouton_galaxy.signal_clicked().connect(sigc::mem_fun(*this, &FenetreAccueil::hide));
-
-	add(bouton_galaxy);
-	
-	show_all();
 }
 
  
@@ -38,7 +23,7 @@ inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg
 inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), 
 inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
 inventory7("Images/white_inventory.jpg"), inventory8("Images/white_inventory.jpg"),
-about_image("Images/about.png"), regles("Images/regles.jpeg"),
+about_image("Images/about.png"), regles("Images/regles.jpeg"), rules("Images/rules.png"),
 annonce_radio("Images/annonce_radio.jpg"),
 bibliotheque("Images/bibliotheque.jpg"),
 boite_chocolat("Images/boite_chocolat.jpg"),
@@ -205,7 +190,7 @@ void FenetreJeu::init_allBoutonObjets() {
 
 
 void FenetreJeu::init_table_zones_texte() {
-	table_zones_texte = new Gtk::Table(6, 8);
+	table_zones_texte = new Gtk::Table(6, 9);
 	table_big->attach(*table_zones_texte, 0, 1, 0, 1);
 	
 	table_zones_texte->attach(combinaisons, 0, 2, 0, 1);
@@ -227,16 +212,20 @@ void FenetreJeu::init_table_zones_texte() {
 	table_zones_texte->attach(*bouton_about, 6, 8, 0, 2, Gtk::SHRINK);
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherApropos));
 	
+	bouton_rules = new BoutonAccueil(rules);
+	table_zones_texte->attach(*bouton_rules, 8, 9, 0, 2, Gtk::SHRINK);
+	bouton_rules->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherRegles));
+	
 	bouton_combinaisons = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_combinaisons, 0, 1, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_combinaisons, 1, 2, 4, 5, Gtk::SHRINK);
 	bouton_combinaisons->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCombinaison));
 	
 	bouton_enigme = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_enigme, 2, 3, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_enigme, 3, 4, 4, 5, Gtk::SHRINK);
 	bouton_enigme->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestRepondreEnigme));
 	
 	bouton_carte = new BoutonTexte("Envoyer");
-	table_zones_texte->attach(*bouton_carte, 4, 5, 4, 5, Gtk::SHRINK);
+	table_zones_texte->attach(*bouton_carte, 5, 6, 4, 5, Gtk::SHRINK);
 	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCarte));
 
 }
@@ -289,6 +278,11 @@ void FenetreJeu::afficherApropos() {
 	dialogue.set_authors(listeAuteurs);
 	dialogue.set_position(Gtk::WIN_POS_CENTER);
 	dialogue.run();
+}
+
+void FenetreJeu::afficherRegles() {
+	FenetreAccueil regles("Images/regles.jpeg");
+	Gtk::Main::run(regles);
 }
 
 

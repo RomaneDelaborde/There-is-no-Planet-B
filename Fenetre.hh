@@ -31,7 +31,7 @@ class Jeu;
 class FenetreAccueil: public Gtk::Window {
 	
 	public:
-		FenetreAccueil();
+		FenetreAccueil(const std::string image) : galaxy(image), bouton_galaxy(galaxy) {set_title("There is no Planet B"); set_position(Gtk::WIN_POS_CENTER); bouton_galaxy.signal_clicked().connect(sigc::mem_fun(*this, &FenetreAccueil::hide)); add(bouton_galaxy); show_all();};
 	
 	private:
 		Image galaxy;
@@ -48,7 +48,7 @@ class FenetreJeu: public Gtk::Window {
 		FenetreJeu();
 	
 		void afficherApropos();
-
+		void afficherRegles();
 	
 		std::string get_entry_objet_1() {return entry_objet_1.get_text();}
 		std::string get_entry_objet_2() {return entry_objet_2.get_text();}
@@ -69,7 +69,6 @@ class FenetreJeu: public Gtk::Window {
 
 		BoutonCarte* boutonCarteFromName(const std::string name);
 		BoutonCarte* boutonObjetFromName(const std::string name);
-
 
 		std::tuple<int, int> getFirstWhiteCarte();
 		std::tuple<int, int> getFirstWhiteInventory();
@@ -95,6 +94,7 @@ class FenetreJeu: public Gtk::Window {
 		BoutonTexte* bouton_carte;
 
 		BoutonAccueil* bouton_about;
+		BoutonAccueil* bouton_rules;
 		
 		Gtk::Table* table_big; //Grand tableau
 		Gtk::Table* table_zones_texte; //tableau du haut, pour les zones de texte et d'entrée utilisateur
@@ -125,6 +125,7 @@ class FenetreJeu: public Gtk::Window {
  
 		Image about_image;
 		Image regles;
+		Image rules;
 	
 		Image annonce_radio;
 		Image bibliotheque;
