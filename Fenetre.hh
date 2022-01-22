@@ -22,7 +22,6 @@
 #include "Widgets.hh"
 
 #include <tuple>
-//#include "jeu.hh"
 
 bool is_number(const std::string& s);
 
@@ -37,7 +36,6 @@ class FenetreAccueil: public Gtk::Window {
 	private:
 		Image galaxy;
 		BoutonAccueil bouton_galaxy;
-	
 };
 
 
@@ -81,7 +79,6 @@ class FenetreJeu: public Gtk::Window {
 		void init_table_inventory();
 		void init_allBoutonCartes();
 
-
 		Jeu* Game;
 
 		std::vector<BoutonCarte*> allBoutonCartes;
@@ -93,7 +90,6 @@ class FenetreJeu: public Gtk::Window {
 
 		BoutonAccueil* bouton_about;
 		
-		//Utiles
 		Gtk::Table* table_big; //Grand tableau
 		Gtk::Table* table_zones_texte; //tableau du haut, pour les zones de texte et d'entrée utilisateur
 		Gtk::Table* table_images; //tableau du milieu, pour les images en taille petite
