@@ -59,7 +59,7 @@ class FenetreJeu: public Gtk::Window {
 		~FenetreJeu();
 	
 		void popupMessage(const std::string message, const std::string title);
-		void changerWhitetoRetroviseur();
+		//void changerWhitetoRetroviseur();
 		void remplacerCartetoWhite(BoutonCarte & bouton);
 		void remplacerWhitetoCarte(BoutonCarte & bouton);
 		void requestCarte();
@@ -73,7 +73,7 @@ class FenetreJeu: public Gtk::Window {
 	
 	private:
 
-		//passer les init en privé ?
+		//passer les init en privé
 		void init_table_zones_texte();
 		void init_table_images();
 		void init_table_inventory();
@@ -83,7 +83,7 @@ class FenetreJeu: public Gtk::Window {
 
 		std::vector<BoutonCarte*> allBoutonCartes;
 
-		BoutonTexte* superbouton;
+		//BoutonTexte* superbouton;
 		BoutonTexte* bouton_combinaisons;
 		BoutonTexte* bouton_enigme;
 		BoutonTexte* bouton_carte;

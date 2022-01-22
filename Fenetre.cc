@@ -9,7 +9,7 @@
 #include "jeu.hh"
  
 
-bool FenetreJeu::retroviseurChange = false;
+//bool FenetreJeu::retroviseurChange = false;
 
 //fonction venant de stackoverflow
 bool is_number(const std::string& s) {
@@ -127,9 +127,9 @@ reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	init_table_inventory();
 	init_allBoutonCartes();
 
-	superbouton = new BoutonTexte("Super bouton");
-	table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
-	superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
+	//superbouton = new BoutonTexte("Super bouton");
+	//table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
+	//superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
 	
 	show_all();
 }
@@ -165,8 +165,6 @@ void FenetreJeu::init_allBoutonCartes() {
 	allBoutonCartes.push_back(&bouton_tiroir);
 	allBoutonCartes.push_back(&bouton_voiture);
 	allBoutonCartes.push_back(&bouton_zoom_livres);
-
-	boutonFromName("dialogue_patron");
 }
 
 void FenetreJeu::init_table_zones_texte() {
@@ -256,21 +254,17 @@ void FenetreJeu::afficherApropos() {
 	dialogue.run();
 }
 
-
+/*
 void FenetreJeu::changerWhitetoRetroviseur() {
 	if (retroviseurChange == false) {
-		//table_images->remove(bouton_0101);
-		//table_images->attach(bouton_dialogue_patron, 0, 1, 0, 1);
 		remplacerWhitetoCarte(bouton_dialogue_patron);
 		retroviseurChange = true;
 	}
 	else {
-		//table_images->remove(bouton_retroviseur);
-		//table_images->attach(bouton_0101, 0, 1, 0, 1);
 		remplacerCartetoWhite(bouton_dialogue_patron);
 		retroviseurChange = false;
 	}
-}
+}*/
 
 void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 	int col = bouton.get_column(), line = bouton.get_line();
@@ -377,7 +371,7 @@ void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 }
 
 FenetreJeu::~FenetreJeu() {
-	delete superbouton;
+	//delete superbouton;
 	delete bouton_about;
 	delete bouton_combinaisons;
 	delete bouton_enigme;
@@ -392,13 +386,10 @@ FenetreJeu::~FenetreJeu() {
 void FenetreJeu::requestCarte() {
 
 	if (is_number(entry_carte_num.get_text())) {
-		//appeler fct qui demande a afficher une carte
 		Game->demande_affichage_carte(std::stoi(entry_carte_num.get_text()));
 		return;
 	}
-	else {
-		popupMessage("Vous n'avez pas saisi un nombre entier", "Erreur");
-	}
+	else {popupMessage("Vous n'avez pas saisi un nombre entier", "Erreur");}
 }
 
 
@@ -409,14 +400,9 @@ void FenetreJeu::requestRepondreEnigme() {
 			Game->solution_enigme_valide(std::stoi(entry_id_enigme.get_text()), std::stoi(entry_reponse_enigme_l.get_text()));
 			return;
 		}
-		else {
-			popupMessage("Vous n'avez pas saisi un nombre entier pour la réponse", "Erreur");
-
-		}
+		else {popupMessage("Vous n'avez pas saisi un nombre entier pour la réponse", "Erreur");}
 	}
-	else {
-		popupMessage("Vous n'avez pas saisi un nombre entier pour l'énigme", "Erreur");
-	}
+	else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'énigme", "Erreur");}
 }
 
 
@@ -427,14 +413,9 @@ void FenetreJeu::requestCombinaison() {
 			Game->combinaison_valide(std::stoi(entry_objet_1.get_text()), std::stoi(entry_objet_2.get_text()));
 			return;
 		}
-		else {
-			popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 2", "Erreur");
-
-		}
+		else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 2", "Erreur");}
 	}
-	else {
-		popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 1", "Erreur");
-	}
+	else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 1", "Erreur");}
 }
 
 
@@ -463,25 +444,16 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
 		column = -1;
 	}
 
-	//std::cout << "final : " << " column " << column << " line " << line << std::endl;
-
 	return std::make_tuple(column, line);
 }
 
 
 BoutonCarte* FenetreJeu::boutonFromName(const std::string name) {
-
-	std::cout << "name cherché : " << name << std::endl;
-
 	std::size_t i;
-	//std::vector<BoutonCarte*>::iterator it;
 	for (i = 0; i != allBoutonCartes.size(); i++) {
 		if (allBoutonCartes[i]->get_name_tiny_image() == name) {
-			//i = std::distance(allBoutonCartes, it);
 			break;
 		}
 	}
-
-	std::cout << "bouton name : " << allBoutonCartes[i]->get_name_tiny_image() << std::endl;
 	return allBoutonCartes[i];
 }
