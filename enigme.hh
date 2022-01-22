@@ -4,7 +4,7 @@
 #include "carte.hh"
 
 
-class Enigme : public Carte{
+class Enigme : public Carte {
 
 private:
   // 1 énigme = 1 carte (où il faut "rentrer" le code) donc pas besoin de _id_enigme
@@ -28,7 +28,7 @@ public:
   int get_id_carte_debloquee() const {return _id_carte_debloquee;};
 
   // Méthodes
-  void affichage_info_enigme() const;
+  void affichage_info_carte() const;
   bool code_correct(int val); // val est l'entier proposé par le joueur comme réponse à l'énigme : renvoie 0 si le joueur a faux et 1 sinon
 
   // Méthodes virtuelles communes : calcul_code_solution ?

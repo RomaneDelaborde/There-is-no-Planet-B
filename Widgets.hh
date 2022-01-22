@@ -1,10 +1,3 @@
-//
-//  Widgets.hh
-//  
-//
-//  Created by Maëlle Jolivet on 08/01/2022.
-//
-
 #pragma once
 
 #include <gtkmm/main.h>
@@ -28,19 +21,30 @@ class Image: public Gtk::Image {
 		std::string name;
 };
 
-
-class BoutonTexte: public Gtk::Button {
-		
+class Bouton : public Gtk::Button {
+	protected:
+		std::string name;
+	
 	public:
-		BoutonTexte(const Glib::ustring& label, bool mnemonic=false) : Gtk::Button (label, false) {set_can_focus(false);}
+		Bouton(const Glib::ustring& label, bool mnemonic = false) : Gtk::Button(label, false), name("") {set_can_focus(false);}
+		Bouton(Image& image) : Gtk::Button(), name(image.get_name()) {set_image(image); set_can_focus(false);}
+		virtual std::string get_name() const = 0;
 };
 
 
-class BoutonCarte: public Gtk::Button {
+class BoutonTexte: public Bouton {
+	public:
+		BoutonTexte(const Glib::ustring& label) : Bouton(label) {};
+		std::string get_name() const {return "no name";};
+};
+
+
+class BoutonCarte: public Bouton {
 	public:
 		BoutonCarte(Image& image, int c = -1, int l = -1);
-		void zoom_Image();
-		std::string get_name_tiny_image() {return name_tiny_image;};
+	
+		void zoom_Image() const;
+		std::string get_name() const {return name_tiny_image;};
 		int get_column() const {return column_coordinate;};
 		int get_line() const {return line_coordinate;};
 		void set_column(int col) {column_coordinate = col;};
@@ -55,8 +59,28 @@ class BoutonCarte: public Gtk::Button {
 		int line_coordinate;
 };
 
-class BoutonAccueil: public Gtk::Button {
+class BoutonAccueil: public Bouton {
 	public:
-		BoutonAccueil(Image& image);
-		
+		BoutonAccueil(Image& image) : Bouton(image) {set_relief(Gtk::RELIEF_NONE);};
+		std::string get_name() const {return name;};
 };
+
+/*
+class Fin {
+protected:
+	
+	
+	
+};
+
+
+class FinGagnante : public Fin {
+	
+	
+};
+
+
+class FinPerdante : public Fin {
+	
+	
+};*/

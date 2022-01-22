@@ -1,8 +1,8 @@
 #include "objet.hh"
 
-void Objet::affichage_info_objet() const {
+void Objet::affichage_info_carte() const {
   std::cout << "Nom carte : " << _nom_carte << std::endl;
-  std::cout << "Id : " << _id << std::endl;
+  std::cout << "Id : " << _id << std::endl; 
 
 
   //std::map<int,int>::iterator iter = _id_objets_combinables.begin();

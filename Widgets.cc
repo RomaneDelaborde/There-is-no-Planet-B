@@ -1,23 +1,13 @@
-//
-//  Widgets.cpp
-//  
-// 
-//  Created by Maëlle Jolivet on 08/01/2022.
-//  
-   
 #include "Widgets.hh"
 
 std::string split_name_image(std::string name) {
 	std::string result = name.substr(0, name.find('.'));
 	result.erase(0, result.find('/') + 1);
 	return result;
-}
+}   
 
-BoutonCarte::BoutonCarte(Image& image, int c, int l) : Gtk::Button(), column_coordinate(c), line_coordinate(l) {
-	set_image(image);
+BoutonCarte::BoutonCarte(Image& image, int c, int l) : Bouton(image), column_coordinate(c), line_coordinate(l) {
 	set_relief(Gtk::RELIEF_NONE);
-	set_can_focus(false);
-
 	name_tiny_image = split_name_image(image.get_name()); //"gaston"
 	//ne pas zoomer sur les images blanches
 	if (name_tiny_image != "white" && name_tiny_image != "white_inventory") {
@@ -26,13 +16,7 @@ BoutonCarte::BoutonCarte(Image& image, int c, int l) : Gtk::Button(), column_coo
 	}
 }
 
-BoutonAccueil::BoutonAccueil(Image& image) : Gtk::Button() {
-	set_image(image);
-	set_relief(Gtk::RELIEF_NONE);
-	set_can_focus(false);
-}
-
-void BoutonCarte::zoom_Image() {
+void BoutonCarte::zoom_Image() const {
 	//ne pas zoomer sur les images blanches
 	if (name_tiny_image != "white" && name_tiny_image != "white_inventory") {
 		Gtk::Window fenetre_temp;
@@ -50,4 +34,5 @@ Image& Image::operator=(const Image& image) {
 	name = split_name_image(image.name);
 	return *this;
 }
+ 
  

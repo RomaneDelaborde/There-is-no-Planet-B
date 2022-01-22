@@ -23,6 +23,6 @@ public:
   bool get_est_objet_inventaire() const {return _est_objet_inventaire;};
 
   // Méthodes
-  void affichage_info_objet() const;
+  void affichage_info_carte() const;
   bool id_obj_est_combinable(int id_obj) const; // renvoie 0 si id_obj n'est pas combinable avec l'objet et 1 sinon
 };

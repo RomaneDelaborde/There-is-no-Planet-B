@@ -34,9 +34,9 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
   /*
   for (std::size_t i = 0; i < _cartes_basiques.size(); i++) {_cartes_basiques[i].affichage_info_carte();} // Affichage des informations sur les cartes basiques
 
-  for (std::size_t i = 0; i < _cartes_objets.size(); i++) {_cartes_objets[i].affichage_info_objet();}  // Affichage des informations sur les cartes objets
+  for (std::size_t i = 0; i < _cartes_objets.size(); i++) {_cartes_objets[i].affichage_info_carte();}  // Affichage des informations sur les cartes objets
  
-  for (std::size_t i = 0; i < _cartes_enigmes.size(); i++) {_cartes_enigmes[i].affichage_info_enigme();}  // Affichage des informations sur les cartes enigmes
+  for (std::size_t i = 0; i < _cartes_enigmes.size(); i++) {_cartes_enigmes[i].affichage_info_carte();}  // Affichage des informations sur les cartes enigmes
   */
 
 }

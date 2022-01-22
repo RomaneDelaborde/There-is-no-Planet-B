@@ -41,8 +41,8 @@ int main(int argc, char* argv[]) {
   std::cout << planete.get_chaine << std::endl;
   std::cout << planete.get_code_solution() << std::endl<< std::endl;
 
-  */
-
+  */ 
+ 
   /*
   Jeu test; // Jeu test(); faux car il déclare une fonction
   std::cout << test.solution_enigme_valide(32, 311) << std::endl; // true
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 
   //Enigme3 planete2("coffre_fort",45,{50},5,46, "VTJSUNB-B");
   //std::cout << planete2.get_code_solution() << std::endl; 
-
+ 
   
   //Jeu Game;
  
@@ -62,9 +62,11 @@ int main(int argc, char* argv[]) {
 	
 	FenetreAccueil accueil("Images/galaxy.jpg");
 	Gtk::Main::run(accueil);
-	
+	 
 	FenetreAccueil regles("Images/regles.jpeg");
 	Gtk::Main::run(regles);
+	
+	std::cout << "fdsdff" << std::endl;
 
   FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur
   Gtk::Main::run(fenetre);

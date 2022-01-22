@@ -5,7 +5,7 @@
 #include "enigme.hh"
 
 
-class Enigme2 : public Enigme{ // énigme avec le livre de Roald Dahl
+class Enigme2 : public Enigme { // énigme avec le livre de Roald Dahl
 
 private:
   std::map<char, int> _alphabet_indices; // map pour ne pas balayer l'alphabet à chaque fois qu'on cherche l'indice d'une lettre
@@ -16,7 +16,7 @@ private:
 
 public:
   // Constructeur
-  Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee):Enigme(nom_carte, id, id_cartes_kick, nb_essais, code_solution, id_carte_debloquee){};
+  Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee): Enigme(nom_carte, id, id_cartes_kick, nb_essais, code_solution, id_carte_debloquee) {};
   Enigme2(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee, std::string phrase);
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
@@ -27,7 +27,5 @@ public:
 
   // Méthodes
   void codage_jules_cesar(int decalage, bool sens_decalage); // permet de coder la _phrase passée dans le constructeur par l'utilisateur
-
-
 
 };

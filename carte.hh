@@ -24,7 +24,7 @@ class Carte {
 	  Carte(std::string nom_carte, int id, std::vector<int> id_cartes_kick): _nom_carte(nom_carte), _id(id), _id_cartes_kick(id_cartes_kick) {}; // pour la classe fille Enigme
 
 	  // Destructeur
-	  ~Carte(){}; // vide
+	  virtual ~Carte() {};
 
 	  // Getters
 	  std::string get_nom_carte() const {return _nom_carte;};
@@ -34,6 +34,6 @@ class Carte {
 	  int get_id_carte_autre_choix() const {return _id_carte_autre_choix;};
 
 	  // Méthodes
-	  void affichage_info_carte() const; // permet l'affichage des informations d'une carte basique (i.e. une carte qui ne se débloque ni par résolution d'énigme ni par combinaison de 2 objets)
+	  virtual void affichage_info_carte() const; // affichage des informations d'une carte basique (i.e. une carte qui ne se débloque ni par résolution d'énigme ni par combinaison de 2 objets)
 
 };

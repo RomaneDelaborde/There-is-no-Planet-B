@@ -1,12 +1,5 @@
-//
-//  Fenetre.cpp
-//  
-//
-//  Created by Maëlle Jolivet on 29/12/2021.
-//
-
 #include "Fenetre.hh"
-#include "jeu.hh"
+#include "jeu.hh" 
  
 //fonction venant de stackoverflow
 bool is_number(const std::string& s) {
@@ -15,109 +8,47 @@ bool is_number(const std::string& s) {
 }
 
  
-FenetreJeu::FenetreJeu() : 
-white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"), 
-white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"), 
-white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), 
-inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), 
-inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), 
-inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
-inventory7("Images/white_inventory.jpg"), inventory8("Images/white_inventory.jpg"),
-about_image("Images/about.png"), rules("Images/rules.png"),
-annonce_radio("Images/annonce_radio.jpg"),
-bibliotheque("Images/bibliotheque.jpg"),
-boite_chocolat("Images/boite_chocolat.jpg"),
-boite_gants("Images/boite_gants.jpg"),
-boite_outils("Images/boite_outils.jpg"),
-boss_assomme("Images/boss_assomme.jpg"),
-boss_enerve("Images/boss_enerve.jpg"),
-boss_mort("Images/boss_mort.jpg"),
-bureau("Images/bureau.jpg"),
-certificat("Images/certificat.jpg"),
-coffre_fort("Images/coffre_fort.jpg"),
-dessin_mur("Images/dessin_mur.jpg"),
-dessin_recto("Images/dessin_recto.jpg"),
-dessin_sol("Images/dessin_sol.jpg"),
-dessin_verso("Images/dessin_verso.jpg"),
-dialogue_patron("Images/dialogue_patron.jpg"),
-frequences("Images/frequences.jpg"),
-garage("Images/garage.jpg"),
-non_revelation("Images/non_revelation.jpg"),
-planetes("Images/planetes.jpg"),
-porte_cachee("Images/porte_cachee.jpg"),
-pressing("Images/pressing.jpg"),
-radio("Images/radio.jpg"),
-retroviseur("Images/retroviseur.jpg"),
-revelation("Images/revelation.jpg"),
-table_chevet("Images/table_chevet.jpg"),
-ticket_dore("Images/ticket_dore.jpg"),
-tiroir("Images/tiroir.jpg"),
-voiture("Images/voiture.jpg"),
-zoom_livres("Images/zoom_livres.jpg"),
-boss_o("Images/boss_o.jpg"),
-certificat_o("Images/certificat_o.jpg"),
-cesar("Images/cesar.jpg"),
-epingle_cheveux("Images/epingle_cheveux.jpg"),
-morceau1("Images/morceau1.jpg"),
-morceau2("Images/morceau2.jpg"),
-pied_biche("Images/pied_biche.jpg"),
-porte_cachee_o("Images/porte_cachee_o.jpg"),
-porte_electronique("Images/porte_electronique.jpg"),
-revolver("Images/revolver.jpg"),
-ticket_dore_o("Images/ticket_dore_o.jpg"),
-bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0),
-bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1), 
-bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1, 0, 1),
-bouton_inventory2(inventory2, 1, 1), bouton_inventory3(inventory3, 2, 1),
-bouton_inventory4(inventory4, 3, 1), bouton_inventory5(inventory5, 4, 1),
-bouton_inventory6(inventory6, 5, 1), bouton_inventory7(inventory7, 6, 1), bouton_inventory8(inventory8, 7, 1),
-bouton_annonce_radio(annonce_radio),
-bouton_bibliotheque(bibliotheque),
-bouton_boite_chocolat(boite_chocolat),
-bouton_boite_gants(boite_gants),
-bouton_boite_outils(boite_outils),
-bouton_boss_assomme(boss_assomme),
-bouton_boss_enerve(boss_enerve),
-bouton_boss_mort(boss_mort),
-bouton_bureau(bureau),
-bouton_certificat(certificat),
-bouton_coffre_fort(coffre_fort),
-bouton_dessin_mur(dessin_mur),
-bouton_dessin_recto(dessin_recto),
-bouton_dessin_sol(dessin_sol),
-bouton_dessin_verso(dessin_verso),
-bouton_dialogue_patron(dialogue_patron),
-bouton_frequences(frequences),
-bouton_garage(garage),
-bouton_non_revelation(non_revelation),
-bouton_planetes(planetes),
-bouton_porte_cachee(porte_cachee),
-bouton_pressing(pressing),
-bouton_radio(radio),
-bouton_retroviseur(retroviseur),
-bouton_revelation(revelation),
-bouton_table_chevet(table_chevet),
-bouton_ticket_dore(ticket_dore),
-bouton_tiroir(tiroir),
-bouton_voiture(voiture),
-bouton_zoom_livres(zoom_livres),
-bouton_boss_o(boss_o),
-bouton_certificat_o(certificat_o),
-bouton_cesar(cesar),
-bouton_epingle_cheveux(epingle_cheveux),
-bouton_morceau1(morceau1),
-bouton_morceau2(morceau2),
-bouton_pied_biche(pied_biche),
-bouton_porte_cachee_o(porte_cachee_o),
-bouton_porte_electronique(porte_electronique),
-bouton_revolver(revolver),
-bouton_ticket_dore_o(ticket_dore_o),
-combinaisons("Saisir une combinaison d'objets"),
-reponse_enigme("Saisir la réponse à une énigme"), 
-tirer_carte_1("Saisir le numéro de la carte à tirer"), 
-tirer_carte_2("(si vous en avez le droit)"), 
-objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), 
-reponse_enigme_l("réponse"), carte_num("n° carte"), separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() { //à l'initialisation
+FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"),
+	white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"),
+	white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), inventory1("Images/white_inventory.jpg"),
+	inventory2("Images/white_inventory.jpg"), inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"),
+	inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), inventory7("Images/white_inventory.jpg"),
+	inventory8("Images/white_inventory.jpg"), about_image("Images/about.png"), rules("Images/rules.png"),
+	annonce_radio("Images/annonce_radio.jpg"), bibliotheque("Images/bibliotheque.jpg"), boite_chocolat("Images/boite_chocolat.jpg"),
+	boite_gants("Images/boite_gants.jpg"), boite_outils("Images/boite_outils.jpg"), boss_assomme("Images/boss_assomme.jpg"),
+	boss_enerve("Images/boss_enerve.jpg"), boss_mort("Images/boss_mort.jpg"), bureau("Images/bureau.jpg"),
+	certificat("Images/certificat.jpg"), coffre_fort("Images/coffre_fort.jpg"), dessin_mur("Images/dessin_mur.jpg"),
+	dessin_recto("Images/dessin_recto.jpg"), dessin_sol("Images/dessin_sol.jpg"), dessin_verso("Images/dessin_verso.jpg"),
+	dialogue_patron("Images/dialogue_patron.jpg"), frequences("Images/frequences.jpg"), garage("Images/garage.jpg"),
+	non_revelation("Images/non_revelation.jpg"), planetes("Images/planetes.jpg"), porte_cachee("Images/porte_cachee.jpg"),
+	pressing("Images/pressing.jpg"), radio("Images/radio.jpg"), retroviseur("Images/retroviseur.jpg"),
+	revelation("Images/revelation.jpg"), table_chevet("Images/table_chevet.jpg"), ticket_dore("Images/ticket_dore.jpg"),
+	tiroir("Images/tiroir.jpg"), voiture("Images/voiture.jpg"), zoom_livres("Images/zoom_livres.jpg"),
+	boss_o("Images/boss_o.jpg"), certificat_o("Images/certificat_o.jpg"), cesar("Images/cesar.jpg"),
+	epingle_cheveux("Images/epingle_cheveux.jpg"), morceau1("Images/morceau1.jpg"), morceau2("Images/morceau2.jpg"),
+	pied_biche("Images/pied_biche.jpg"), porte_cachee_o("Images/porte_cachee_o.jpg"), porte_electronique("Images/porte_electronique.jpg"),
+	revolver("Images/revolver.jpg"), ticket_dore_o("Images/ticket_dore_o.jpg"),
+	bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0),
+	bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1),
+	bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1, 0, 1),
+	bouton_inventory2(inventory2, 1, 1), bouton_inventory3(inventory3, 2, 1), bouton_inventory4(inventory4, 3, 1),
+	bouton_inventory5(inventory5, 4, 1), bouton_inventory6(inventory6, 5, 1), bouton_inventory7(inventory7, 6, 1),
+	bouton_inventory8(inventory8, 7, 1), bouton_annonce_radio(annonce_radio), bouton_bibliotheque(bibliotheque),
+	bouton_boite_chocolat(boite_chocolat), bouton_boite_gants(boite_gants), bouton_boite_outils(boite_outils),
+	bouton_boss_assomme(boss_assomme), bouton_boss_enerve(boss_enerve), bouton_boss_mort(boss_mort),
+	bouton_bureau(bureau), bouton_certificat(certificat), bouton_coffre_fort(coffre_fort), bouton_dessin_mur(dessin_mur),
+	bouton_dessin_recto(dessin_recto), bouton_dessin_sol(dessin_sol), bouton_dessin_verso(dessin_verso),
+	bouton_dialogue_patron(dialogue_patron), bouton_frequences(frequences), bouton_garage(garage),
+	bouton_non_revelation(non_revelation), bouton_planetes(planetes), bouton_porte_cachee(porte_cachee), bouton_pressing(pressing),
+	bouton_radio(radio), bouton_retroviseur(retroviseur), bouton_revelation(revelation), bouton_table_chevet(table_chevet),
+	bouton_ticket_dore(ticket_dore), bouton_tiroir(tiroir), bouton_voiture(voiture), bouton_zoom_livres(zoom_livres),
+	bouton_boss_o(boss_o), bouton_certificat_o(certificat_o), bouton_cesar(cesar), bouton_epingle_cheveux(epingle_cheveux),
+	bouton_morceau1(morceau1), bouton_morceau2(morceau2), bouton_pied_biche(pied_biche), bouton_porte_cachee_o(porte_cachee_o),
+	bouton_porte_electronique(porte_electronique), bouton_revolver(revolver), bouton_ticket_dore_o(ticket_dore_o),
+	combinaisons("Saisir une combinaison d'objets"), reponse_enigme("Saisir la réponse à une énigme"),
+	tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"),
+	objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
+	separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() { //à l'initialisation
 	
 	std::cout << "entree constructeur" << std::endl;
  
@@ -169,9 +100,9 @@ void FenetreJeu::init_allBoutonCartes() {
 	allBoutonCartes.push_back(&bouton_ticket_dore);
 	allBoutonCartes.push_back(&bouton_tiroir);
 	allBoutonCartes.push_back(&bouton_voiture);
-	allBoutonCartes.push_back(&bouton_zoom_livres);
+	allBoutonCartes.push_back(&bouton_zoom_livres); 
 }
-
+ 
 void FenetreJeu::init_allBoutonObjets() {
 	allBoutonObjets.push_back(&bouton_boss_o);
 	allBoutonObjets.push_back(&bouton_certificat_o);
@@ -495,7 +426,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
 	for (auto* it : children) {
 		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
 
-			if (test->get_name_tiny_image() == "white") {
+			if (test->get_name() == "white") {
 				
 				if (test->get_column() < column || test->get_line() < line) {
 					line = test->get_line();
@@ -522,7 +453,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() {
 	for (auto* it : children) {
 		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
 
-			if (test->get_name_tiny_image() == "white_inventory") {
+			if (test->get_name() == "white_inventory") {
 				
 				if (test->get_column() < column || test->get_line() < line) {
 					line = test->get_line();
@@ -545,7 +476,7 @@ BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
 		
 	std::size_t i;
 	for (i = 0; i != allBoutonCartes.size(); i++) {
-		if (allBoutonCartes[i]->get_name_tiny_image() == name) {
+		if (allBoutonCartes[i]->get_name() == name) {
 			break;
 		}
 	}
@@ -557,7 +488,7 @@ BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
 		
 	std::size_t i;
 	for (i = 0; i != allBoutonObjets.size(); i++) {
-		if (allBoutonObjets[i]->get_name_tiny_image() == name) {
+		if (allBoutonObjets[i]->get_name() == name) {
 			break;
 		}
 	}
