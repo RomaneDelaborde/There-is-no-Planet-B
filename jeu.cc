@@ -324,6 +324,11 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
 
   if (enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
+    if(!std::count(_inventaire.begin(), _inventaire.end(), 101)) // on ne peut pas laisser le joueur continuer s'il n'a pas ramassé l'épingle à cheveux
+    {
+      _fenetre.popupMessage("Bonne réponse ! Cependant vous n'avez pas ramassé l'épingle à cheveux, rentrez à nouveau la solution quand ça sera fait", "Bravo");
+      return;
+    }
     _fenetre.popupMessage("Bonne réponse !", "Bravo");
     affichage_carte(enigme(id_carte_enigme).get_id_carte_debloquee()); // afficher carte qui est debloquée par l'enigme dans la fenêtre graphique et faire les modifications qui vont avec
   }
