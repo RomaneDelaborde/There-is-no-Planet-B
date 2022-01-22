@@ -266,7 +266,6 @@ void FenetreJeu::popupMessage(const std::string message, const std::string title
 
 //Fenêtre A Propos, pop-up quand on clique sur l'icône correspondante
 void FenetreJeu::afficherApropos() {
-	//reste à ajouter le logo avec dialogue.set_logo(Gdk::Pixbuf::create_from_file("name.png"));
 	Gtk::AboutDialog dialogue;
 	dialogue.set_program_name("There is no planet B");
 	dialogue.set_version("1.0");
@@ -276,6 +275,7 @@ void FenetreJeu::afficherApropos() {
 	listeAuteurs.push_back("Mario");
 	listeAuteurs.push_back("Romano");
 	dialogue.set_authors(listeAuteurs);
+	dialogue.set_logo(Gdk::Pixbuf::create_from_file("Images/logo.jpg"));
 	dialogue.set_position(Gtk::WIN_POS_CENTER);
 	dialogue.run();
 }
