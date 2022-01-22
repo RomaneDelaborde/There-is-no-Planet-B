@@ -15,7 +15,7 @@
 #include "enigme1.hh"
 #include "enigme2.hh"
 #include "enigme3.hh"
-// #include "inventaire.hh"
+
 
 #include "Fenetre.hh"
 
@@ -77,7 +77,7 @@ class Jeu {
 
 	  bool id_existe(const int id_carte) const; // renvoie 1 si l'id est dans _map_id et 0 sinon (i.e. s'il existe)
 
-	  bool affichage_carte_autorise(const int id_carte); 
+	  bool affichage_carte_autorise(const int id_carte);
 
 	  void affichage_carte(const int id_carte); // permet l'affichage d'une carte ainsi que les modifications qui en découlent
 
