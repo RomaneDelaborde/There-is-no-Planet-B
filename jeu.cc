@@ -247,12 +247,18 @@ void Jeu::affichage_carte(const int id_carte) {
       _inventaire.push_back(id_carte);
       _fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
     }
+    else
+    {
+      _fenetre.popupMessage("Cette carte est un objet non affichable", "Erreur");
+      return;
+    }
 
     // déclenchement arrivée du patron
     if((id_carte==402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
     {
       affichage_carte(50);
     }
+
     return;
   }
 
