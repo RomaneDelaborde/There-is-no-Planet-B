@@ -22,9 +22,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
   _id_cartes_enigmes.push_back(charlie.get_id());
   _id_cartes_enigmes.push_back(planete.get_id());
 
-
-  _cartes_jeu = _cartes_basiques;
-  //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
+  _cartes_jeu = _cartes_basiques; //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
   _cartes_jeu.insert(_cartes_jeu.end(), _cartes_objets.begin(), _cartes_objets.end());
   _cartes_jeu.insert(_cartes_jeu.end(), _cartes_enigmes.begin(), _cartes_enigmes.end());
 
@@ -34,22 +32,11 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
   }
 
   /*
-  for(std::size_t i=0;i<_cartes_basiques.size();i++)  // Affichage des informations sur les cartes basiques
-  {
-    _cartes_basiques[i].affichage_info_carte();
-  }
+  for (std::size_t i = 0; i < _cartes_basiques.size(); i++) {_cartes_basiques[i].affichage_info_carte();} // Affichage des informations sur les cartes basiques
 
-
-  for(std::size_t i=0;i<_cartes_objets.size();i++)    // Affichage des informations sur les cartes objets
-  {
-    _cartes_objets[i].affichage_info_objet();
-  }
-
-  for(std::size_t i=0;i<_cartes_enigmes.size();i++)   // Affichage des informations sur les cartes enigmes
-  {
-    _cartes_enigmes[i].affichage_info_enigme();
-  }
-
+  for (std::size_t i = 0; i < _cartes_objets.size(); i++) {_cartes_objets[i].affichage_info_objet();}  // Affichage des informations sur les cartes objets
+ 
+  for (std::size_t i = 0; i < _cartes_enigmes.size(); i++) {_cartes_enigmes[i].affichage_info_enigme();}  // Affichage des informations sur les cartes enigmes
   */
 
 }
@@ -57,7 +44,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
 
 
 std::vector<int> Jeu::lecture_str_tab(std::string chaine) {
-  std::vector<std::string> res = {}; // res pour résultat
+  std::vector<std::string> res = {}; 
 
   // Lecture de la chaine avec un délimiteur
   std::string const delims{ "-" };
@@ -240,22 +227,21 @@ bool Jeu::affichage_carte_autorise(const int id_carte) {
 }
 
 void Jeu::affichage_carte(const int id_carte) {
-  if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) // si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
-  {
-    if (objet(id_carte).get_est_objet_inventaire()) // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
-    {
-      _inventaire.push_back(id_carte);
-      _fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
+	if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) { // si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
+		if (objet(id_carte).get_est_objet_inventaire()) { // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
+			_inventaire.push_back(id_carte);
+			_fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
+			BoutonCarte& objet = *(_fenetre.boutonObjetFromName(carte(id_carte).get_nom_carte()));
+			_fenetre.remplacerWhitetoObjet(objet);
     }
-    else
-    {
-      _fenetre.popupMessage("Cette carte est un objet non affichable", "Erreur");
+    else {
+      _fenetre.popupMessage("Vous allez avoir du mal à rentrer ça dans votre poche.... Vous pouvez directement combiner cet objet à un autre.", "Erreur");
       return;
     }
 
     // déclenchement arrivée du patron
-    if((id_carte==402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
-    {
+		if ((id_carte==402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) {// si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
+    
       affichage_carte(50);
     }
 
@@ -272,14 +258,14 @@ void Jeu::affichage_carte(const int id_carte) {
         if (_cartes_jeu[i].get_id_cartes_kick()[j] == id_carte) {
 			_map_id[_cartes_jeu[i].get_id()] = -1;
 			if (_cartes_jeu[i].get_id() != 1) {
-				BoutonCarte& kick = *(_fenetre.boutonFromName(carte((_cartes_jeu[i].get_id())).get_nom_carte()));
+				BoutonCarte& kick = *(_fenetre.boutonCarteFromName(carte((_cartes_jeu[i].get_id())).get_nom_carte()));
 				_fenetre.remplacerCartetoWhite(kick);
 			}
 		}
       }
     }
   }
-	BoutonCarte& test = *(_fenetre.boutonFromName(carte(id_carte).get_nom_carte()));
+	BoutonCarte& test = *(_fenetre.boutonCarteFromName(carte(id_carte).get_nom_carte()));
 	_fenetre.remplacerWhitetoCarte(test);
 	_map_id[id_carte] = 1; // indiquer que la carte est affichée dans _map_id
 
@@ -298,7 +284,7 @@ void Jeu::affichage_carte(const int id_carte) {
 void Jeu::demande_affichage_carte(const int id_carte) {
 
   // si la carte zoom livres est affichée et que le joueur tente d'afficher une carte livre (qui n'existe pas ...)
-  if(_map_id[32]==1 && (id_carte==308 || id_carte==309 || id_carte==310 || id_carte==311 || id_carte==312 || id_carte==313)) // pas très joli ces conditions : moyen de faire ça plus condensé genre if id_carte is in LISTE ??
+  if (_map_id[32]==1 && (id_carte==308 || id_carte==309 || id_carte==310 || id_carte==311 || id_carte==312 || id_carte==313)) // pas très joli ces conditions : moyen de faire ça plus condensé genre if id_carte is in LISTE ??
   {
     _fenetre.popupMessage("Cette carte n'est pas affichable, il pourrait potentiellement s'agir d'une réponse à une énigme ...", "Erreur");
     return;

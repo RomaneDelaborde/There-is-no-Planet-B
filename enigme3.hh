@@ -6,7 +6,7 @@
 #include "enigme.hh"
 
 
-class Enigme3 : public Enigme{ // énigme avec le tableau et le coffre-fort
+class Enigme3 : public Enigme { // énigme avec le tableau et le coffre-fort
 
 private:
   std::map<char,int> _lettres; // ensemble des lettres codables en clés et leurs valeurs associées en valeurs du map

@@ -37,7 +37,8 @@ white_2312("Images/white.jpg"), white_3412("Images/white.jpg"),
 inventory1("Images/white_inventory.jpg"), inventory2("Images/white_inventory.jpg"), 
 inventory3("Images/white_inventory.jpg"), inventory4("Images/white_inventory.jpg"), 
 inventory5("Images/white_inventory.jpg"), inventory6("Images/white_inventory.jpg"), 
-inventory7("Images/white_inventory.jpg"), about_image("Images/about.png"),
+inventory7("Images/white_inventory.jpg"), inventory8("Images/white_inventory.jpg"),
+about_image("Images/about.png"), regles("Images/regles.jpeg"),
 annonce_radio("Images/annonce_radio.jpg"),
 bibliotheque("Images/bibliotheque.jpg"),
 boite_chocolat("Images/boite_chocolat.jpg"),
@@ -68,12 +69,23 @@ ticket_dore("Images/ticket_dore.jpg"),
 tiroir("Images/tiroir.jpg"),
 voiture("Images/voiture.jpg"),
 zoom_livres("Images/zoom_livres.jpg"),
+boss_o("Images/boss_o.jpg"),
+certificat_o("Images/certificat_o.jpg"),
+cesar("Images/cesar.jpg"),
+epingle_cheveux("Images/epingle_cheveux.jpg"),
+morceau1("Images/morceau1.jpg"),
+morceau2("Images/morceau2.jpg"),
+pied_biche("Images/pied_biche.jpg"),
+porte_cachee_o("Images/porte_cachee_o.jpg"),
+porte_electronique("Images/porte_electronique.jpg"),
+revolver("Images/revolver.jpg"),
+ticket_dore_o("Images/ticket_dore_o.jpg"),
 bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0),
 bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1), 
-bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1), 
-bouton_inventory2(inventory2), bouton_inventory3(inventory3), 
-bouton_inventory4(inventory4), bouton_inventory5(inventory5), 
-bouton_inventory6(inventory6), bouton_inventory7(inventory7),
+bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1, 0, 1),
+bouton_inventory2(inventory2, 1, 1), bouton_inventory3(inventory3, 2, 1),
+bouton_inventory4(inventory4, 3, 1), bouton_inventory5(inventory5, 4, 1),
+bouton_inventory6(inventory6, 5, 1), bouton_inventory7(inventory7, 6, 1), bouton_inventory8(inventory8, 7, 1),
 bouton_annonce_radio(annonce_radio),
 bouton_bibliotheque(bibliotheque),
 bouton_boite_chocolat(boite_chocolat),
@@ -104,6 +116,17 @@ bouton_ticket_dore(ticket_dore),
 bouton_tiroir(tiroir),
 bouton_voiture(voiture),
 bouton_zoom_livres(zoom_livres),
+bouton_boss_o(boss_o),
+bouton_certificat_o(certificat_o),
+bouton_cesar(cesar),
+bouton_epingle_cheveux(epingle_cheveux),
+bouton_morceau1(morceau1),
+bouton_morceau2(morceau2),
+bouton_pied_biche(pied_biche),
+bouton_porte_cachee_o(porte_cachee_o),
+bouton_porte_electronique(porte_electronique),
+bouton_revolver(revolver),
+bouton_ticket_dore_o(ticket_dore_o),
 combinaisons("Saisir une combinaison d'objets (au moins 2)"),
 reponse_enigme("Saisir la réponse à une énigme"), 
 tirer_carte_1("Saisir le numéro de la carte à tirer"), 
@@ -126,10 +149,7 @@ reponse_enigme_l("réponse"), carte_num("n° carte") { //à l'initialisation
 	init_table_images();
 	init_table_inventory();
 	init_allBoutonCartes();
-
-	//superbouton = new BoutonTexte("Super bouton");
-	//table_zones_texte->attach(*superbouton, 0, 2, 5, 6, Gtk::SHRINK);
-	//superbouton->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::changerWhitetoRetroviseur));
+	init_allBoutonObjets();
 	
 	show_all();
 }
@@ -166,6 +186,23 @@ void FenetreJeu::init_allBoutonCartes() {
 	allBoutonCartes.push_back(&bouton_voiture);
 	allBoutonCartes.push_back(&bouton_zoom_livres);
 }
+
+void FenetreJeu::init_allBoutonObjets() {
+	std::cout << "objets" << std::endl;
+	allBoutonObjets.push_back(&bouton_boss_o);
+	allBoutonObjets.push_back(&bouton_certificat_o);
+	allBoutonObjets.push_back(&bouton_cesar);
+	allBoutonObjets.push_back(&bouton_epingle_cheveux);
+	allBoutonObjets.push_back(&bouton_morceau1);
+	allBoutonObjets.push_back(&bouton_morceau2);
+	allBoutonObjets.push_back(&bouton_pied_biche);
+	allBoutonObjets.push_back(&bouton_porte_cachee_o);
+	allBoutonObjets.push_back(&bouton_porte_electronique);
+	allBoutonObjets.push_back(&bouton_revolver);
+	allBoutonObjets.push_back(&bouton_ticket_dore_o);
+	std::cout << "fin objets" << std::endl;
+}
+
 
 void FenetreJeu::init_table_zones_texte() {
 	table_zones_texte = new Gtk::Table(6, 8);
@@ -205,7 +242,6 @@ void FenetreJeu::init_table_zones_texte() {
 }
 
 void FenetreJeu::init_table_images() {
-
 	table_images = new Gtk::Table(2, 4);
 	table_big->attach(*table_images, 0, 1, 1, 2);
 	
@@ -220,7 +256,7 @@ void FenetreJeu::init_table_images() {
 }
 
 void FenetreJeu::init_table_inventory() {
-	table_inventory = new Gtk::Table(2, 7);
+	table_inventory = new Gtk::Table(2, 8);
 	table_big->attach(*table_inventory, 0, 1, 2, 3);
 	
 	table_inventory->attach(bouton_inventory1, 0, 1, 1, 2);
@@ -230,6 +266,7 @@ void FenetreJeu::init_table_inventory() {
 	table_inventory->attach(bouton_inventory5, 4, 5, 1, 2);
 	table_inventory->attach(bouton_inventory6, 5, 6, 1, 2);
 	table_inventory->attach(bouton_inventory7, 6, 7, 1, 2);
+	table_inventory->attach(bouton_inventory8, 7, 8, 1, 2);
 }
 
 void FenetreJeu::popupMessage(const std::string message, const std::string title) {
@@ -254,17 +291,6 @@ void FenetreJeu::afficherApropos() {
 	dialogue.run();
 }
 
-/*
-void FenetreJeu::changerWhitetoRetroviseur() {
-	if (retroviseurChange == false) {
-		remplacerWhitetoCarte(bouton_dialogue_patron);
-		retroviseurChange = true;
-	}
-	else {
-		remplacerCartetoWhite(bouton_dialogue_patron);
-		retroviseurChange = false;
-	}
-}*/
 
 void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 	int col = bouton.get_column(), line = bouton.get_line();
@@ -318,7 +344,6 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 
 
 void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
-	
 	std::tuple<int, int> res = getFirstWhiteCarte();
 	int col = std::get<0>(res), line = std::get<1>(res);
 
@@ -370,8 +395,43 @@ void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 	show_all();
 }
 
+void FenetreJeu::remplacerWhitetoObjet(BoutonCarte & bouton) {
+	std::tuple<int, int> res = getFirstWhiteInventory();
+	int col = std::get<0>(res), line = std::get<1>(res);
+
+	switch (col) {
+		case 0:
+			table_inventory->remove(bouton_inventory1);
+			break;
+		case 1:
+			table_inventory->remove(bouton_inventory2);
+			break;
+		case 2:
+			table_inventory->remove(bouton_inventory3);
+			break;
+		case 3:
+			table_inventory->remove(bouton_inventory4);
+			break;
+		case 4:
+			table_inventory->remove(bouton_inventory5);
+			break;
+		case 5:
+			table_inventory->remove(bouton_inventory6);
+			break;
+		case 6:
+			table_inventory->remove(bouton_inventory7);
+			break;
+		case 7:
+			table_inventory->remove(bouton_inventory8);
+			break;
+	}
+	table_inventory->attach(bouton, col, col+1, 1, 2);
+	bouton.set_column(col);
+	bouton.set_line(line);
+	show_all();
+}
+
 FenetreJeu::~FenetreJeu() {
-	//delete superbouton;
 	delete bouton_about;
 	delete bouton_combinaisons;
 	delete bouton_enigme;
@@ -458,7 +518,35 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
 }
 
 
-BoutonCarte* FenetreJeu::boutonFromName(const std::string name) {
+std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() {
+
+	std::vector<Gtk::Widget*> children = table_inventory->get_children();
+	int column = 8, line = 2;
+
+	for (auto* it : children) {
+		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
+
+			if (test->get_name_tiny_image() == "white_inventory") {
+				
+				if (test->get_column() < column || test->get_line() < line) {
+					line = test->get_line();
+					column = test->get_column();
+				}
+			}
+		}
+	}
+
+	if (line == 8 && column == 2) {
+		line = -1;
+		column = -1;
+	}
+
+	return std::make_tuple(column, line);
+}
+
+
+BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
+		
 	std::size_t i;
 	for (i = 0; i != allBoutonCartes.size(); i++) {
 		if (allBoutonCartes[i]->get_name_tiny_image() == name) {
@@ -466,4 +554,16 @@ BoutonCarte* FenetreJeu::boutonFromName(const std::string name) {
 		}
 	}
 	return allBoutonCartes[i];
+}
+
+
+BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
+		
+	std::size_t i;
+	for (i = 0; i != allBoutonObjets.size(); i++) {
+		if (allBoutonObjets[i]->get_name_tiny_image() == name) {
+			break;
+		}
+	}
+	return allBoutonObjets[i];
 }

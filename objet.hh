@@ -4,7 +4,7 @@
 #include <map>
 #include "carte.hh"
 
-class Objet : public Carte{
+class Objet : public Carte {
 
 private:
   std::map<int, int> _id_objets_combinables; // id des objets combinables avec cet objet en clés et id de la carte résultante de cette combinaison en valeur

@@ -62,13 +62,17 @@ class FenetreJeu: public Gtk::Window {
 		//void changerWhitetoRetroviseur();
 		void remplacerCartetoWhite(BoutonCarte & bouton);
 		void remplacerWhitetoCarte(BoutonCarte & bouton);
+		void remplacerWhitetoObjet(BoutonCarte & bouton);
 		void requestCarte();
 		void requestRepondreEnigme();
 		void requestCombinaison();
 
-		BoutonCarte* boutonFromName(const std::string name);
+		BoutonCarte* boutonCarteFromName(const std::string name);
+		BoutonCarte* boutonObjetFromName(const std::string name);
+
 
 		std::tuple<int, int> getFirstWhiteCarte();
+		std::tuple<int, int> getFirstWhiteInventory();
 
 	
 	private:
@@ -78,10 +82,12 @@ class FenetreJeu: public Gtk::Window {
 		void init_table_images();
 		void init_table_inventory();
 		void init_allBoutonCartes();
+		void init_allBoutonObjets();
 
 		Jeu* Game;
 
 		std::vector<BoutonCarte*> allBoutonCartes;
+		std::vector<BoutonCarte*> allBoutonObjets;
 
 		//BoutonTexte* superbouton;
 		BoutonTexte* bouton_combinaisons;
@@ -115,8 +121,10 @@ class FenetreJeu: public Gtk::Window {
 		Image inventory5;
 		Image inventory6;
 		Image inventory7;
+		Image inventory8;
  
 		Image about_image;
+		Image regles;
 	
 		Image annonce_radio;
 		Image bibliotheque;
@@ -148,6 +156,18 @@ class FenetreJeu: public Gtk::Window {
 		Image tiroir;
 		Image voiture;
 		Image zoom_livres;
+		
+		Image boss_o;
+		Image certificat_o;
+		Image cesar;
+		Image epingle_cheveux;
+		Image morceau1;
+		Image morceau2;
+		Image pied_biche;
+		Image porte_cachee_o;
+		Image porte_electronique;
+		Image revolver;
+		Image ticket_dore_o;
 
 		BoutonCarte bouton_0101;
 		BoutonCarte bouton_1201;
@@ -165,6 +185,7 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_inventory5;
 		BoutonCarte bouton_inventory6;
 		BoutonCarte bouton_inventory7;
+		BoutonCarte bouton_inventory8;
 	
 		BoutonCarte bouton_annonce_radio;
 		BoutonCarte bouton_bibliotheque;
@@ -196,6 +217,18 @@ class FenetreJeu: public Gtk::Window {
 		BoutonCarte bouton_tiroir;
 		BoutonCarte bouton_voiture;
 		BoutonCarte bouton_zoom_livres;
+	
+		BoutonCarte bouton_boss_o;
+		BoutonCarte bouton_certificat_o;
+		BoutonCarte bouton_cesar;
+		BoutonCarte bouton_epingle_cheveux;
+		BoutonCarte bouton_morceau1;
+		BoutonCarte bouton_morceau2;
+		BoutonCarte bouton_pied_biche;
+		BoutonCarte bouton_porte_cachee_o;
+		BoutonCarte bouton_porte_electronique;
+		BoutonCarte bouton_revolver;
+		BoutonCarte bouton_ticket_dore_o;
 	
 		Gtk::Label combinaisons;
 		Gtk::Label reponse_enigme;

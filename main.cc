@@ -66,6 +66,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "before" << std::endl;
 
   FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur
+  std::cout << "?" << std::endl;
   Gtk::Main::run(fenetre);
 
   //std::cout << "ignbkj" << std::endl;
