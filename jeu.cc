@@ -315,6 +315,13 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
     _fenetre.popupMessage("Vous tentez de répondre à une carte énigme qui n'existe pas", "Erreur");
     return;
   }
+
+  if(_map_id[id_carte_enigme]!=1) // si la carte n'est pas affichée à l'écran
+  {
+    _fenetre.popupMessage("Cette énigme ne correspond à aucune carte affichée à l'écran", "Erreur");
+    return;
+  }
+
   if (enigme(id_carte_enigme).code_correct(val)) // si réponse correcte
   {
     _fenetre.popupMessage("Bonne réponse !", "Bravo");
@@ -356,12 +363,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
 
   if(objet(id_obj_1).id_obj_est_combinable(id_obj_2)) // si les 2 objets sont bien combinables
   {
-    if(id_obj_1!=203 || id_obj_2!=203) // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
-    {
-      affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
-    }
-
-    else // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
+    if(id_obj_1==203 || id_obj_2==203) // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
     {
       if(id_existe(26)) // sécurité : carte 26 = carte cesar
       {
@@ -369,9 +371,18 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
         {
           affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
         }
+        else
+        {
+          _fenetre.popupMessage("Etes-vous certain d'avoir tout regardé avant de passer cette porte ?", "Erreur");
+        }
       }
-      else {_fenetre.popupMessage("Etes-vous certain d'avoir tout regardé ?", "Erreur");}
     }
+    else // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
+    {
+      affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+    }
+
+
   }
     else {_fenetre.popupMessage("Les 2 objets ne sont pas combinables", "Erreur");}
 }
