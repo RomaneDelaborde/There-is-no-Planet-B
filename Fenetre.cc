@@ -387,9 +387,11 @@ void FenetreJeu::requestCarte() {
 
 	if (is_number(entry_carte_num.get_text())) {
 		Game->demande_affichage_carte(std::stoi(entry_carte_num.get_text()));
+		entry_carte_num.set_text("");
 		return;
 	}
 	else {popupMessage("Vous n'avez pas saisi un nombre entier", "Erreur");}
+	entry_carte_num.set_text("");
 }
 
 
@@ -398,11 +400,15 @@ void FenetreJeu::requestRepondreEnigme() {
 	if (is_number(entry_id_enigme.get_text())) {
 		if (is_number(entry_reponse_enigme_l.get_text())) {
 			Game->solution_enigme_valide(std::stoi(entry_id_enigme.get_text()), std::stoi(entry_reponse_enigme_l.get_text()));
+			entry_id_enigme.set_text("");
+			entry_reponse_enigme_l.set_text("");
 			return;
 		}
 		else {popupMessage("Vous n'avez pas saisi un nombre entier pour la réponse", "Erreur");}
 	}
 	else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'énigme", "Erreur");}
+	entry_id_enigme.set_text("");
+	entry_reponse_enigme_l.set_text("");
 }
 
 
@@ -411,11 +417,15 @@ void FenetreJeu::requestCombinaison() {
 	if (is_number(entry_objet_1.get_text())) {
 		if (is_number(entry_objet_2.get_text())) {
 			Game->combinaison_valide(std::stoi(entry_objet_1.get_text()), std::stoi(entry_objet_2.get_text()));
+			entry_objet_1.set_text("");
+			entry_objet_2.set_text("");
 			return;
 		}
 		else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 2", "Erreur");}
 	}
 	else {popupMessage("Vous n'avez pas saisi un nombre entier pour l'objet 1", "Erreur");}
+	entry_objet_1.set_text("");
+	entry_objet_2.set_text("");
 }
 
 
