@@ -47,6 +47,7 @@ class BoutonCarte: public Bouton {
 		void zoom_Image() const; //Methode qui peut etre reliee a un Bouton, affiche l'image en 700*700 dans une nouvelle fenetre
 
 		std::string get_name() const {return name_tiny_image;};
+		std::string get_name_big_image() const {return name_big_image;};
 		int get_column() const {return column_coordinate;};
 		int get_line() const {return line_coordinate;};
 		void set_column(int col) {column_coordinate = col;};

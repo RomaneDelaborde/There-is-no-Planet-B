@@ -31,19 +31,19 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
     else {_map_id[_cartes_jeu[i].get_id()] = 0;}
   }
 
-
+  /*
   for (std::size_t i = 0; i < _cartes_basiques.size(); i++) {_cartes_basiques[i].affichage_info_carte();} // Affichage des informations sur les cartes basiques
 
   for (std::size_t i = 0; i < _cartes_objets.size(); i++) {_cartes_objets[i].affichage_info_carte();}  // Affichage des informations sur les cartes objets
-
+ 
   for (std::size_t i = 0; i < _cartes_enigmes.size(); i++) {_cartes_enigmes[i].affichage_info_carte();}  // Affichage des informations sur les cartes enigmes
-
+  */
 
 }
 
 
 std::vector<int> Jeu::lecture_str_tab(std::string chaine) {
-  std::vector<std::string> res = {};
+  std::vector<std::string> res = {}; 
 
   // Lecture de la chaine avec un délimiteur
   std::string const delims{ "-" };
@@ -219,7 +219,7 @@ void Jeu::affichage_carte(const int id_carte) {
 
     // déclenchement arrivée du patron
 		if ((id_carte == 402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) { // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
-
+    
       affichage_carte(50);
     }
 
@@ -321,7 +321,7 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
 
 
 void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
-  if (!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) {
+  if (!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) { 
     _fenetre.popupMessage("Au moins 1 des 2 objets n'existe pas", "Erreur");
     return;
   }
@@ -335,13 +335,13 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
   if (objet(id_obj_1).id_obj_est_combinable(id_obj_2)) { // si les 2 objets sont bien combinables
     if (id_obj_1 == 203 || id_obj_2 == 203) { // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
       if (std::count(_inventaire.begin(), _inventaire.end(), 204)) { // si le joueur a déposé la roue de césar dans son inventaire i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
-        affichage_carte(objet(id_obj_1)+objet(id_obj_2)); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+        affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
       }
       else {_fenetre.popupMessage("Etes-vous certain d'avoir tout regardé avant de passer cette porte ?", "Erreur");}
 
     }
     else { // si la carte n'est pas la combinaison pied de biche et porte_electronique (id 203)
-      affichage_carte(objet(id_obj_1)+objet(id_obj_2)); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
+      affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
     }
 
   }

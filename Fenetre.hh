@@ -64,6 +64,8 @@ class FenetreJeu : public Gtk::Window {
 		std::string get_entry_reponse_enigme_l() const {return entry_reponse_enigme_l.get_text();}
 		std::string get_entry_carte_num() const {return entry_carte_num.get_text();}
 	
+		Jeu* get_Game() {return Game;};
+	
 		//Fenetre A Propos, pop-up quand on clique sur l'icone correspondante
 		void afficherApropos();
 	

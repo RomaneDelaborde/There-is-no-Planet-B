@@ -6,7 +6,7 @@ bool is_number(const std::string& s) {
     return !s.empty() && std::find_if(s.begin(), 
         s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
 }
-
+  
 
 FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"),
 	white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"),
@@ -47,9 +47,7 @@ FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_
 	tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"),
 	objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
 	separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() {
-	
-	std::cout << "entree constructeur" << std::endl;
- 
+	 
 	Game = new Jeu(*this);
 	  
 	set_title("There is no Planet B");
@@ -430,5 +428,4 @@ FenetreJeu::~FenetreJeu() {
 	delete table_images;
 	delete table_big;
 	delete Game;
-	std::cout << "fin destructeur fenetre" << std::endl;
 }
