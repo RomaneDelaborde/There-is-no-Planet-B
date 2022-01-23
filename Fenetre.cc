@@ -7,7 +7,7 @@ bool is_number(const std::string& s) {
         s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
 }
 
- 
+
 FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_1201("Images/white.jpg"), white_2301("Images/white.jpg"),
 	white_3401("Images/white.jpg"), white_0112("Images/white.jpg"), white_1212("Images/white.jpg"),
 	white_2312("Images/white.jpg"), white_3412("Images/white.jpg"), inventory1("Images/white_inventory.jpg"),
@@ -59,48 +59,35 @@ FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_
 	table_big = new Gtk::Table(4, 1);
 	add(*table_big);
 	 
+	init_allBoutonCartes();
+	init_allBoutonObjets();
 	init_table_zones_texte();
 	init_table_images();
 	init_table_inventory();
-	init_allBoutonCartes();
-	init_allBoutonObjets();
 	
 	show_all();
 }
 
+//Initialisation du vecteur de Cartes (toutes les cartes du Jeu, affichees sur le tableau du milieu)
 void FenetreJeu::init_allBoutonCartes() {
-	allBoutonCartes.push_back(&bouton_annonce_radio);
-	allBoutonCartes.push_back(&bouton_bibliotheque);
-	allBoutonCartes.push_back(&bouton_boite_chocolat);
-	allBoutonCartes.push_back(&bouton_boite_gants);
-	allBoutonCartes.push_back(&bouton_boite_outils);
-	allBoutonCartes.push_back(&bouton_boss_assomme);
-	allBoutonCartes.push_back(&bouton_boss_enerve);
-	allBoutonCartes.push_back(&bouton_boss_mort);
-	allBoutonCartes.push_back(&bouton_bureau);
-	allBoutonCartes.push_back(&bouton_certificat);
-	allBoutonCartes.push_back(&bouton_coffre_fort);
-	allBoutonCartes.push_back(&bouton_dessin_mur);
-	allBoutonCartes.push_back(&bouton_dessin_recto);
-	allBoutonCartes.push_back(&bouton_dessin_sol);
-	allBoutonCartes.push_back(&bouton_dessin_verso);
-	allBoutonCartes.push_back(&bouton_dialogue_patron);
-	allBoutonCartes.push_back(&bouton_frequences);
-	allBoutonCartes.push_back(&bouton_garage);
-	allBoutonCartes.push_back(&bouton_non_revelation);
-	allBoutonCartes.push_back(&bouton_planetes);
-	allBoutonCartes.push_back(&bouton_porte_cachee);
-	allBoutonCartes.push_back(&bouton_pressing);
-	allBoutonCartes.push_back(&bouton_radio);
-	allBoutonCartes.push_back(&bouton_retroviseur);
-	allBoutonCartes.push_back(&bouton_revelation);
-	allBoutonCartes.push_back(&bouton_table_chevet);
-	allBoutonCartes.push_back(&bouton_ticket_dore);
-	allBoutonCartes.push_back(&bouton_tiroir);
-	allBoutonCartes.push_back(&bouton_voiture);
-	allBoutonCartes.push_back(&bouton_zoom_livres); 
+	allBoutonCartes.push_back(&bouton_annonce_radio); allBoutonCartes.push_back(&bouton_bibliotheque);
+	allBoutonCartes.push_back(&bouton_boite_chocolat); allBoutonCartes.push_back(&bouton_boite_gants);
+	allBoutonCartes.push_back(&bouton_boite_outils); allBoutonCartes.push_back(&bouton_boss_assomme);
+	allBoutonCartes.push_back(&bouton_boss_enerve); allBoutonCartes.push_back(&bouton_boss_mort);
+	allBoutonCartes.push_back(&bouton_bureau); allBoutonCartes.push_back(&bouton_certificat);
+	allBoutonCartes.push_back(&bouton_coffre_fort); allBoutonCartes.push_back(&bouton_dessin_mur);
+	allBoutonCartes.push_back(&bouton_dessin_recto); allBoutonCartes.push_back(&bouton_dessin_sol);
+	allBoutonCartes.push_back(&bouton_dessin_verso); allBoutonCartes.push_back(&bouton_dialogue_patron);
+	allBoutonCartes.push_back(&bouton_frequences); allBoutonCartes.push_back(&bouton_garage);
+	allBoutonCartes.push_back(&bouton_non_revelation); allBoutonCartes.push_back(&bouton_planetes);
+	allBoutonCartes.push_back(&bouton_porte_cachee); allBoutonCartes.push_back(&bouton_pressing);
+	allBoutonCartes.push_back(&bouton_radio); allBoutonCartes.push_back(&bouton_retroviseur);
+	allBoutonCartes.push_back(&bouton_revelation); allBoutonCartes.push_back(&bouton_table_chevet);
+	allBoutonCartes.push_back(&bouton_ticket_dore); allBoutonCartes.push_back(&bouton_tiroir);
+	allBoutonCartes.push_back(&bouton_voiture); allBoutonCartes.push_back(&bouton_zoom_livres);
 }
  
+//Initialisation du vecteur d'Objets (toutes les Objets de l'inventaire du Jeu, affichees sur le tableau du bas)
 void FenetreJeu::init_allBoutonObjets() {
 	allBoutonObjets.push_back(&bouton_boss_o);
 	allBoutonObjets.push_back(&bouton_certificat_o);
@@ -187,7 +174,7 @@ void FenetreJeu::init_table_inventory() {
 	table_inventory->attach(bouton_inventory8, 7, 8, 1, 2);
 }
 
-//Fenêtre A Propos, pop-up quand on clique sur l'icône correspondante
+//Fenetre A Propos, pop-up quand on clique sur l'icone correspondante
 void FenetreJeu::afficherApropos() {
 	Gtk::AboutDialog dialogue;
 	dialogue.set_program_name("There is no planet B");
@@ -203,10 +190,12 @@ void FenetreJeu::afficherApropos() {
 	dialogue.run();
 }
 
+//Fenetre Regles, pop-up quand on clique sur l'icone correspondante
 void FenetreJeu::afficherRegles() {
 	FenetreAccueil regles("Images/regles.jpeg");
 	Gtk::Main::run(regles);
 }
+
 
 void FenetreJeu::popupMessage(const std::string message, const std::string title) {
 	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING);//, Gtk::BUTTONS_NONE);
@@ -297,7 +286,7 @@ void FenetreJeu::remplacerWhitetoObjet(BoutonCarte & bouton) {
 	show_all();
 }
 
-
+//En reaction a un appui sur le BoutonTexte bouton_carte
 void FenetreJeu::requestCarte() {
 	if (is_number(entry_carte_num.get_text())) {
 		int num = std::stoi(entry_carte_num.get_text());
@@ -319,7 +308,7 @@ void FenetreJeu::requestCarte() {
 	entry_carte_num.set_text("");
 }
 
-
+//En reaction a un appui sur le BoutonTexte bouton_enigme
 void FenetreJeu::requestRepondreEnigme() {
 	
 	if (is_number(entry_id_enigme.get_text())) {
@@ -336,7 +325,7 @@ void FenetreJeu::requestRepondreEnigme() {
 	entry_reponse_enigme_l.set_text("");
 }
 
-
+//En reaction a un appui sur le BoutonTexte bouton_combinaison
 void FenetreJeu::requestCombinaison() {
 	
 	if (is_number(entry_objet_1.get_text())) {
@@ -376,7 +365,7 @@ BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
 	return allBoutonObjets[i];
 }
 
-
+//Renvoyer les coordonnees de la 1ere case blanche disponible
 std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 
 	std::vector<Gtk::Widget*> children = table_images->get_children();
@@ -394,7 +383,8 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 			}
 		}
 	}
-
+	
+	//En cas d'echec, mais normalement impossible : il y a au maximum 7 cartes affichees en meme temps sur le plateau, pour 8 cases au total
 	if (line == 4 && column == 4) {
 		line = -1;
 		column = -1;
@@ -403,7 +393,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 	return std::make_tuple(column, line);
 }
 
-
+//Renvoyer les coordonnees de la 1ere case blanche de l'inventaire disponible
 std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() const {
 
 	std::vector<Gtk::Widget*> children = table_inventory->get_children();

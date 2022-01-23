@@ -1,5 +1,6 @@
 #include "Widgets.hh"
 
+//name est de format : "Images/image.png" => ne garder que "image"
 std::string split_name_image(std::string name) {
 	std::string result = name.substr(0, name.find('.'));
 	result.erase(0, result.find('/') + 1);
@@ -16,8 +17,8 @@ BoutonCarte::BoutonCarte(Image& image, int c, int l) : Bouton(image), column_coo
 	}
 }
 
+//Methode qui peut etre reliee a un Bouton, affiche l'image en 700*700 dans une nouvelle fenetre
 void BoutonCarte::zoom_Image() const {
-	//ne pas zoomer sur les images blanches
 	if (name_tiny_image != "white" && name_tiny_image != "white_inventory") {
 		Gtk::Window fenetre_temp;
 		fenetre_temp.set_title("Zoom sur l'image");

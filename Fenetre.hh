@@ -16,8 +16,10 @@
 #include <iostream>
 #include "Widgets.hh"
 
+//fonction venant de stackoverflow
 bool is_number(const std::string& s);
 
+//Fenetre pour l'ecran d'accueil et l'affichage des regles : Fenetre avec Image (dans un BoutonCarte), passe à la suite du programme quand le joueur clique sur l'image
 class FenetreAccueil : public Gtk::Window {
 	
 	public:
@@ -28,8 +30,11 @@ class FenetreAccueil : public Gtk::Window {
 		BoutonAccueil bouton;
 };
 
+//Pour inclusion circulaire
 class Jeu;
 
+
+//Fenetre du Jeu : lance le Jeu + gere l'interaction Joueur-Jeu et les affichages
 class FenetreJeu : public Gtk::Window {
 		
 	//Contructeur et Initialisation
@@ -39,8 +44,13 @@ class FenetreJeu : public Gtk::Window {
 	private:
 
 		//Methodes d'initialisation en prive car appelees une seule fois par le constructeur
+	
+		//Initialisation du vecteur de Cartes (toutes les cartes du Jeu, affichees sur le tableau du milieu)
 		void init_allBoutonCartes();
+	
+		//Initialisation du vecteur d'Objets (toutes les Objets de l'inventaire du Jeu, affichees sur le tableau du bas)
 		void init_allBoutonObjets();
+	
 		void init_table_zones_texte();
 		void init_table_images();
 		void init_table_inventory();
@@ -54,8 +64,12 @@ class FenetreJeu : public Gtk::Window {
 		std::string get_entry_reponse_enigme_l() const {return entry_reponse_enigme_l.get_text();}
 		std::string get_entry_carte_num() const {return entry_carte_num.get_text();}
 	
+		//Fenetre A Propos, pop-up quand on clique sur l'icone correspondante
 		void afficherApropos();
+	
+		//Fenetre Regles, pop-up quand on clique sur l'icone correspondante
 		void afficherRegles();
+	
 		void popupMessage(const std::string message, const std::string title);
 		void remplacerCartetoWhite(BoutonCarte & bouton);
 		void remplacerWhitetoCarte(BoutonCarte & bouton);
@@ -67,7 +81,10 @@ class FenetreJeu : public Gtk::Window {
 		BoutonCarte* boutonCarteFromName(const std::string name);
 		BoutonCarte* boutonObjetFromName(const std::string name);
 
+		//Renvoyer les coordonnees de la 1ere case blanche disponible
 		std::tuple<int, int> getFirstWhiteCarte() const;
+	
+		//Renvoyer les coordonnees de la 1ere case blanche de l'inventaire disponible
 		std::tuple<int, int> getFirstWhiteInventory() const;
 	
 		~FenetreJeu();
