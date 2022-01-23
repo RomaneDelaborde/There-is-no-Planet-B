@@ -206,8 +206,8 @@ TEST_CASE("8: Widgets") {
 	REQUIRE(texte.get_name() == "no name");
 	
 	Image about2("Images/about.png");
-	BoutonAccueil accueil(about2);
-	REQUIRE(accueil.get_name() == "Images/about.png");
+	BoutonImage test(about2);
+	REQUIRE(test.get_name() == "Images/about.png");
 	
 	cout << endl << "-------------------------------------------------------------------------" << endl;
 	cout << "     8 - WIDGETS : IGNORER LES CRITICAL ET WARNING DE GTK" << endl;

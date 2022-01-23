@@ -20,14 +20,14 @@
 bool is_number(const std::string& s);
 
 //Fenetre pour l'ecran d'accueil et l'affichage des regles : Fenetre avec Image (dans un BoutonCarte), passe à la suite du programme quand le joueur clique sur l'image
-class FenetreAccueil : public Gtk::Window {
+class FenetreImage : public Gtk::Window {
 	
 	public:
-		FenetreAccueil(const std::string image) : Gtk::Window(), image_bouton(image), bouton(image_bouton) {set_title("There is no Planet B"); set_position(Gtk::WIN_POS_CENTER); bouton.signal_clicked().connect(sigc::mem_fun(*this, &FenetreAccueil::hide)); add(bouton); show_all();};
+		FenetreImage(const std::string image) : Gtk::Window(), image_bouton(image), bouton(image_bouton) {set_title("There is no Planet B"); set_position(Gtk::WIN_POS_CENTER); bouton.signal_clicked().connect(sigc::mem_fun(*this, &FenetreImage::hide)); add(bouton); show_all();};
 	
 	private:
 		Image image_bouton;
-		BoutonAccueil bouton;
+		BoutonImage bouton;
 };
 
 //Pour inclusion circulaire
@@ -63,7 +63,6 @@ class FenetreJeu : public Gtk::Window {
 		std::string get_entry_id_enigme() const {return entry_id_enigme.get_text();}
 		std::string get_entry_reponse_enigme_l() const {return entry_reponse_enigme_l.get_text();}
 		std::string get_entry_carte_num() const {return entry_carte_num.get_text();}
-	
 		Jeu* get_Game() {return Game;};
 	
 		//Fenetre A Propos, pop-up quand on clique sur l'icone correspondante
@@ -99,7 +98,7 @@ class FenetreJeu : public Gtk::Window {
 		std::vector<BoutonCarte*> allBoutonObjets;
 
 		BoutonTexte* bouton_combinaisons; BoutonTexte* bouton_enigme; BoutonTexte* bouton_carte;
-		BoutonAccueil* bouton_about; BoutonAccueil* bouton_rules;
+		BoutonImage* bouton_about; BoutonImage* bouton_rules;
 		
 		Gtk::Table* table_big;
 		Gtk::Table* table_zones_texte; //tableau du haut, pour les zones de texte et d'entrée utilisateur

@@ -62,8 +62,8 @@ class BoutonCarte: public Bouton {
 		int line_coordinate;
 };
 
-class BoutonAccueil: public Bouton {
+class BoutonImage: public Bouton {
 	public:
-		BoutonAccueil(Image& image) : Bouton(image) {set_relief(Gtk::RELIEF_NONE);};
+		BoutonImage(Image& image) : Bouton(image) {set_relief(Gtk::RELIEF_NONE);};
 		std::string get_name() const {return name;};
 };

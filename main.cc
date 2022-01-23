@@ -60,10 +60,10 @@ int main(int argc, char* argv[]) {
  
    Gtk::Main app(argc, argv);
 	
-	FenetreAccueil accueil("Images/galaxy.jpg");
+	FenetreImage accueil("Images/galaxy.jpg");
 	Gtk::Main::run(accueil);
 	 
-	FenetreAccueil regles("Images/regles.jpeg");
+	FenetreImage regles("Images/regles.jpeg");
 	Gtk::Main::run(regles);
 	
   FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur

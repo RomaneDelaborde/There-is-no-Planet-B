@@ -122,11 +122,11 @@ void FenetreJeu::init_table_zones_texte() {
 	
 	//table_zones_texte->attach(separator2, 0, 9, 5, 6, Gtk::FILL, Gtk::FILL, 5, 20);
 	
-	bouton_about = new BoutonAccueil(about_image);
+	bouton_about = new BoutonImage(about_image);
 	table_zones_texte->attach(*bouton_about, 8, 9, 0, 2, Gtk::SHRINK);
 	bouton_about->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherApropos));
 	
-	bouton_rules = new BoutonAccueil(rules);
+	bouton_rules = new BoutonImage(rules);
 	table_zones_texte->attach(*bouton_rules, 7, 8, 0, 2, Gtk::SHRINK);
 	bouton_rules->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::afficherRegles));
 	
@@ -190,7 +190,7 @@ void FenetreJeu::afficherApropos() {
 
 //Fenetre Regles, pop-up quand on clique sur l'icone correspondante
 void FenetreJeu::afficherRegles() {
-	FenetreAccueil regles("Images/regles.png");
+	FenetreImage regles("Images/regles.png");
 	Gtk::Main::run(regles);
 }
 
