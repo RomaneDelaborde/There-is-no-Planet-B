@@ -287,17 +287,30 @@ void FenetreJeu::remplacerWhitetoObjet(BoutonCarte & bouton) {
 //En reaction a un appui sur le BoutonTexte bouton_carte
 void FenetreJeu::requestCarte() {
 	if (is_number(entry_carte_num.get_text())) {
-		int num = std::stoi(entry_carte_num.get_text());
-		Game->demande_affichage_carte(num);
-		entry_carte_num.set_text("");
 		
-		//Quitter le jeu apres une des fin
-		if (Game->affichage_carte_autorise(num) && (num == 17 || num == 503 || num == 504)) { //pressing, revelation ou non-revelation
-			if (num == 17) {bouton_pressing.zoom_Image();}
-			else if (num == 503) {bouton_revelation.zoom_Image();}
-			else {bouton_non_revelation.zoom_Image();}
-			popupMessage("\nBravo ! Comme vous l'avez compris, vous avez trouvé une des fins possibles du jeu. \n\nLe jeu va donc quitter à la fermeture de cette fenêtre. \n\nSi vous souhaitez découvrir les autres fins possibles, n'hésitez pas à relancer une partie !", "Yeahhh");
-			Gtk::Main::quit();
+		int num = std::stoi(entry_carte_num.get_text());
+		
+		if (num != 17 && num != 503 && num && 504) {
+			Game->demande_affichage_carte(num);
+			entry_carte_num.set_text("");
+		}
+
+		else {
+
+			if (Game->affichage_carte_autorise(num)) { //pressing, revelation ou non-revelation
+				Game->demande_affichage_carte(num);
+				entry_carte_num.set_text("");
+				if (num == 17) {bouton_pressing.zoom_Image();}
+				else if (num == 503) {bouton_revelation.zoom_Image();}
+				else {bouton_non_revelation.zoom_Image();}
+				popupMessage("\nBravo ! Comme vous l'avez compris, vous avez trouvé une des fins possibles du jeu. \n\nLe jeu va donc quitter à la fermeture de cette fenêtre. \n\nSi vous souhaitez découvrir les autres fins possibles, n'hésitez pas à relancer une partie !", "Yeahhh");
+				Gtk::Main::quit();
+			}
+ 
+			else {
+				popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");
+			}
+
 		}
 		
 		return;

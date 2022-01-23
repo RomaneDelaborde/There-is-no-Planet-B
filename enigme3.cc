@@ -32,7 +32,7 @@ void Enigme3::calcul_solution_enigme() {
   // Lecture de la _chaine avec des délimiteurs
   std::string const delims{ "-+" }; // délimiteurs
 
-  size_t beg, pos = 0;
+  std::size_t beg = 0, pos = 0;
 
   if ((beg = _chaine.find_first_not_of(delims, pos)) != std::string::npos) { // récupération du premier mot de _chaine s'il existe
     pos = _chaine.find_first_of(delims, beg + 1);

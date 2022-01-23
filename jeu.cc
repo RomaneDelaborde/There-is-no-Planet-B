@@ -49,7 +49,7 @@ std::vector<int> Jeu::lecture_str_tab(std::string chaine) {
   // Lecture de la chaine avec un délimiteur
   std::string const delims{ "-" };
 
-  size_t beg, pos = 0;
+  std::size_t beg = 0, pos = 0;
   while ((beg = chaine.find_first_not_of(delims, pos)) != std::string::npos) {
       pos = chaine.find_first_of(delims, beg + 1);
       res.push_back(chaine.substr(beg, pos - beg)); // Ajout de chaque int (séparé par des tabulats) sous forme d'un str dans le vecteur res
@@ -73,12 +73,12 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier) {
     std::string ligne = "";
     std::getline(fichier,ligne); // pour passer la première ligne (avec le nom des colonnes)
     while(std::getline(fichier,ligne)) {
-      std::string nom_carte;
-	  int id, choix; // id de la carte autre choix
-      std::string suiv; // id des cartes suivantes (valeurs séparées par des tabulats)
-      std::string kick; // id des cartes permettant de kicker la carte (valeurs séparées par des tabulats)
+      std::string nom_carte = "";
+	    int id = 0, choix = 0; // id de la carte autre choix
+      std::string suiv = ""; // id des cartes suivantes (valeurs séparées par des tabulats)
+      std::string kick = ""; // id des cartes permettant de kicker la carte (valeurs séparées par des tabulats)
 
-      std::string tempString;
+      std::string tempString = "";
       std::stringstream inputString(ligne);
 
       std::getline(inputString, nom_carte, ',');
@@ -112,13 +112,13 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
     std::string ligne = "";
     std::getline(fichier,ligne); // pour passer la première ligne (avec le nom des colonnes)
     while (std::getline(fichier,ligne)) {
-      std::string nom_carte;
-      int id;
-      std::string objets_combinables; // id des cartes des objets combinables (valeurs séparées par des tabulats)
-      std::string combinaisons_obtenues; // id des cartes obtenues par combinaison (valeurs séparées par des tabulats)
-      bool est_objet_inventaire;
+      std::string nom_carte = "";
+      int id = 0;
+      std::string objets_combinables = ""; // id des cartes des objets combinables (valeurs séparées par des tabulats)
+      std::string combinaisons_obtenues = ""; // id des cartes obtenues par combinaison (valeurs séparées par des tabulats)
+      bool est_objet_inventaire = false;
 
-      std::string tempString;
+      std::string tempString = "";
 
       std::stringstream inputString(ligne);
 
@@ -145,7 +145,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
 
 		if (v1[0] != 0) { // si l'objet n'est pas combinable avec d'autres objets
 			// Création map
-			std::map<int, int> obj; // obj pour objets combinables
+			std::map<int, int> obj = {}; // obj pour objets combinables
 			for (std::size_t i = 0; i < v1.size(); i++) {obj[v1[i]] = v2[i];}
 			_cartes_objets.push_back(Objet(nom_carte, id, obj, est_objet_inventaire));
 		}
@@ -159,7 +159,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
 
 // à partir d'une valeur d'id (unique) d'une carte basique, renvoie sa carte correspondante
 Carte Jeu::carte(const int id_carte) const {
-  for (std::size_t i=0; i < _cartes_jeu.size(); i++) {
+  for (std::size_t i = 0; i < _cartes_jeu.size(); i++) {
     if (_cartes_jeu[i].get_id() == id_carte) {return _cartes_jeu[i];} // si on a trouvé un match des id, on retourne la carte (basique) correspondante
   }
   // si on a pas trouvé un match des id, on affiche un message d'erreur mais on renvoie quand même une carte (celle des règles du jeu)
@@ -241,7 +241,7 @@ void Jeu::affichage_carte(const int id_carte) {
 	  // Si id_carte se trouve dans _id_cartes_kick, on peut tej la carte correspondate
       for (std::size_t j = 0; j < _cartes_jeu[i].get_id_cartes_kick().size(); j++) {
         if (_cartes_jeu[i].get_id_cartes_kick()[j] == id_carte) {
-			_map_id[_cartes_jeu[i].get_id()] = -1;
+			  _map_id[_cartes_jeu[i].get_id()] = -1;
 			if (_cartes_jeu[i].get_id() != 1) {
 				BoutonCarte& kick = *(_fenetre.boutonCarteFromName(carte((_cartes_jeu[i].get_id())).get_nom_carte()));
 				_fenetre.remplacerCartetoWhite(kick);

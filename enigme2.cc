@@ -21,11 +21,11 @@ void Enigme2::codage_jules_cesar(int decalage, bool sens_decalage) {
 
         else  // sinon c'est une lettre
         {
-          int indice=_alphabet_indices[_phrase[i]]; // on retient l'indice de la lettre courante
+          int indice = _alphabet_indices[_phrase[i]]; // on retient l'indice de la lettre courante
 
-          if(sens_decalage) // décalage vers la droite dans l'alphabet si sens_decalage=1
+          if (sens_decalage) // décalage vers la droite dans l'alphabet si sens_decalage=1
           {
-            indice+=decalage; // indice devient l'indice décalé
+            indice += decalage; // indice devient l'indice décalé
 
           }
           else            // sinon décalage vers la gauche dans l'alphabet (si sens_decalage=0)
@@ -43,7 +43,7 @@ void Enigme2::codage_jules_cesar(int decalage, bool sens_decalage) {
             int v = iter->second; // v pour valeur (=indice)
 
             if (v == indice) { // quand on a trouvé l'indice décalé, on ajoute sa lettre correspondante dans la _phrase_codee
-              _phrase_codee+=c;
+              _phrase_codee += c;
               break;            // sortie en amont
             }
             ++iter;

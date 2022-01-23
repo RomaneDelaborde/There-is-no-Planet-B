@@ -15,7 +15,7 @@ void Enigme::affichage_info_carte() const {
 }
 
 bool Enigme::code_correct(int val) {
-  if (val==_code_solution) {return 1;}  // le joueur a bon, on renvoie 0
+  if (val ==_code_solution) {return 1;}  // le joueur a bon, on renvoie 0
   // sinon le joueur a faux et on diminue le nombre de chances qu'il lui reste pour répondre juste à l'éngime
   _nb_essais--; // checker ici ou dans la fonction de Jeu si le _nb_essais n'est pas négatif + messages d'erreurs/pop-up
 
