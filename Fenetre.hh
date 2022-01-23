@@ -18,9 +18,6 @@
 
 bool is_number(const std::string& s);
 
-class Jeu;
-
-
 class FenetreAccueil : public Gtk::Window {
 	
 	public:
@@ -31,24 +28,34 @@ class FenetreAccueil : public Gtk::Window {
 		BoutonAccueil bouton;
 };
 
-
+class Jeu;
 
 class FenetreJeu : public Gtk::Window {
 		
+	//Contructeur et Initialisation
 	public:
 		FenetreJeu();
 	
-		void afficherApropos();
-		void afficherRegles();
+	private:
+
+		//Methodes d'initialisation en prive car appelees une seule fois par le constructeur
+		void init_allBoutonCartes();
+		void init_allBoutonObjets();
+		void init_table_zones_texte();
+		void init_table_images();
+		void init_table_inventory();
+
+	//Méthodes
+	public:
 	
 		std::string get_entry_objet_1() const {return entry_objet_1.get_text();}
 		std::string get_entry_objet_2() const {return entry_objet_2.get_text();}
 		std::string get_entry_id_enigme() const {return entry_id_enigme.get_text();}
 		std::string get_entry_reponse_enigme_l() const {return entry_reponse_enigme_l.get_text();}
 		std::string get_entry_carte_num() const {return entry_carte_num.get_text();}
-
-		~FenetreJeu();
 	
+		void afficherApropos();
+		void afficherRegles();
 		void popupMessage(const std::string message, const std::string title);
 		void remplacerCartetoWhite(BoutonCarte & bouton);
 		void remplacerWhitetoCarte(BoutonCarte & bouton);
@@ -60,18 +67,12 @@ class FenetreJeu : public Gtk::Window {
 		BoutonCarte* boutonCarteFromName(const std::string name);
 		BoutonCarte* boutonObjetFromName(const std::string name);
 
-		std::tuple<int, int> getFirstWhiteCarte();
-		std::tuple<int, int> getFirstWhiteInventory();
-
+		std::tuple<int, int> getFirstWhiteCarte() const;
+		std::tuple<int, int> getFirstWhiteInventory() const;
+	
+		~FenetreJeu();
 	
 	private:
-
-		//passer les init en privé
-		void init_table_zones_texte();
-		void init_table_images();
-		void init_table_inventory();
-		void init_allBoutonCartes();
-		void init_allBoutonObjets();
 
 		Jeu* Game;
 
@@ -86,34 +87,27 @@ class FenetreJeu : public Gtk::Window {
 		Gtk::Table* table_images; //tableau du milieu, pour les images en taille petite
 		Gtk::Table* table_inventory;
 		
-		//DECLARER TOOOOOOOOUTES LES IMAGES DONT ON AURA BESOIN
+		//DECLARER TOOOOOOOOUS LES WIDGETS QUI SERONT AFFICHES SUR LA FENETRE PRINCIPALE AU COURS DU JEU
 		//Même si 2 widgets utilisent la même image, il faut déclarer 2 Gtk::Image avec 2 noms différents
-		//Ici on déclare les images "white", qui servent à remplir les cases du tableau quand les cases n'ont pas de cartes
 		Image white_0101; Image white_1201; Image white_2301; Image white_3401; Image white_0112;
 		Image white_1212; Image white_2312; Image white_3412;
-	
 		Image inventory1; Image inventory2; Image inventory3; Image inventory4; Image inventory5;
 		Image inventory6; Image inventory7; Image inventory8;
- 
 		Image about_image; Image rules;
-	
 		Image annonce_radio; Image bibliotheque; Image boite_chocolat; Image boite_gants; Image boite_outils;
 		Image boss_assomme; Image boss_enerve; Image boss_mort; Image bureau; Image certificat; Image coffre_fort;
 		Image dessin_mur; Image dessin_recto; Image dessin_sol; Image dessin_verso; Image dialogue_patron;
 		Image frequences; Image garage; Image non_revelation; Image planetes; Image porte_cachee; Image pressing;
 		Image radio; Image retroviseur; Image revelation; Image table_chevet; Image ticket_dore;
 		Image tiroir; Image voiture; Image zoom_livres;
-		
 		Image boss_o; Image certificat_o; Image cesar; Image epingle_cheveux; Image morceau1; Image morceau2;
 		Image pied_biche; Image porte_cachee_o; Image porte_electronique; Image revolver; Image ticket_dore_o;
 
 		BoutonCarte bouton_0101; BoutonCarte bouton_1201; BoutonCarte bouton_2301; BoutonCarte bouton_3401;
 		BoutonCarte bouton_0112; BoutonCarte bouton_1212; BoutonCarte bouton_2312; BoutonCarte bouton_3412;
-	
 		BoutonCarte bouton_inventory1; BoutonCarte bouton_inventory2; BoutonCarte bouton_inventory3;
 		BoutonCarte bouton_inventory4; BoutonCarte bouton_inventory5; BoutonCarte bouton_inventory6;
 		BoutonCarte bouton_inventory7; BoutonCarte bouton_inventory8;
-	
 		BoutonCarte bouton_annonce_radio; BoutonCarte bouton_bibliotheque; BoutonCarte bouton_boite_chocolat;
 		BoutonCarte bouton_boite_gants; BoutonCarte bouton_boite_outils; BoutonCarte bouton_boss_assomme;
 		BoutonCarte bouton_boss_enerve; BoutonCarte bouton_boss_mort; BoutonCarte bouton_bureau;
@@ -124,14 +118,12 @@ class FenetreJeu : public Gtk::Window {
 		BoutonCarte bouton_pressing; BoutonCarte bouton_radio; BoutonCarte bouton_retroviseur;
 		BoutonCarte bouton_revelation; BoutonCarte bouton_table_chevet; BoutonCarte bouton_ticket_dore;
 		BoutonCarte bouton_tiroir; BoutonCarte bouton_voiture; BoutonCarte bouton_zoom_livres;
-	
 		BoutonCarte bouton_boss_o; BoutonCarte bouton_certificat_o; BoutonCarte bouton_cesar;
 		BoutonCarte bouton_epingle_cheveux; BoutonCarte bouton_morceau1; BoutonCarte bouton_morceau2;
 		BoutonCarte bouton_pied_biche; BoutonCarte bouton_porte_cachee_o; BoutonCarte bouton_porte_electronique;
 		BoutonCarte bouton_revolver; BoutonCarte bouton_ticket_dore_o;
 	
 		Gtk::Label combinaisons; Gtk::Label reponse_enigme; Gtk::Label tirer_carte_1; Gtk::Label tirer_carte_2;
-	
 		Gtk::Label objet_1; Gtk::Label objet_2; Gtk::Label id_enigme; Gtk::Label reponse_enigme_l; Gtk::Label carte_num;
 	
 		Gtk::Entry entry_objet_1; Gtk::Entry entry_objet_2; Gtk::Entry entry_id_enigme; Gtk::Entry entry_reponse_enigme_l;

@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
   
   //Jeu Game;
  
-  Gtk::Main app(argc, argv);
+   Gtk::Main app(argc, argv);
 	
 	FenetreAccueil accueil("Images/galaxy.jpg");
 	Gtk::Main::run(accueil);
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 
   FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur
   Gtk::Main::run(fenetre);
-
+		
   //std::cout << "ignbkj" << std::endl;
 
   return 0;

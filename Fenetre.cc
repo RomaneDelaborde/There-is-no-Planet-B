@@ -158,7 +158,6 @@ void FenetreJeu::init_table_zones_texte() {
 	bouton_carte = new BoutonTexte("Envoyer");
 	table_zones_texte->attach(*bouton_carte, 5, 6, 4, 5, Gtk::FILL, Gtk::FILL, 80, 5);
 	bouton_carte->signal_clicked().connect(sigc::mem_fun(*this, &FenetreJeu::requestCarte));
-
 }
 
 void FenetreJeu::init_table_images() {
@@ -179,7 +178,6 @@ void FenetreJeu::init_table_inventory() {
 	table_inventory = new Gtk::Table(2, 8);
 	table_big->attach(*table_inventory, 0, 1, 3, 4);
 	table_big->attach(separator3, 0, 1, 2, 3, Gtk::FILL, Gtk::FILL, 5, 20);
-
 	
 	table_inventory->attach(bouton_inventory1, 0, 1, 1, 2);
 	table_inventory->attach(bouton_inventory2, 1, 2, 1, 2);
@@ -189,12 +187,6 @@ void FenetreJeu::init_table_inventory() {
 	table_inventory->attach(bouton_inventory6, 5, 6, 1, 2);
 	table_inventory->attach(bouton_inventory7, 6, 7, 1, 2);
 	table_inventory->attach(bouton_inventory8, 7, 8, 1, 2);
-}
-
-void FenetreJeu::popupMessage(const std::string message, const std::string title) {
-	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING);//, Gtk::BUTTONS_NONE);
-	dialogue.set_title(title);
-	dialogue.run();
 }
 
 //Fenêtre A Propos, pop-up quand on clique sur l'icône correspondante
@@ -216,6 +208,12 @@ void FenetreJeu::afficherApropos() {
 void FenetreJeu::afficherRegles() {
 	FenetreAccueil regles("Images/regles.jpeg");
 	Gtk::Main::run(regles);
+}
+
+void FenetreJeu::popupMessage(const std::string message, const std::string title) {
+	Gtk::MessageDialog dialogue(*this, message, false, Gtk::MESSAGE_WARNING);//, Gtk::BUTTONS_NONE);
+	dialogue.set_title(title);
+	dialogue.run();
 }
 
 
@@ -268,7 +266,6 @@ void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 	}
 	show_all();
 }
-
 
 void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 	std::tuple<int, int> res = getFirstWhiteCarte();
@@ -358,23 +355,22 @@ void FenetreJeu::remplacerWhitetoObjet(BoutonCarte & bouton) {
 	show_all();
 }
 
-FenetreJeu::~FenetreJeu() {
-	delete bouton_about;
-	delete bouton_combinaisons;
-	delete bouton_enigme;
-	delete bouton_carte;
-	delete table_zones_texte;
-	delete table_images;
-	delete table_big;
-	delete Game;
-	std::cout << "fin destructeur fenetre" << std::endl;
-}
 
 void FenetreJeu::requestCarte() {
-
 	if (is_number(entry_carte_num.get_text())) {
-		Game->demande_affichage_carte(std::stoi(entry_carte_num.get_text()));
+		int num = std::stoi(entry_carte_num.get_text());
+		Game->demande_affichage_carte(num);
 		entry_carte_num.set_text("");
+		
+		//Quitter le jeu apres une des fin
+		if (Game->affichage_carte_autorise(num) && (num == 17 || num == 503 || num == 504)) { //pressing, revelation ou non-revelation
+			if (num == 17) {bouton_pressing.zoom_Image();}
+			else if (num == 503) {bouton_revelation.zoom_Image();}
+			else {bouton_non_revelation.zoom_Image();}
+			popupMessage("\nBravo ! Comme vous l'avez compris, vous avez trouvé une des fins possibles du jeu. \n\nLe jeu va donc quitter à la fermeture de cette fenêtre. \n\nSi vous souhaitez découvrir les autres fins possibles, n'hésitez pas à relancer une partie !", "Yeahhh");
+			Gtk::Main::quit();
+		}
+		
 		return;
 	}
 	else {popupMessage("Vous n'avez pas saisi un nombre entier", "Erreur");}
@@ -415,10 +411,31 @@ void FenetreJeu::requestCombinaison() {
 	entry_objet_2.set_text("");
 }
 
+BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
+		
+	std::size_t i;
+	for (i = 0; i != allBoutonCartes.size(); i++) {
+		if (allBoutonCartes[i]->get_name() == name) {
+			break;
+		}
+	}
+	return allBoutonCartes[i];
+}
 
 
+BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
+		
+	std::size_t i;
+	for (i = 0; i != allBoutonObjets.size(); i++) {
+		if (allBoutonObjets[i]->get_name() == name) {
+			break;
+		}
+	}
+	return allBoutonObjets[i];
+}
 
-std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
+
+std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 
 	std::vector<Gtk::Widget*> children = table_images->get_children();
 	int column = 4, line = 4;
@@ -445,7 +462,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() {
 }
 
 
-std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() {
+std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() const {
 
 	std::vector<Gtk::Widget*> children = table_inventory->get_children();
 	int column = 8, line = 2;
@@ -472,25 +489,14 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() {
 }
 
 
-BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
-		
-	std::size_t i;
-	for (i = 0; i != allBoutonCartes.size(); i++) {
-		if (allBoutonCartes[i]->get_name() == name) {
-			break;
-		}
-	}
-	return allBoutonCartes[i];
-}
-
-
-BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
-		
-	std::size_t i;
-	for (i = 0; i != allBoutonObjets.size(); i++) {
-		if (allBoutonObjets[i]->get_name() == name) {
-			break;
-		}
-	}
-	return allBoutonObjets[i];
+FenetreJeu::~FenetreJeu() {
+	delete bouton_about;
+	delete bouton_combinaisons;
+	delete bouton_enigme;
+	delete bouton_carte;
+	delete table_zones_texte;
+	delete table_images;
+	delete table_big;
+	delete Game;
+	std::cout << "fin destructeur fenetre" << std::endl;
 }

@@ -1,5 +1,5 @@
 #include "jeu.hh"
-
+#include <gtkmm/main.h>
 
 Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
 
@@ -31,16 +31,15 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
     else {_map_id[_cartes_jeu[i].get_id()] = 0;}
   }
 
-  /*
+  
   for (std::size_t i = 0; i < _cartes_basiques.size(); i++) {_cartes_basiques[i].affichage_info_carte();} // Affichage des informations sur les cartes basiques
 
   for (std::size_t i = 0; i < _cartes_objets.size(); i++) {_cartes_objets[i].affichage_info_carte();}  // Affichage des informations sur les cartes objets
  
   for (std::size_t i = 0; i < _cartes_enigmes.size(); i++) {_cartes_enigmes[i].affichage_info_carte();}  // Affichage des informations sur les cartes enigmes
-  */
+  
 
 }
-
 
 
 std::vector<int> Jeu::lecture_str_tab(std::string chaine) {
@@ -209,7 +208,7 @@ void Jeu::affichage_carte(const int id_carte) {
 	if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) { // si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
 		if (objet(id_carte).get_est_objet_inventaire()) { // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
 			_inventaire.push_back(id_carte);
-			_fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
+			//_fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
 			BoutonCarte& objet = *(_fenetre.boutonObjetFromName(carte(id_carte).get_nom_carte()));
 			_fenetre.remplacerWhitetoObjet(objet);
     }
@@ -219,7 +218,7 @@ void Jeu::affichage_carte(const int id_carte) {
     }
 
     // déclenchement arrivée du patron
-		if ((id_carte==402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) { // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
+		if ((id_carte == 402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) { // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
     
       affichage_carte(50);
     }
@@ -275,13 +274,11 @@ void Jeu::demande_affichage_carte(const int id_carte) {
       break;
 
     case -1:
-      _fenetre.popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");
+      _fenetre.popupMessage("Vous n'avez plus le droit d'afficher cette carte", "Erreur");
       break;
 
     case 0:
-	  if(affichage_carte_autorise(id_carte)) {
-        affichage_carte(id_carte); // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
-      }
+	  if (affichage_carte_autorise(id_carte)) {affichage_carte(id_carte);} // afficher carte dans la fenêtre graphique et faire les modifications qui vont avec
       else {_fenetre.popupMessage("Vous n'avez pas encore le droit d'afficher cette carte", "Erreur");}
       break;
   }
@@ -323,9 +320,8 @@ void Jeu::solution_enigme_valide(int id_carte_enigme, int val) {
 }
 
 
-
 void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
-  if (!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) { // si au moins l'un des objets n'existe pas
+  if (!std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_1) || !std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_obj_2)) { 
     _fenetre.popupMessage("Au moins 1 des 2 objets n'existe pas", "Erreur");
     return;
   }
@@ -337,7 +333,7 @@ void Jeu::combinaison_valide(int id_obj_1, int id_obj_2) {
   }
 
   if (objet(id_obj_1).id_obj_est_combinable(id_obj_2)) { // si les 2 objets sont bien combinables
-    if (id_obj_1==203 || id_obj_2==203) { // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
+    if (id_obj_1 == 203 || id_obj_2 == 203) { // pour le pied de biche --> ajouter condition pour vérifier que le joueur ait bien tout regardé dans le garage avant de passer dans la bibliothèque
       if (std::count(_inventaire.begin(), _inventaire.end(), 204)) { // si le joueur a déposé la roue de césar dans son inventaire i.e. il a récupéré tout ce qu'il y avait d'intéressant dans le garage, il a le feu vert pour aller dans la bibliothèque
         affichage_carte(objet(id_obj_1).get_id_objets_combinables()[id_obj_2]); // afficher carte qui résulte de la combinaison dans la fenêtre graphique et faire les modifications qui vont avec
       }

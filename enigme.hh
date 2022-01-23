@@ -17,8 +17,8 @@ protected:
 
 public:
   // Constructeurs
-  Enigme(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int id_carte_debloquee): Carte(nom_carte, id, id_cartes_kick), _nb_essais(nb_essais), _id_carte_debloquee(id_carte_debloquee){};
-  Enigme(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee): Carte(nom_carte, id, id_cartes_kick), _nb_essais(nb_essais), _code_solution(code_solution), _id_carte_debloquee(id_carte_debloquee){}; // Constructeur pour Charlie
+  Enigme(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int id_carte_debloquee): Carte(nom_carte, id, id_cartes_kick), _nb_essais(nb_essais), _id_carte_debloquee(id_carte_debloquee) {};
+  Enigme(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int code_solution, int id_carte_debloquee): Carte(nom_carte, id, id_cartes_kick), _nb_essais(nb_essais), _code_solution(code_solution), _id_carte_debloquee(id_carte_debloquee) {}; // Constructeur pour Charlie
 
   // Destructeur : bail virtuel ?? ou alors hérite direct de celui de la classe mère ??
 
