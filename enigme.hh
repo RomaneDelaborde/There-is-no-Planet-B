@@ -31,6 +31,6 @@ public:
   void affichage_info_carte() const;
   bool code_correct(int val); // val est l'entier proposé par le joueur comme réponse à l'énigme : renvoie 0 si le joueur a faux et 1 sinon
 
-  // Méthodes virtuelles communes : calcul_code_solution ?
+  virtual void calcul_solution_enigme(); //  Méthode virtuelle qui renvoie la valeur correspondant à la solution de l'énigme
 
 };

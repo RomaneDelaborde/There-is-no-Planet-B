@@ -5,8 +5,14 @@ Enigme1::Enigme1(std::string nom_carte, int id, std::vector<int> id_cartes_kick,
   _val2 = 2*_beta+_alpha;
   _val3 = 2*_gamma+_beta;
 
+  calcul_solution_enigme();
+}
+
+void Enigme1::calcul_solution_enigme()
+{
   _code_solution = _alpha*10+_beta; // modifier ici si on veut une autre réponse à l'énigme
 }
+
 
 //alpha = 8
 //beta = 7

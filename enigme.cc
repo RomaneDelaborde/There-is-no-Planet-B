@@ -21,3 +21,5 @@ bool Enigme::code_correct(int val) {
 
   return 0;
 }
+
+void Enigme::calcul_solution_enigme(){};

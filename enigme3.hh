@@ -29,6 +29,6 @@ public:
   // OU bool lettre_existe(const char l) const; ??
 
   int codage_mot_planete(std::string mot); // permet de coder un mot avec les valeurs données dans _lettres
-  void codage_chaine_planete();           // permet de sommer/soustraire les codes des mots de _chaine en fonction des + et - présents
+  void calcul_solution_enigme();           // permet de sommer/soustraire les codes des mots de _chaine en fonction des + et - présents
 
 };

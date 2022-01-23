@@ -2,7 +2,7 @@
 
 Enigme3::Enigme3(std::string nom_carte, int id, std::vector<int> id_cartes_kick, int nb_essais, int id_carte_debloquee, std::string chaine):Enigme(nom_carte, id, id_cartes_kick, nb_essais, id_carte_debloquee), _chaine(chaine){
   _lettres = {{'V', 2}, {'T', 3}, {'J', 5}, {'S', 6}, {'U', 7}, {'N', 8}, {'B', 9}}; // création du map _lettres
-  codage_chaine_planete();
+  calcul_solution_enigme();
 }
 
 bool Enigme3::lettre_existe(char l) const { // l pour lettre
@@ -26,7 +26,7 @@ int Enigme3::codage_mot_planete(std::string mot) {
 }
 
 
-void Enigme3::codage_chaine_planete() {
+void Enigme3::calcul_solution_enigme() {
   _code_solution = 0; // initialisation du code de _chaine à la valeur 0
 
   // Lecture de la _chaine avec des délimiteurs
