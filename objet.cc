@@ -2,7 +2,7 @@
 
 void Objet::affichage_info_carte() const {
   std::cout << "Nom carte : " << _nom_carte << std::endl;
-  std::cout << "Id : " << _id << std::endl; 
+  std::cout << "Id : " << _id << std::endl;
 
 
   //std::map<int,int>::iterator iter = _id_objets_combinables.begin();
@@ -26,4 +26,14 @@ void Objet::affichage_info_carte() const {
 bool Objet::id_obj_est_combinable(int id_obj) const {
   if (_id_objets_combinables.find(id_obj)!=_id_objets_combinables.end()) {return 1;} // si l'id de l'objet est dans le map c'est bon
   return 0;
+}
+
+int  Objet::operator+(const Objet & p)
+{
+  if(id_obj_est_combinable(p.get_id()))
+  {
+    return _id_objets_combinables[p.get_id()];
+  }
+  std::cout << "ERREUR : pas de combinaison possible entre les deux objets indiqués" << std::endl;
+  return -1;
 }
