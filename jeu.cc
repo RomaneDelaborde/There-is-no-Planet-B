@@ -6,7 +6,7 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
   lecture_csv_carte_basique(fichier_cartes_basiques);
   lecture_csv_carte_objet(fichier_cartes_objets);
 
-  int nb = 5; // nombre arbitraire d'essais (ici commun à toutes les énigmes mais chacune pourrait avoir sa propre valeur)
+  int nb = 5; // nombre arbitraire d'essais
 
   // Enigmes entrées à la main car il y en a que 3
   Enigme1 radio("radio", 13, {14}, 5, 14, 8, 7, 9);
@@ -15,19 +15,20 @@ Jeu::Jeu(FenetreJeu &fenetre) : _fenetre(fenetre) {
 
   // Ajout des énigmes dans la liste des énigmes
   _cartes_enigmes.push_back(radio);
-  _cartes_enigmes.push_back(charlie); // OU _cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
+  _cartes_enigmes.push_back(charlie);
+  //_cartes_enigmes.push_back(Enigme2("zoom_livres",32,{33},5,311,33,"TIRER LE LIVRE DE ROALD DAHL"));
   _cartes_enigmes.push_back(planete);
 
   _id_cartes_enigmes.push_back(radio.get_id());
   _id_cartes_enigmes.push_back(charlie.get_id());
   _id_cartes_enigmes.push_back(planete.get_id());
 
-  _cartes_jeu = _cartes_basiques; //_cartes_jeu.insert(_cartes_jeu.end(), _cartes_basiques.begin(), _cartes_basiques.end());
+  _cartes_jeu = _cartes_basiques;
   _cartes_jeu.insert(_cartes_jeu.end(), _cartes_objets.begin(), _cartes_objets.end());
   _cartes_jeu.insert(_cartes_jeu.end(), _cartes_enigmes.begin(), _cartes_enigmes.end());
 
   for (std::size_t i = 0; i < _cartes_jeu.size(); i++) {
-    if (i == 0) {_map_id[_cartes_jeu[i].get_id()] = 1;} // seule la carte regles (le première de_cartes_jeu) est initialisée à la valeur 1 dans _map_id
+    if (i == 0) {_map_id[_cartes_jeu[i].get_id()] = 1;} // seule la carte regles (le première de_cartes_jeu) est initialisée à 1 dans _map_id
     else {_map_id[_cartes_jeu[i].get_id()] = 0;}
   }
 
@@ -56,7 +57,8 @@ std::vector<int> Jeu::lecture_str_tab(std::string chaine) {
 
   std::vector<int> res_int = {};
 
-  std::transform(res.begin(), res.end(), std::back_inserter(res_int), [](const std::string& str) {return std::stoi(str);}); // conversion du vecteur res de str en vecteur res_int d'entiers
+  // conversion du vecteur res de str en vecteur res_int d'entiers
+  std::transform(res.begin(), res.end(), std::back_inserter(res_int), [](const std::string& str) {return std::stoi(str);});
 
   return res_int;
 
@@ -69,11 +71,11 @@ void Jeu::lecture_csv_carte_basique(std::string nom_fichier) {
 
   if (fichier) {
     std::string ligne = "";
-    std::getline(fichier,ligne); // pour passer la première ligne (celle avec le nom des colonnes)
+    std::getline(fichier,ligne); // pour passer la première ligne (avec le nom des colonnes)
     while(std::getline(fichier,ligne)) {
       std::string nom_carte;
 	  int id, choix; // id de la carte autre choix
-      std::string suiv; // id des cartes suivantes sous forme de string (valeurs séparées par des tabulats)
+      std::string suiv; // id des cartes suivantes (valeurs séparées par des tabulats)
       std::string kick; // id des cartes permettant de kicker la carte (valeurs séparées par des tabulats)
 
       std::string tempString;
@@ -108,12 +110,12 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
 
   if (fichier) {
     std::string ligne = "";
-    std::getline(fichier,ligne); // pour passer la première ligne (celle avec le nom des colonnes)
+    std::getline(fichier,ligne); // pour passer la première ligne (avec le nom des colonnes)
     while (std::getline(fichier,ligne)) {
       std::string nom_carte;
       int id;
-      std::string objets_combinables; // id des cartes des objets combinables sous forme de string (valeurs séparées par des tabulats)
-      std::string combinaisons_obtenues; // id des cartes obtenues par combinaison sous forme de string (valeurs séparées par des tabulats)
+      std::string objets_combinables; // id des cartes des objets combinables (valeurs séparées par des tabulats)
+      std::string combinaisons_obtenues; // id des cartes obtenues par combinaison (valeurs séparées par des tabulats)
       bool est_objet_inventaire;
 
       std::string tempString;
@@ -136,7 +138,7 @@ void Jeu::lecture_csv_carte_objet(std::string nom_fichier) {
       std::vector<int> v1 = lecture_str_tab(objets_combinables); // v1 = vecteur des id des cartes des objets combinables sous forme de int
       std::vector<int> v2 = lecture_str_tab(combinaisons_obtenues); // v2 = vecteur des id des cartes obtenues par combinaison sous forme de int
 
-		if (v1.size() != v2.size()) { // si jamais v1 et v2 ne sont pas de la même taille, on affiche un message d'erreur (car 1 combinaison = 1 carte obtenue)
+		if (v1.size() != v2.size()) { // si jamais v1 et v2 ne sont pas de la même taille (car 1 combinaison = 1 carte obtenue)
 			std::cout << "ERREUR : il n'y a pas autant d'objets combinables que de combinaisons possibles" << std::endl;
 			return;
 		}
@@ -205,32 +207,39 @@ bool Jeu::affichage_carte_autorise(const int id_carte) {
 }
 
 void Jeu::affichage_carte(const int id_carte) {
-	if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) { // si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
-		if (objet(id_carte).get_est_objet_inventaire()) { // si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
+	
+	// si la carte est une carte objet (alors on l'ajoute juste à l'inventaire, pas de kick engendré i.e. une carte objet ne kick aucune carte)
+	if (std::count(_id_cartes_objets.begin(), _id_cartes_objets.end(), id_carte)) {
+		
+		// si c'est une carte objet inventaire, on l'ajoute à l'inventaire et pas d'affichage
+		if (objet(id_carte).get_est_objet_inventaire()) {
 			_inventaire.push_back(id_carte);
 			//_fenetre.popupMessage("L'objet a été ajouté à l'inventaire", "Inventaire");
 			BoutonCarte& objet = *(_fenetre.boutonObjetFromName(carte(id_carte).get_nom_carte()));
 			_fenetre.remplacerWhitetoObjet(objet);
-    }
-    else {
-      _fenetre.popupMessage("Vous allez avoir du mal à rentrer ça dans votre poche.... Vous pouvez directement combiner cet objet à un autre.", "Erreur");
-      return;
-    }
+		}
+			
+		else {
+		  _fenetre.popupMessage("Vous allez avoir du mal à rentrer ça dans votre poche.... Vous pouvez directement combiner cet objet à un autre.", "Erreur");
+		  return;
+		}
 
-    // déclenchement arrivée du patron
+		// déclenchement arrivée du patron
 		if ((id_carte == 402 && std::count(_inventaire.begin(), _inventaire.end(), 403) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==403 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 401)) || (id_carte==401 && std::count(_inventaire.begin(), _inventaire.end(), 402) && std::count(_inventaire.begin(), _inventaire.end(), 403))) { // si le joueur trouve le ticket et a déjà ramassé le certificat (ou l'inverse) + le gun => alors on affiche la carte patron énervé
     
-      affichage_carte(50);
-    }
+			affichage_carte(50);
+		}
 
     return;
-  }
+	}
 
   // modifications communes aux différentes types de cartes
-  // kick les cartes : si des cartes actuellement affichées peuvent être kick par l'arrivée de cette carte alors on les tej
+  // kick les cartes : si des cartes actuellement affichées peuvent être kick par l'arrivée de cette carte, alors on les tej
   for (std::size_t i = 0; i < _cartes_jeu.size(); i++) {
-    if (_map_id[_cartes_jeu[i].get_id()] == 1) { // Si la carte du jeu est affichée dans _map_id, on regarde son attribut id_cartes_kick
-      for (std::size_t j = 0; j < _cartes_jeu[i].get_id_cartes_kick().size(); j++) { // Si id_carte se trouve dans _id_cartes_kick, on peut tej la carte correspondate
+	// Si la carte du jeu est affichée dans _map_id, on regarde son attribut id_cartes_kick
+    if (_map_id[_cartes_jeu[i].get_id()] == 1) {
+	  // Si id_carte se trouve dans _id_cartes_kick, on peut tej la carte correspondate
+      for (std::size_t j = 0; j < _cartes_jeu[i].get_id_cartes_kick().size(); j++) {
         if (_cartes_jeu[i].get_id_cartes_kick()[j] == id_carte) {
 			_map_id[_cartes_jeu[i].get_id()] = -1;
 			if (_cartes_jeu[i].get_id() != 1) {
@@ -241,12 +250,12 @@ void Jeu::affichage_carte(const int id_carte) {
       }
     }
   }
-	BoutonCarte& test = *(_fenetre.boutonCarteFromName(carte(id_carte).get_nom_carte()));
-	_fenetre.remplacerWhitetoCarte(test);
-	_map_id[id_carte] = 1; // indiquer que la carte est affichée dans _map_id
+  BoutonCarte& test = *(_fenetre.boutonCarteFromName(carte(id_carte).get_nom_carte()));
+  _fenetre.remplacerWhitetoCarte(test);
+  _map_id[id_carte] = 1; // indiquer que la carte est affichée dans _map_id
 
 
-	if (std::count(_id_cartes_basiques.begin(), _id_cartes_basiques.end(), id_carte)) { // si la carte est une carte basique
+	if (std::count(_id_cartes_basiques.begin(), _id_cartes_basiques.end(), id_carte)) {
 		if (carte(id_carte).get_id_carte_autre_choix() != 0) {// s'il s'agit d'une carte choix (attribut _id_carte_autre_choix rempli seulement pour les cartes basiques)
 		  _map_id[carte(id_carte).get_id_carte_autre_choix()] = -1; // on empêche le joueur d'accèder aux cartes des autres choix
 		}
@@ -257,8 +266,7 @@ void Jeu::affichage_carte(const int id_carte) {
 void Jeu::demande_affichage_carte(const int id_carte) {
 
   // si la carte zoom livres est affichée et que le joueur tente d'afficher une carte livre (qui n'existe pas ...)
-  if (_map_id[32]==1 && (id_carte==308 || id_carte==309 || id_carte==310 || id_carte==311 || id_carte==312 || id_carte==313)) // pas très joli ces conditions : moyen de faire ça plus condensé genre if id_carte is in LISTE ??
-  {
+  if (_map_id[32]==1 && (id_carte==308 || id_carte==309 || id_carte==310 || id_carte==311 || id_carte==312 || id_carte==313)) { 
     _fenetre.popupMessage("Cette carte n'est pas affichable, il pourrait potentiellement s'agir d'une réponse à une énigme ...", "Erreur");
     return;
   }
