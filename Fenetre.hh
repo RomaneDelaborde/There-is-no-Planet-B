@@ -82,10 +82,10 @@ class FenetreJeu : public Gtk::Window {
 		BoutonCarte* boutonObjetFromName(const std::string name);
 
 		//Renvoyer les coordonnees de la 1ere case blanche disponible
-		std::tuple<int, int> getFirstWhiteCarte() const;
+		std::pair<int, int> getFirstWhiteCarte() const;
 	
 		//Renvoyer les coordonnees de la 1ere case blanche de l'inventaire disponible
-		std::tuple<int, int> getFirstWhiteInventory() const;
+		std::pair<int, int> getFirstWhiteInventory() const;
 	
 		~FenetreJeu();
 	

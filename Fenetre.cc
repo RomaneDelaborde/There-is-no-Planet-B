@@ -364,7 +364,7 @@ BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
 }
 
 //Renvoyer les coordonnees de la 1ere case blanche disponible
-std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
+std::pair<int, int> FenetreJeu::getFirstWhiteCarte() const {
 
 	std::vector<Gtk::Widget*> children = table_images->get_children();
 	int column = 4, line = 4;
@@ -389,11 +389,11 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 		column = -1;
 	}
 
-	return std::make_tuple(column, line);
+	return std::make_pair(column, line);
 }
 
 //Renvoyer les coordonnees de la 1ere case blanche de l'inventaire disponible
-std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() const {
+std::pair<int, int> FenetreJeu::getFirstWhiteInventory() const {
 
 	std::vector<Gtk::Widget*> children = table_inventory->get_children();
 	int column = 8, line = 2;
@@ -417,7 +417,7 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() const {
 		column = -1;
 	}
 
-	return std::make_tuple(column, line);
+	return std::make_pair(column, line);
 }
 
 
