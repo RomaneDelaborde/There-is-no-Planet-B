@@ -346,9 +346,8 @@ BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
 	
 	std::size_t i;
 	for (i = 0; i != allBoutonCartes.size(); i++) {
-		if (allBoutonCartes[i]->get_name() == name) {
-			break;
-		}
+		//if (allBoutonCartes[i]->get_name() == name) {
+		if (*allBoutonCartes[i] == name) {break;}
 	}
 	return allBoutonCartes[i];
 }
@@ -358,9 +357,8 @@ BoutonCarte* FenetreJeu::boutonObjetFromName(const std::string name) {
 		
 	std::size_t i;
 	for (i = 0; i != allBoutonObjets.size(); i++) {
-		if (allBoutonObjets[i]->get_name() == name) {
-			break;
-		}
+		//if (allBoutonObjets[i]->get_name() == name) {
+		if (*allBoutonObjets[i] == name) {break;}
 	}
 	return allBoutonObjets[i];
 }
@@ -374,7 +372,8 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteCarte() const {
 	for (auto* it : children) {
 		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
 
-			if (test->get_name() == "white") {
+			//if (test->get_name() == "white") {
+			if (*test == "white") {
 				
 				if (test->get_column() < column || test->get_line() < line) {
 					line = test->get_line();
@@ -402,7 +401,8 @@ std::tuple<int, int> FenetreJeu::getFirstWhiteInventory() const {
 	for (auto* it : children) {
 		if (auto test = dynamic_cast<BoutonCarte*>(it)) {
 
-			if (test->get_name() == "white_inventory") {
+			//if (test->get_name() == "white_inventory") {
+			if (*test == "white_inventory") {
 				
 				if (test->get_column() < column || test->get_line() < line) {
 					line = test->get_line();
