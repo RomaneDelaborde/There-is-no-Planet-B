@@ -28,27 +28,25 @@ FenetreJeu::FenetreJeu() : Gtk::Window(), white_0101("Images/white.jpg"), white_
 	epingle_cheveux("Images/epingle_cheveux.jpg"), morceau1("Images/morceau1.jpg"), morceau2("Images/morceau2.jpg"),
 	pied_biche("Images/pied_biche.jpg"), porte_cachee_o("Images/porte_cachee_o.jpg"), porte_electronique("Images/porte_electronique.jpg"),
 	revolver("Images/revolver.jpg"), ticket_dore_o("Images/ticket_dore_o.jpg"),
-	bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0),
-	bouton_3401(white_3401, 3, 0), bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1),
-	bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1), bouton_inventory1(inventory1, 0, 1),
-	bouton_inventory2(inventory2, 1, 1), bouton_inventory3(inventory3, 2, 1), bouton_inventory4(inventory4, 3, 1),
-	bouton_inventory5(inventory5, 4, 1), bouton_inventory6(inventory6, 5, 1), bouton_inventory7(inventory7, 6, 1),
-	bouton_inventory8(inventory8, 7, 1), bouton_annonce_radio(annonce_radio), bouton_bibliotheque(bibliotheque),
-	bouton_boite_chocolat(boite_chocolat), bouton_boite_gants(boite_gants), bouton_boite_outils(boite_outils),
-	bouton_boss_assomme(boss_assomme), bouton_boss_enerve(boss_enerve), bouton_boss_mort(boss_mort),
-	bouton_bureau(bureau), bouton_certificat(certificat), bouton_coffre_fort(coffre_fort), bouton_dessin_mur(dessin_mur),
-	bouton_dessin_recto(dessin_recto), bouton_dessin_sol(dessin_sol), bouton_dessin_verso(dessin_verso),
-	bouton_dialogue_patron(dialogue_patron), bouton_frequences(frequences), bouton_garage(garage),
-	bouton_non_revelation(non_revelation), bouton_planetes(planetes), bouton_porte_cachee(porte_cachee), bouton_pressing(pressing),
-	bouton_radio(radio), bouton_retroviseur(retroviseur), bouton_revelation(revelation), bouton_table_chevet(table_chevet),
-	bouton_ticket_dore(ticket_dore), bouton_tiroir(tiroir), bouton_voiture(voiture), bouton_zoom_livres(zoom_livres),
-	bouton_boss_o(boss_o), bouton_certificat_o(certificat_o), bouton_cesar(cesar), bouton_epingle_cheveux(epingle_cheveux),
-	bouton_morceau1(morceau1), bouton_morceau2(morceau2), bouton_pied_biche(pied_biche), bouton_porte_cachee_o(porte_cachee_o),
-	bouton_porte_electronique(porte_electronique), bouton_revolver(revolver), bouton_ticket_dore_o(ticket_dore_o),
+	bouton_0101(white_0101, 0, 0), bouton_1201(white_1201, 1, 0), bouton_2301(white_2301, 2, 0), bouton_3401(white_3401, 3, 0),
+	bouton_0112(white_0112, 0, 1), bouton_1212(white_1212, 1, 1), bouton_2312(white_2312, 2, 1), bouton_3412(white_3412, 3, 1),
+	bouton_inventory1(inventory1, 0, 1), bouton_inventory2(inventory2, 1, 1), bouton_inventory3(inventory3, 2, 1),
+	bouton_inventory4(inventory4, 3, 1), bouton_inventory5(inventory5, 4, 1), bouton_inventory6(inventory6, 5, 1),
+	bouton_inventory7(inventory7, 6, 1), bouton_inventory8(inventory8, 7, 1), bouton_annonce_radio(annonce_radio),
+	bouton_bibliotheque(bibliotheque), bouton_boite_chocolat(boite_chocolat), bouton_boite_gants(boite_gants), bouton_boite_outils(boite_outils),
+	bouton_boss_assomme(boss_assomme), bouton_boss_enerve(boss_enerve), bouton_boss_mort(boss_mort), bouton_bureau(bureau),
+	bouton_certificat(certificat), bouton_coffre_fort(coffre_fort), bouton_dessin_mur(dessin_mur), bouton_dessin_recto(dessin_recto),
+	bouton_dessin_sol(dessin_sol), bouton_dessin_verso(dessin_verso), bouton_dialogue_patron(dialogue_patron), bouton_frequences(frequences),
+	bouton_garage(garage), bouton_non_revelation(non_revelation), bouton_planetes(planetes), bouton_porte_cachee(porte_cachee),
+	bouton_pressing(pressing), bouton_radio(radio), bouton_retroviseur(retroviseur), bouton_revelation(revelation), bouton_table_chevet(table_chevet),
+	bouton_ticket_dore(ticket_dore), bouton_tiroir(tiroir), bouton_voiture(voiture), bouton_zoom_livres(zoom_livres), bouton_boss_o(boss_o),
+	bouton_certificat_o(certificat_o), bouton_cesar(cesar), bouton_epingle_cheveux(epingle_cheveux), bouton_morceau1(morceau1),
+	bouton_morceau2(morceau2), bouton_pied_biche(pied_biche), bouton_porte_cachee_o(porte_cachee_o), bouton_porte_electronique(porte_electronique),
+	bouton_revolver(revolver), bouton_ticket_dore_o(ticket_dore_o),
 	combinaisons("Saisir une combinaison d'objets"), reponse_enigme("Saisir la réponse à une énigme"),
 	tirer_carte_1("Saisir le numéro de la carte à tirer"), tirer_carte_2("(si vous en avez le droit)"),
 	objet_1("objet n°1"), objet_2("objet n°2"), id_enigme("n° énigme"), reponse_enigme_l("réponse"), carte_num("n° carte"),
-	separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() { //à l'initialisation
+	separator1(Gtk::ORIENTATION_HORIZONTAL), separator2(Gtk::ORIENTATION_HORIZONTAL), separator3() {
 	
 	std::cout << "entree constructeur" << std::endl;
  
@@ -137,7 +135,7 @@ void FenetreJeu::init_table_zones_texte() {
 	table_zones_texte->attach(carte_num, 4, 5, 2, 3);
 	table_zones_texte->attach(entry_carte_num, 5, 6, 2, 3);
 	
-	table_zones_texte->attach(separator2, 0, 9, 5, 6, Gtk::FILL, Gtk::FILL, 5, 20);
+	//table_zones_texte->attach(separator2, 0, 9, 5, 6, Gtk::FILL, Gtk::FILL, 5, 20);
 	
 	bouton_about = new BoutonAccueil(about_image);
 	table_zones_texte->attach(*bouton_about, 8, 9, 0, 2, Gtk::SHRINK);
@@ -216,53 +214,32 @@ void FenetreJeu::popupMessage(const std::string message, const std::string title
 	dialogue.run();
 }
 
-
 void FenetreJeu::remplacerCartetoWhite(BoutonCarte & bouton) {
 	int col = bouton.get_column(), line = bouton.get_line();
 	table_images->remove(bouton);
 	bouton.set_column(-1);
 	bouton.set_line(-1);
 	switch (col) {
-		case 0:
-			switch (line) {
-				case 0:
-					table_images->attach(bouton_0101, 0, 1, 0, 1);
-					break;
-				case 1:
-					table_images->attach(bouton_0112, 0, 1, 1, 2);
-					break;
-			}
-			break;
-		case 1:
-			switch (line) {
-				case 0:
-					table_images->attach(bouton_1201, 1, 2, 0, 1);
-					break;
-				case 1:
-					table_images->attach(bouton_1212, 1, 2, 1, 2);
-					break;
-			}
-			break;
-		case 2:
-			switch (line) {
-				case 0:
-					table_images->attach(bouton_2301, 2, 3, 0, 1);
-					break;
-				case 1:
-					table_images->attach(bouton_2312, 2, 3, 1, 2);
-					break;
-			}
-			break;
-		case 3:
-			switch (line) {
-				case 0:
-					table_images->attach(bouton_3401, 3, 4, 0, 1);
-					break;
-				case 1:
-					table_images->attach(bouton_3412, 3, 4, 1, 2);
-					break;
-			}
-			break;
+		case 0: switch (line) {
+					case 0: table_images->attach(bouton_0101, 0, 1, 0, 1); break;
+					case 1: table_images->attach(bouton_0112, 0, 1, 1, 2); break;
+				}
+				break;
+		case 1: switch (line) {
+					case 0: table_images->attach(bouton_1201, 1, 2, 0, 1); break;
+					case 1: table_images->attach(bouton_1212, 1, 2, 1, 2); break;
+				}
+				break;
+		case 2: switch (line) {
+					case 0: table_images->attach(bouton_2301, 2, 3, 0, 1); break;
+					case 1: table_images->attach(bouton_2312, 2, 3, 1, 2); break;
+				}
+				break;
+		case 3: switch (line) {
+					case 0: table_images->attach(bouton_3401, 3, 4, 0, 1); break;
+					case 1: table_images->attach(bouton_3412, 3, 4, 1, 2); break;
+				}
+				break;
 	}
 	show_all();
 }
@@ -272,46 +249,26 @@ void FenetreJeu::remplacerWhitetoCarte(BoutonCarte & bouton) {
 	int col = std::get<0>(res), line = std::get<1>(res);
 
 	switch (col) {
-		case 0:
-			switch (line) {
-				case 0:
-					table_images->remove(bouton_0101);
-					break;
-				case 1:
-					table_images->remove(bouton_0112);
-					break;
-			}
-			break;
-		case 1:
-			switch (line) {
-				case 0:
-					table_images->remove(bouton_1201);
-					break;
-				case 1:
-					table_images->remove(bouton_1212);
-					break;
-			}
-			break;
-		case 2:
-			switch (line) {
-				case 0:
-					table_images->remove(bouton_2301);
-					break;
-				case 1:
-					table_images->remove(bouton_2312);
-					break;
-			}
-			break;
-		case 3:
-			switch (line) {
-				case 0:
-					table_images->remove(bouton_3401);
-					break;
-				case 1:
-					table_images->remove(bouton_3412);
-					break;
-			}
-			break;
+		case 0: switch (line) {
+					case 0: table_images->remove(bouton_0101); break;
+					case 1: table_images->remove(bouton_0112); break;
+				}
+				break;
+		case 1: switch (line) {
+					case 0: table_images->remove(bouton_1201); break;
+					case 1: table_images->remove(bouton_1212); break;
+				}
+				break;
+		case 2: switch (line) {
+					case 0: table_images->remove(bouton_2301); break;
+					case 1: table_images->remove(bouton_2312); break;
+				}
+				break;
+		case 3: switch (line) {
+					case 0: table_images->remove(bouton_3401); break;
+					case 1: table_images->remove(bouton_3412); break;
+				}
+				break;
 	}
 	table_images->attach(bouton, col, col+1, line, line+1);
 	bouton.set_column(col);
@@ -324,31 +281,16 @@ void FenetreJeu::remplacerWhitetoObjet(BoutonCarte & bouton) {
 	int col = std::get<0>(res), line = std::get<1>(res);
 
 	switch (col) {
-		case 0:
-			table_inventory->remove(bouton_inventory1);
-			break;
-		case 1:
-			table_inventory->remove(bouton_inventory2);
-			break;
-		case 2:
-			table_inventory->remove(bouton_inventory3);
-			break;
-		case 3:
-			table_inventory->remove(bouton_inventory4);
-			break;
-		case 4:
-			table_inventory->remove(bouton_inventory5);
-			break;
-		case 5:
-			table_inventory->remove(bouton_inventory6);
-			break;
-		case 6:
-			table_inventory->remove(bouton_inventory7);
-			break;
-		case 7:
-			table_inventory->remove(bouton_inventory8);
-			break;
+		case 0: table_inventory->remove(bouton_inventory1); break;
+		case 1: table_inventory->remove(bouton_inventory2); break;
+		case 2: table_inventory->remove(bouton_inventory3); break;
+		case 3: table_inventory->remove(bouton_inventory4); break;
+		case 4: table_inventory->remove(bouton_inventory5); break;
+		case 5: table_inventory->remove(bouton_inventory6); break;
+		case 6: table_inventory->remove(bouton_inventory7); break;
+		case 7: table_inventory->remove(bouton_inventory8); break;
 	}
+	
 	table_inventory->attach(bouton, col, col+1, 1, 2);
 	bouton.set_column(col);
 	bouton.set_line(line);
@@ -412,7 +354,7 @@ void FenetreJeu::requestCombinaison() {
 }
 
 BoutonCarte* FenetreJeu::boutonCarteFromName(const std::string name) {
-		
+	
 	std::size_t i;
 	for (i = 0; i != allBoutonCartes.size(); i++) {
 		if (allBoutonCartes[i]->get_name() == name) {
