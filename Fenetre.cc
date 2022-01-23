@@ -175,13 +175,13 @@ void FenetreJeu::init_table_inventory() {
 //Fenetre A Propos, pop-up quand on clique sur l'icone correspondante
 void FenetreJeu::afficherApropos() {
 	Gtk::AboutDialog dialogue;
-	dialogue.set_program_name("There is no planet B");
+	dialogue.set_program_name("There is no Planet B");
 	dialogue.set_version("1.0");
 	dialogue.set_copyright("2022");
 	dialogue.set_comments("Petit Escape Game codé pour le cours de C++");
 	std::vector<Glib::ustring> listeAuteurs;
-	listeAuteurs.push_back("Mario");
-	listeAuteurs.push_back("Romano");
+	listeAuteurs.push_back(": Mario et Romano");
+	listeAuteurs.push_back("  EISE4 et MAIN4");
 	dialogue.set_authors(listeAuteurs);
 	dialogue.set_logo(Gdk::Pixbuf::create_from_file("Images/logo.jpg"));
 	dialogue.set_position(Gtk::WIN_POS_CENTER);
@@ -190,7 +190,7 @@ void FenetreJeu::afficherApropos() {
 
 //Fenetre Regles, pop-up quand on clique sur l'icone correspondante
 void FenetreJeu::afficherRegles() {
-	FenetreAccueil regles("Images/regles.jpeg");
+	FenetreAccueil regles("Images/regles.png");
 	Gtk::Main::run(regles);
 }
 

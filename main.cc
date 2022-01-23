@@ -66,8 +66,6 @@ int main(int argc, char* argv[]) {
 	FenetreAccueil regles("Images/regles.jpeg");
 	Gtk::Main::run(regles);
 	
-	std::cout << "fdsdff" << std::endl;
-
   FenetreJeu fenetre; //fenetre lance un Jeu() dans son constructeur
   Gtk::Main::run(fenetre);
 		
